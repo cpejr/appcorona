@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(routes);
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://art_lima1:<password>@cluster0-o87ch.gcp.mongodb.net/test?retryWrites=true&w=majority', {
+mongoose.connect(process.env.MONGOACESS, {
 	useNewUrlPasser: true,
 	useUnifiedTopology: true
 });
