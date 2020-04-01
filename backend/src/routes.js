@@ -1,6 +1,8 @@
 const express = require('express');
 const { celebrate, Segments, Joi } = require('celebrate');
 const routes = express.Router();
+const adminController = require('./controllers/adminController');
+const ongController = require('./controllers/ongController');
 
 //Ainda faltam criar e adicionar os controllers de cada rota para elas funcionarem.
 //Parametros ja estao sendo validados pelo celebrate.
