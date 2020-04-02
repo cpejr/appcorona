@@ -1,79 +1,107 @@
 import React from 'react';
 import './styles.css';
+import Card from './Card';
+import { Link } from 'react-router-dom';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-
-const useStyles = makeStyles({
-    root: {
-      maxWidth: 345,
-    },
-    media: {
-      height: 140,
-    },
-  });
+const ongsList = [
+  {
+  name: 'APAD',
+  _id: 1,
+  description: 'Primeiro item',
+  cnpj: 156468168415,
+  state: 'MG',
+  city: 'Belo Horizonte',
+  neighborhood: 'Santa Branca',
+  street: 'Rua das Canárias',
+  number: 160,
+  complement: 'Apartamento 201',
+  picpay: 418616161684615,
+  facebook: 'facebook.com.br/lucaschaia',
+  whatsapp: 31996513872,
+  email: 'lucaschaia@hotmail.com',
+  site: 'cpejr.com.br',
+  agencia: 21616541,
+  banco: 4516,
+},
+{
+name: 'CPE',
+_id: 2,
+description: 'Segundo item',
+cnpj: 1618687424684,
+state: 'MG',
+city: 'Belo Horizonte',
+neighborhood: 'Campus Pampulha',
+street: 'Av Presidente Antônio Carlos',
+number: 6627,
+complement: 'CPDEE',
+picpay: 156461684,
+facebook: 'facebook.com.br/cpe.jr',
+whatsapp: 3134976258,
+email: 'lucassouza@cpejr.com.br',
+site: 'cpejr.com.br',
+agencia: 11651,
+banco: 1964,
+},
+{
+name: 'PJ',
+_id: 3,
+description: 'Terceiro item',
+cnpj: 1618687424684,
+state: 'MG',
+city: 'Belo Horizonte',
+neighborhood: 'Campus Pampulha',
+street: 'Av Presidente Antônio Carlos',
+number: 6627,
+complement: 'CPDEE',
+picpay: 156461684,
+facebook: 'facebook.com.br/cpe.jr',
+whatsapp: 3134976258,
+email: 'lucassouza@cpejr.com.br',
+site: 'cpejr.com.br',
+agencia: 11651,
+banco: 1964,
+},
+{
+name: 'Emas',
+_id: 4,
+description: 'Quarto item',
+cnpj: 1618687424684,
+state: 'MG',
+city: 'Belo Horizonte',
+neighborhood: 'Campus Pampulha',
+street: 'Av Presidente Antônio Carlos',
+number: 6627,
+complement: 'CPDEE',
+picpay: 156461684,
+facebook: 'facebook.com.br/cpe.jr',
+whatsapp: 3134976258,
+email: 'lucassouza@cpejr.com.br',
+site: 'cpejr.com.br',
+agencia: 11651,
+banco: 1964,
+},
+]
 
 export default function Register(){
-    const classes = useStyles();
+
+    const ongs = ongsList.map(function(ong) {
+      return (
+        <Card key={ong._id} name={ong.name} description={ong.description} />
+      );
+    });
 
     return (
-      <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-      <div class="wrapper wrapper--w790">
-      <div class="card card-5">
-      <div class="card-heading text-center">
-        <h2 class="title">Bem Conectado</h2>
-        <button class="btn btn--radius-2 btn btn-warning m-2" type="submit">Entrar</button>
-        <button class="btn btn--radius-2 btn btn-warning m-2" type="submit">Cadastrar ONG</button>
+      <div className="page-wrapper bg-gra-03 p-t-45 p-b-50">
+      <div className="wrapper wrapper--w960">
+      <div className="card card-5">
+      <div className="card-heading text-center d-flex flex-wrap justify-content-between">
+        <img src="cachorro.jpg" className="logo" alt="Logo"></img>
+        <h2 className="title align-self-center">Bem Conectado</h2>
+        <Link className="btn btn--radius-2 btn btn-warning m-2 mr-4 justify-content-end align-self-center" to="/register" type="submit">Cadastrar ONG</Link>
       </div>
 
-      <div class="card-body align-self-center">
-        <Card className={classes.root}>
-          <CardActionArea>
-            <CardMedia
-            className={classes.media}
-            image="/List/cachorro.jpg"
-            title="Contemplative Reptile"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-              APAD
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-              Ong que serviu de exemplo na Semana Omnistack. Ajuda pessoas, fazendo o bem e tornando o Brasil um lugar melhor.
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
-          <button class="btn btn--radius-2 btn btn-warning p-2" type="submit">Saiba mais</button>
-          </CardActions>
-        </Card>
-
-        <Card className={classes.root}>
-          <CardActionArea>
-            <CardMedia
-            className={classes.media}
-            image="/List/cachorro.jpg"
-            title="Contemplative Reptile"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-              APAD
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-              Ong que serviu de exemplo na Semana Omnistack. Ajuda pessoas, fazendo o bem e tornando o Brasil um lugar melhor.
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
-          <button class="btn btn--radius-2 btn btn-warning p-2" type="submit">Saiba mais</button>
-          </CardActions>
-        </Card>
+      <div className="card-body d-flex flex-wrap justify-content-center">
+        {ongs}
       </div>
       </div>
       </div>
