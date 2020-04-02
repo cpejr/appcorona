@@ -1,0 +1,134 @@
+/*=============================================================
+    #CARDS
+  ===========================================================*/
+.ONGcard {
+    padding: 5%;
+    border-radius: 3%;
+    background-color: #FFCF4F;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 3%;
+
+}
+
+
+.ONGcard:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    padding: 2px 16px;
+
+}
+
+
+img {
+    border-radius: 5px 5px 0 0;
+    width: 30%;
+    float: left;
+    padding: 3%;
+}
+
+
+
+
+/* ==========================================================================
+   #FONT
+   ========================================================================== */
+.font-robo {
+    font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
+}
+
+.font-poppins {
+    font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
+}
+
+.font-opensans {
+    font-family: "Open Sans", "Arial", "Helvetica Neue", sans-serif;
+}
+
+/* ==========================================================================
+    #TEXT
+  ========================================================================== */
+.pendingsTitle {
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+    color: black;
+
+}
+
+.info {
+    font-size: 16px;
+    font-weight: 700;
+    text-align: left;
+    color: black;
+    font-weight: bold;
+    padding-bottom: 1.5%;
+}
+
+.name {
+    font-size: 20px;
+    text-transform: uppercase;
+
+    text-align: left;
+    color: black;
+    font-weight: bold;
+    padding-bottom: 1.5%;
+    padding-top: 1.5%;
+    padding-left: 1.5%;
+}
+
+.style-5 {
+    background: #e5e5e5;
+    text-align: left;
+    line-height: 50px;
+    border-radius: 5px;
+    padding: 0 22px;
+    font-size: 16px;
+    color: #555;
+  }
+
+  .forms-row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+/* ==========================================================================
+    #GRID
+  ========================================================================== */
+.ONGgrid {
+    transition: 0.3s;
+    width: 100%;
+    padding: 3%;
+
+}
+
+
+.gridCard {
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.col-5 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+}
