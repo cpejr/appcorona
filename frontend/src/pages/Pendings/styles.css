@@ -70,7 +70,6 @@ img {
 .name {
     font-size: 20px;
     text-transform: uppercase;
-
     text-align: left;
     color: black;
     font-weight: bold;
@@ -87,7 +86,19 @@ img {
     padding: 0 22px;
     font-size: 16px;
     color: #555;
-  }
+    width: 100%;
+}
+
+.style-6 {
+    background: #e5e5e5;
+    text-align: left;
+    line-height: 50px;
+    border-radius: 5px;
+    padding: 0 22px;
+    font-size: 16px;
+    color: #555;
+    width: 100%;
+}
 
   .forms-row {
     display: -webkit-box;
@@ -106,13 +117,25 @@ img {
     margin-bottom: 40px;
   }
 
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+  }
+  .row-spaces {
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -moz-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
 /* ==========================================================================
     #GRID
   ========================================================================== */
 .ONGgrid {
     transition: 0.3s;
     width: 100%;
-    padding: 3%;
+    padding: 2%;
 
 }
 
@@ -127,8 +150,18 @@ img {
     padding-bottom: 5%;
 }
 
-.col-5 {
+.col-0 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 
 }
+
+.m-rg-45 {
+    margin-right: 45px;
+  }
+.col-5 {
+    width: -webkit-calc((100% - 30px) / 2);
+    width: -moz-calc((100% - 30px) / 2);
+    width: calc((100% - 30px) / 2);
+  }
+  
