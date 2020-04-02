@@ -10,7 +10,7 @@ app.use(routes);
 const mongoose = require('mongoose');
 
 mongoose.connect(process.env.MONGO_ACESS, {
-  useNewUrlPasser: true,
+  useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
