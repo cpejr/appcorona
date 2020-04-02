@@ -63,7 +63,8 @@ const ong = new mongoose.Schema({
   },
   approved: {
     type: Boolean,
-    required: true
+    required: false,
+    default: false,
   }
 },
   { timestamps: true }
@@ -86,7 +87,7 @@ class OngsActions {
 
   static deleteOng(id) {
     return new Promise((resolve, reject) => {
-      Ong.findById(id).then((result) => {
+      Ong.deleteOne({ _id: id }).then((result) => {
         resolve(result);
       }).catch((error) => {
         reject(error);
@@ -152,11 +153,14 @@ class OngsActions {
 
   static checkExistence(targetName, targetCNPJ) {
     return new Promise((resolve, reject) => {
-      Ong.find({ name: targetName }||{cnpj: targetCNPJ}).then(() => {
-        resolve(true);
+      Ong.find({ $or: [{ name: targetName }, { cnpj: targetCNPJ }] }).then((result) => {
+        if (result.length > 0)
+          resolve(true);
+        else
+          resolve(false);
       }).catch((error) => {
         reject(error);
-        resolve(false)
+        resolve(error);
       });
     });
   }

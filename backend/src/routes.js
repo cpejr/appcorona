@@ -70,7 +70,7 @@ routes.put('/admin/:ongId', celebrate({
     site: Joi.string().optional(),
     agencia: Joi.string().optional(),
     banco: Joi.string().optional(),
-    approved: Joi.string().optional(),
+    approved: Joi.bool().optional(),
   }),
   [Segments.HEADERS]: Joi.object({
     authorization: Joi.string().required(),

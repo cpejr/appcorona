@@ -20,9 +20,13 @@ module.exports = {
 
       let result = await Ong.update(id, updateFields);
 
-      return response.json(result);
-      
+      return response.json({_id: result._id, message: 'atualizado com sucesso'});
+
     } catch (error) {
+      if (error.name === "CastError") {
+        return response.status(400).json({ error: error });
+      }
+
       console.log(error);
       return response.status(500).json({ error: error });
     }

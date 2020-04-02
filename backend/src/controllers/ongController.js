@@ -5,6 +5,7 @@ module.exports = {
     try {
       let { name, cnpj } = request.body;
       const exist = await Ong.checkExistence(name, cnpj)
+      console.log(exist);
       if (!exist) {
         let ong = request.body;
 
@@ -13,7 +14,7 @@ module.exports = {
         return response.json({ _id });
       }
       else {
-        //Ong Already exists
+        return response.status(409).json({ error: 'Ong já existente' });
       }
     } catch (error) {
       console.log(error);
@@ -32,12 +33,16 @@ module.exports = {
   },
   async delete(request, response) {
     try {
-      let { id } = request.params.ongId;
+      let id = request.params.ongId;
 
       let result = await Ong.deleteOng(id);
 
-      return response.json(result);
+      return response.json({ object: result, message: 'deletado com sucesso' });
     } catch (error) {
+      if (error.name === "CastError") {
+        return response.status(400).json({ error: error });
+      }
+
       console.log(error);
       return response.status(500).json({ error: error });
     }
