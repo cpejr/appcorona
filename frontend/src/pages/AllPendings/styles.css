@@ -1,10 +1,18 @@
 /*=============================================================
     #CARDS
   ===========================================================*/
-.ONGcard {
+  .ONGcard1 {
+    padding: 5%;
+    border-radius: 3%;
     background-color: #FFCF4F;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     padding: 3%;
 
+}
+
+
+.ONGcard1:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .container {
@@ -41,17 +49,18 @@ img {
 /* ==========================================================================
     #TEXT
   ========================================================================== */
-.pendingsTitle {
-    font-size: 24px;
+.allPendingsTitle {
+    font-size: 35px;
     text-transform: uppercase;
     font-weight: 700;
     text-align: center;
+    padding-top: 3%;
     color: black;
 
 }
 
 .info {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 700;
     text-align: left;
     color: black;
@@ -124,13 +133,12 @@ img {
 /* ==========================================================================
     #GRID
   ========================================================================== */
-.ONGgrid {
+.ONGrid {
     transition: 0.3s;
     width: 100%;
     padding: 2%;
 
 }
-
 
 .gridCard {
     justify-content: center;
@@ -138,29 +146,19 @@ img {
     grid-template-columns: repeat(2, 1fr);
     padding-left: 3%;
     padding-right: 3%;
-    padding-top: 5%;
-    padding-bottom: 5%;
+    padding-top: 2%;
+    padding-bottom: 2%;
 }
 
-.col-0 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-
-}
 
 .m-rg-45 {
     margin-right: 45px;
   }
-.col-5 {
-    width: -webkit-calc((100% - 30px) / 2);
-    width: -moz-calc((100% - 30px) / 2);
-    width: calc((100% - 30px) / 2);
-  }
-  
 
-  .btn1 {
+#bttn {text-align: center;}
+  .btn2 {
     display: inline-block;
-
+    text-align: center;
     line-height: 50px;
     padding: 0 50px;
     -webkit-transition: all 0.4s ease;
