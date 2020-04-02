@@ -69,13 +69,13 @@ const ong = new mongoose.Schema({
   { timestamps: true }
 );
 
-const OngRegistrada = mongoose.model('OngRegistrada', ong);
+const Ong = mongoose.model('Ong', ong);
 
 class OngsActions {
 
   static createNew(ongData) {
     return new Promise((resolve, reject) => {
-      OngsRegistradas.create(ongData).then((result) => {
+      Ong.create(ongData).then((result) => {
         resolve(result);
       }).catch((error) => {
         reject(error);
@@ -86,7 +86,7 @@ class OngsActions {
 
   static deleteOng(id) {
     return new Promise((resolve, reject) => {
-      OngsRegistradas.findById(id).then((result) => {
+      Ong.findById(id).then((result) => {
         resolve(result);
       }).catch((error) => {
         reject(error);
@@ -97,7 +97,7 @@ class OngsActions {
 
   static getAprovedOngs() {
     return new Promise((resolve, reject) => {
-      OngsRegistradas.find({ approved: true }).then((results) => {
+      Ong.find({ approved: true }).then((results) => {
         resolve(results);
       }).catch((error) => {
         reject(error);
@@ -108,7 +108,7 @@ class OngsActions {
 
   static getWaitingAprovement() {
     return new Promise((resolve, reject) => {
-      OngsRegistradas.find({ approved: false }).then((results) => {
+      Ong.find({ approved: false }).then((results) => {
         resolve(results);
       }).catch((error) => {
         reject(error);
@@ -119,7 +119,7 @@ class OngsActions {
 
   static filterByCity(target) {
     return new Promise((resolve, reject) => {
-      OngsRegistradas.find({ approved: true, city: target }).then((results) => {
+      Ong.find({ approved: true, city: target }).then((results) => {
         resolve(results);
       }).catch((error) => {
         reject(error);
@@ -130,7 +130,18 @@ class OngsActions {
 
   static filterByState(target) {
     return new Promise((resolve, reject) => {
-      OngsRegistradas.find({ approved: true, state: target }).then((results) => {
+      Ong.find({ approved: true, state: target }).then((results) => {
+        resolve(results);
+      }).catch((error) => {
+        reject(error);
+        console.log(error);
+      });
+    });
+  }
+
+  static update(id, newFields) {
+    return new Promise((resolve, reject) => {
+      Ong.findOneAndUpdate({ _id: id }, newFields).then((results) => {
         resolve(results);
       }).catch((error) => {
         reject(error);

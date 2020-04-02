@@ -2,42 +2,42 @@ const Ong = require('../../models/ongDB')
 
 module.exports = {
   async create(request, response) {
-    let { name, cnpj } = request.body;
-    //Validation if ong alredy exists
+    try {
+      let { name, cnpj } = request.body;
+      //Validation if ong alredy exists =====================================
 
-    //
+      //
 
-    let body = request.body;
-    let ong = {
-      name: body.name,
-      cnpj: body.cnpj,
-      state: body.state,
-      city: body.city,
-      neighborhood: body.neighborhood,
-      street: body.street,
-      number: body.number,
-      complement: body.complement,
-      picpay: body.picpay,
-      facebook: body.facebook,
-      whatsapp: body.whatsapp,
-      email: body.email,
-      site: body.site,
-      agencia: body.agencia,
-      banco: body.banco,
-      appoved: false
+      let ong = request.body;
+
+      let { _id } = await Ong.createNew(ong);
+
+      return response.json({ _id });
+    } catch (error) {
+      console.log(error);
+      return response.status(500).json({ error: error });
     }
-
-    let { _id } = await Ong.createNew(ong);
-
-    return response.json({ _id });
   },
   async index(request, response) {
+    try {
+      let result = await Ong.getAprovedOngs();
 
-  },
-  async update(request, response) {
-
+      return response.json(result);
+    } catch (error) {
+      console.log(error);
+      return response.status(500).json({ error: error });
+    }
   },
   async delete(request, response) {
-    
+    try {
+      let { id } = request.params.ongId;
+
+      let result = await Ong.deleteOng(id);
+
+      return response.json(result);
+    } catch (error) {
+      console.log(error);
+      return response.status(500).json({ error: error });
+    }
   }
 };
