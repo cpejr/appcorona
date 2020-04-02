@@ -35,15 +35,15 @@ const ong = new mongoose.Schema({
   },
   picpay: {
     type: String,
-    required: true
+    required: false
   },
   facebook: {
     type: String,
-    required: true
+    required: false
   },
   whatsapp: {
     type: String,
-    required: true
+    required: false
   },
   email: {
     type: String,
@@ -51,7 +51,7 @@ const ong = new mongoose.Schema({
   },
   site: {
     type: String,
-    required: true
+    required: false
   },
   agencia: {
     type: String,
@@ -146,6 +146,17 @@ class OngsActions {
       }).catch((error) => {
         reject(error);
         console.log(error);
+      });
+    });
+  }
+
+  static checkExistence(targetName, targetCNPJ) {
+    return new Promise((resolve, reject) => {
+      Ong.find({ name: targetName }||{cnpj: targetCNPJ}).then(() => {
+        resolve(true);
+      }).catch((error) => {
+        reject(error);
+        resolve(false)
       });
     });
   }

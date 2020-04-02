@@ -4,15 +4,17 @@ module.exports = {
   async create(request, response) {
     try {
       let { name, cnpj } = request.body;
-      //Validation if ong alredy exists =====================================
+      const exist = await Ong.checkExistence(name, cnpj)
+      if (!exist) {
+        let ong = request.body;
 
-      //
+        let { _id } = await Ong.createNew(ong);
 
-      let ong = request.body;
-
-      let { _id } = await Ong.createNew(ong);
-
-      return response.json({ _id });
+        return response.json({ _id });
+      }
+      else {
+        //Ong Already exists
+      }
     } catch (error) {
       console.log(error);
       return response.status(500).json({ error: error });
