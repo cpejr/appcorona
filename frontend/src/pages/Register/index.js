@@ -18,9 +18,9 @@ export default function Register(){
   const [instagram,setInstsgram] = useState('');
   const [email,setEmail] = useState('');
   const [whatsapp,setWhatsapp] = useState('');
-  const [banco,setBanco] = useState('');
+  const [bank,setBank] = useState('');
   const [site,setSite] = useState('');
-  const [agencia,setAgencia] = useState('');
+  const [branch,setBranch] = useState('');
   const history = useHistory();
 
 
@@ -40,8 +40,8 @@ export default function Register(){
       facebook,
       email,
       whatsapp,
-      banco,
-      agencia,
+      bank,
+      branch,
     };
 
     try{
@@ -282,8 +282,8 @@ export default function Register(){
                                           <div className="input-group-desc">
                                               <input className="input--style-5" type="text" 
                                                 name="first_name"
-                                                value = {banco}
-                                                onChange = {e=>setBanco(e.target.value)}
+                                                value = {bank}
+                                                onChange = {e=>setBank(e.target.value)}
                                               />
                                               <label className="label--desc">Banco</label>
                                           </div>
@@ -294,8 +294,8 @@ export default function Register(){
 
                                               <input className="input--style-5" type="text" 
                                                 name="last_name"
-                                                value = {agencia}
-                                                onChange = {e=>setAgencia(e.target.value)}
+                                                value = {branch}
+                                                onChange = {e=>setBranch(e.target.value)}
                                               />
                                               <label className="label--desc">Agência</label>
                                           </div>
