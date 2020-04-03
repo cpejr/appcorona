@@ -27,6 +27,10 @@ module.exports = {
 
       let result = await Ong.getAprovedOngs(page, city, state);
 
+      response.header("X-Total-Count", result[0].totalCount);
+      
+      result = result[0].ongs;
+
       return response.json(result);
     } catch (error) {
       console.log(error);

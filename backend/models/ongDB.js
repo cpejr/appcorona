@@ -147,7 +147,7 @@ class OngsActions {
             }
           }
         ]);
-
+        
         resolve(result);
       } catch (err) {
         console.log(err);
