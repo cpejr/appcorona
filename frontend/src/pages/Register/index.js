@@ -19,6 +19,7 @@ export default function Register(){
   const [email,setEmail] = useState('');
   const [phone,setPhone] = useState('');
   const [banco,setBanco] = useState('');
+  const [site,setSite] = useState('');
   const [agencia,setAgencia] = useState('');
   const history = useHistory();
 
@@ -148,7 +149,7 @@ export default function Register(){
                           </div>
 
                           <div class="form-row m-b-55">
-                              <div class="name">Endereço</div>
+                              <div class="name"></div>
                               <div class="value">
                                   <div class="row row-space">
                                       <div class="col-6">
@@ -209,6 +210,20 @@ export default function Register(){
                                   </div>
                               </div>
                           </div>
+
+                          <div class="form-row">
+                              <div class="name">Site</div>
+                              <div class="value">
+                                  <div class="input-group">
+                                      <input class="input--style-5" type="text" 
+                                        name="company"
+                                        value={site}
+                                        onChange = {e=>setSite(e.target.value)}  
+                                      />
+                                  </div>
+                              </div>
+                          </div>
+
                           <div class="form-row">
                               <div class="name">Facebook</div>
                               <div class="value">
