@@ -6,12 +6,13 @@ import api from '../../services/api';
 
 export default function Register() {
     const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [street, setStreet] = useState('');
     const [neighborhood, setNeighborhood] = useState('');
-    const [cep, setCep] = useState('');
     const [number, setNumber] = useState('');
+    const [cep, setCep] = useState('cep'); // ATENCAO!! ainda precisa ser criado um imput para cep!!
     const [complement, setComplement] = useState('');
     const [cnpj, setCnpj] = useState('');
     const [picpay, setPicpay] = useState('');
@@ -30,9 +31,11 @@ export default function Register() {
         e.preventDefault();
         const data = {
             name,
+            description,
             city,
             state,
             street,
+            cep,
             site,
             neighborhood,
             number,
@@ -48,7 +51,7 @@ export default function Register() {
 
         try {
             const response = await api.post('registerOng', data);
-            alert(`Olá ${response.data.name}, seu cadastro foi realizado com sucesso`);
+            alert(`Olá ${response.name}, seu cadastro foi realizado com sucesso`);
             history.push('/');
         } catch (err) {
             alert(`${err}`);
@@ -64,6 +67,7 @@ export default function Register() {
                     </div>
                     <div className="card-body">
                         <form onSubmit={handleRegister}>
+
                             <div className="form-row">
                                 <div className="name">Nome da Ong</div>
                                 <div className="value">
@@ -75,6 +79,19 @@ export default function Register() {
                                     </div>
                                 </div>
                             </div>
+
+                            <div className="form-row">
+                                <div className="name">Descrição</div>
+                                <div className="value">
+                                    <div className="input-group">
+                                        <input className="input--style-5" type="text" name="description"
+                                            value={description}
+                                            onChange={e => setDescription(e.target.value)}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
                             <div className="form-row m-b-55">
                                 <div className="name">Local</div>
                                 <div className="value">
@@ -104,9 +121,6 @@ export default function Register() {
                                     </div>
                                 </div>
                             </div>
-
-
-
 
                             <div className="form-row m-b-55">
                                 <div className="name">Endereço</div>
@@ -183,6 +197,7 @@ export default function Register() {
                                     </div>
                                 </div>
                             </div>
+
                             <div className="form-row">
                                 <div className="name">PICPAY</div>
                                 <div className="value">
@@ -221,6 +236,7 @@ export default function Register() {
                                     </div>
                                 </div>
                             </div>
+
                             <div className="form-row">
                                 <div className="name">Instagram</div>
                                 <div className="value">
@@ -233,6 +249,7 @@ export default function Register() {
                                     </div>
                                 </div>
                             </div>
+
                             <div className="form-row">
                                 <div className="name">Email</div>
                                 <div className="value">
@@ -245,10 +262,21 @@ export default function Register() {
                                     </div>
                                 </div>
                             </div>
+
                             <div className="form-row m-b-55">
                                 <div className="name">Contato</div>
                                 <div className="value">
                                     <div className="row row-refine">
+                                        <div className="col-3">
+                                            <div className="input-group-desc">
+                                                <input className="input--style-5" type="text"
+                                                    name="ddd"
+                                                    value={ddd}
+                                                    onChange={e => setDdd(e.target.value)}
+                                                />
+                                                <label className="label--desc">DDD</label>
+                                            </div>
+                                        </div>
                                         <div className="col-9">
                                             <div className="input-group-desc">
                                                 <input className="input--style-5" type="text"
@@ -256,7 +284,7 @@ export default function Register() {
                                                     value={phoneNumber}
                                                     onChange={e => setPhoneNumber(e.target.value)}
                                                 />
-                                                <label className="label--desc">Telefone com DDD</label>
+                                                <label className="label--desc">Telefone</label>
                                             </div>
                                         </div>
                                     </div>
@@ -292,6 +320,7 @@ export default function Register() {
                                     </div>
                                 </div>
                             </div>
+
                             <div>
 
                                 <button className="btn btn--radius-2 btn btn-warning" type="submit">Register</button>

@@ -5,6 +5,10 @@ const ong = new mongoose.Schema({
     type: String,
     required: true
   },
+  description: {
+    type: String,
+    required: false
+  },
   cnpj: {
     type: String,
     required: true
@@ -26,7 +30,7 @@ const ong = new mongoose.Schema({
     required: true
   },
   number: {
-    type: Number,
+    type: String,
     required: true
   },
   cep: {
