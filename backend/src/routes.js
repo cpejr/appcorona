@@ -10,21 +10,21 @@ const ongDB = require('../models/ongDB');
 // Parametros ja estao sendo validados pelo celebrate.
 routes.post('/registerOng', celebrate({
   [Segments.BODY]: Joi.object().keys({
-    name: Joi.string().required(),
-    cnpj: Joi.string().required(),
-    state: Joi.string().required(),
-    city: Joi.string().required(),
-    neighborhood: Joi.string().required(),
-    street: Joi.string().required(),
-    number: Joi.string().required(),
-    complement: Joi.string().required(),
+    name: Joi.string().optional(),
+    cnpj: Joi.string().optional(),
+    state: Joi.string().optional(),
+    city: Joi.string().optional(),
+    neighborhood: Joi.string().optional(),
+    street: Joi.string().optional(),
+    number: Joi.string().optional(),
+    complement: Joi.string().optional(),
     picpay: Joi.string().optional(),
     facebook: Joi.string().optional(),
     whatsapp: Joi.string().optional(),
-    email: Joi.string().required(),
+    email: Joi.string().optional(),
     site: Joi.string().optional(),
-    agencia: Joi.string().required(),
-    banco: Joi.string().required(),
+    agencia: Joi.string().optional(),
+    banco: Joi.string().optional(),
   }),
 }), ongController.create);
 
