@@ -45,7 +45,11 @@ const ong = new mongoose.Schema({
     type: String,
     required: false
   },
-  whatsapp: {
+  ddd: {
+    type: String,
+    required: false
+  },
+  phoneNumber: {
     type: String,
     required: false
   },
