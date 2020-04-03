@@ -27,6 +27,7 @@ routes.post('/registerOng', celebrate({
     site: Joi.string().optional(),
     branch: Joi.string().optional(),
     bank: Joi.string().optional(),
+    description: Joi.string().optional(),
   }),
 }), ongController.create);
 
@@ -75,6 +76,7 @@ routes.put('/admin/:ongId', celebrate({
     branch: Joi.string().optional(),
     bank: Joi.string().optional(),
     approved: Joi.bool().optional(),
+    description: Joi.string().optional(),
   }),
   [Segments.HEADERS]: Joi.object({
     authorization: Joi.string().required(),

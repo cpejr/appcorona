@@ -11,7 +11,7 @@ module.exports = {
 
         let { _id } = await Ong.createNew(ong);
 
-        return response.json({ _id });
+        return response.json({ _id, name });
       }
       else {
         return response.status(409).json({ error: 'Ong já existente' });
