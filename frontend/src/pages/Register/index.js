@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './styles.css';
-import {Link,useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import api from '../../services/api';
 
 
@@ -17,7 +17,7 @@ export default function Register(){
   const [facebook, setFacebook] = useState('');
   const [instagram,setInstsgram] = useState('');
   const [email,setEmail] = useState('');
-  const [phone,setPhone] = useState('');
+  const [whatsapp,setWhatsapp] = useState('');
   const [banco,setBanco] = useState('');
   const [site,setSite] = useState('');
   const [agencia,setAgencia] = useState('');
@@ -30,15 +30,16 @@ export default function Register(){
       name,
       city,
       state,
+      street,
+      site,
       neighborhood,
       number,
       complement,
       cnpj,
       picpay,
       facebook,
-      instagram,
       email,
-      phone,
+      whatsapp,
       banco,
       agencia,
     };
@@ -49,7 +50,6 @@ export default function Register(){
       history.push('/');
     }catch(err){
       alert(`${err}`);
-      console.log(err);
       
     }
 
@@ -59,10 +59,6 @@ export default function Register(){
 
 
   return(
-
-    
-
-  
       <div className="page-wrapper bg-gra-03 p-t-45 p-b-50">
           <div className="wrapper wrapper--w790">
               <div className="card card-5">
@@ -268,8 +264,8 @@ export default function Register(){
                                           <div className="input-group-desc">
                                               <input className="input--style-5" type="text" 
                                                 name="phone"
-                                                value ={phone}
-                                                onChange = {e=>setPhone(e.target.value)}
+                                                value ={whatsapp}
+                                                onChange = {e=>setWhatsapp(e.target.value)}
                                               />
                                               <label className="label--desc">Telefone com DDD</label>
                                           </div>
