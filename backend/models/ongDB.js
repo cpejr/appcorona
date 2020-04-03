@@ -29,9 +29,13 @@ const ong = new mongoose.Schema({
     type: Number,
     required: true
   },
-  complement: {
+  cep: {
     type: String,
     required: true
+  },
+  complement: {
+    type: String,
+    required: false
   },
   picpay: {
     type: String,
@@ -53,13 +57,13 @@ const ong = new mongoose.Schema({
     type: String,
     required: false
   },
-  agencia: {
+  branch: {
     type: String,
-    required: true
+    required: false
   },
-  banco: {
+  bank: {
     type: String,
-    required: true
+    required: false
   },
   approved: {
     type: Boolean,
@@ -71,6 +75,9 @@ const ong = new mongoose.Schema({
 );
 
 const Ong = mongoose.model('Ong', ong);
+
+// Use this to define the maximum number of ongs in a page
+const ONGS_PER_PAGE = 10;
 
 class OngsActions {
 
@@ -96,14 +103,52 @@ class OngsActions {
     });
   }
 
-  static getAprovedOngs() {
-    return new Promise((resolve, reject) => {
-      Ong.find({ approved: true }).then((results) => {
-        resolve(results);
-      }).catch((error) => {
-        reject(error);
-        console.log(error);
-      });
+  static getAprovedOngs(page, city, state) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let query = {
+          approved: true,
+        }
+
+        if (city) {
+          query.city = city;
+        }
+
+        if (state) {
+          query.state = state;
+        }
+
+        let pg = 0;
+
+        if (page)
+          pg = (page - 1);
+
+
+        const result = await Ong.aggregate([
+          {
+            $group: {
+              _id: null,
+              ongs: { $push: '$$ROOT' }
+            }
+          }, {
+            $project: {
+              _id: 0,
+              totalCount: { $size: '$ongs' },
+              ongs: 1
+            }
+          }, {
+            $project: {
+              totalCount: 1,
+              ongs: { $slice: ['$ongs', pg * ONGS_PER_PAGE, ONGS_PER_PAGE] }
+            }
+          }
+        ]);
+
+        resolve(result);
+      } catch (err) {
+        console.log(err);
+        reject(err);
+      }
     });
   }
 

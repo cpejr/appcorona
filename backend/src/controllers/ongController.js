@@ -23,7 +23,9 @@ module.exports = {
   },
   async index(request, response) {
     try {
-      let result = await Ong.getAprovedOngs();
+      const { page, city, state } = request.query;
+
+      let result = await Ong.getAprovedOngs(page, city, state);
 
       return response.json(result);
     } catch (error) {
