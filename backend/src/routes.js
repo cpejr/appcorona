@@ -10,7 +10,9 @@ const imageUpload = require('./middleware/imageUpload');
 // Ainda faltam criar e adicionar os controllers de cada rota para elas funcionarem.
 // Parametros ja estao sendo validados pelo celebrate.
 
-routes.post('/teste', imageUpload('teste'));
+routes.post('/teste', imageUpload('teste'), (_req, res) =>
+  res.status(204).send()
+);
 
 routes.post(
   '/registerOng',
