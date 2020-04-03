@@ -123,8 +123,6 @@ class OngsActions {
         if (page)
           pg = (page - 1);
 
-        console.log(query);
-
         const result = await Ong.aggregate([
           {
             $match: {
