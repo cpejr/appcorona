@@ -44,11 +44,13 @@ export default function Register(){
     };
 
     try{
-      const response = await api.post('ongs',data);
+      const response = await api.post('registerOng',data);
       alert(`Olá ${response.data.name}, seu cadastro foi realizado com sucesso`);
       history.push('/');
     }catch(err){
       alert('Erro no cadastro, tente novamente');
+      console.log(err);
+      
     }
 
   }
@@ -56,10 +58,9 @@ export default function Register(){
 
 
 
-
   return(
 
-    <form onSubmit={handleRegister}>
+    
 
   
       <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
@@ -69,7 +70,7 @@ export default function Register(){
                       <h2 class="title">Cadastre a sua ONG abaixo</h2>
                   </div>
                   <div class="card-body">
-                      <form method="POST">
+                  <form onSubmit={handleRegister}>
                         <div class="form-row">
                           <div class="name">Nome da Ong</div>
                             <div class="value">
@@ -136,7 +137,6 @@ export default function Register(){
                                                 name="last_name"
                                                 value={street}
                                                 onChange = {e=>setStreet(e.target.value)                                                                                                                                                                       }
-
                                               />
                                               <label class="label--desc">Rua</label>
                                           </div>
@@ -308,9 +308,9 @@ export default function Register(){
                               </div>
                           </div>
                           <div>
-                            <Link className = ".back-link" to="/">
+                           
                             <button class="btn btn--radius-2 btn btn-warning" type="submit">Register</button>
-                            </Link>                           
+                                                      
                           </div>
                       </form>
                   </div>
@@ -318,6 +318,6 @@ export default function Register(){
           </div>
       </div>
     
-      </form>  
+      
   );
 }
