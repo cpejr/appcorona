@@ -22,9 +22,55 @@ const ongfake = {
     agencia: '4582',
     banco: 'Santander',
 
-};
-
+  };
 export default function Pendings() {
+   
+  const [ongs, setOngs] = useState([]);
+  const [currentOng, setCurrentOng] = useState(0);
+
+  async function getOngs() {
+    try {
+      let ongsResponse = await api.get('admin', {
+        headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1ODU5NTQyNDEsImV4cCI6MTU4NjA0MDY0MX0.H-h_B3NRxlTGZI-ht4eN9VSWDqkf1XZVgxbgUQOcDwM` }
+      });
+      console.log(ongsResponse.data);
+      setOngs(ongsResponse.data);
+    }
+    catch (err) {
+      console.warn(err);
+    }
+  }
+
+  useEffect(() => {
+    getOngs();
+  }, [])
+
+  async function handleApprove(e) {
+    e.preventDefault()
+    try {
+      await api.put(`admin/${ongs[currentOng]._id}`,
+        { approved: true },
+        {
+          headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1ODU5NTQyNDEsImV4cCI6MTU4NjA0MDY0MX0.H-h_B3NRxlTGZI-ht4eN9VSWDqkf1XZVgxbgUQOcDwM` }
+        });
+    }
+    catch (err) {
+      alert("Erro");
+    }
+  }
+
+  async function handleReject(e) {
+    e.preventDefault()
+    try {
+      await api.delete(`admin/${ongs[currentOng]._id}`, {
+        headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1ODU5NTQyNDEsImV4cCI6MTU4NjA0MDY0MX0.H-h_B3NRxlTGZI-ht4eN9VSWDqkf1XZVgxbgUQOcDwM` }
+      });
+    } catch (err) {
+      alert("Erro");
+    }
+  }
+
+
     return (
         <div>
             <div className="ONGcard">
@@ -105,12 +151,12 @@ export default function Pendings() {
                     </div>
                     <div id="bttn">
                         <button
-                            onClick={event => window.location.href='/allpendings'} 
+                            onClick={handleApprove}
                             className="btn1 btn--green btn--radius m-rg-20"
                             type="submit">APROVAR
                         </button>
                         <button 
-                        onClick={event => window.location.href='/allpendings'}
+                        onClick={handleReject}
                         className="btn1 btn--red btn--radius m-lt-20" 
                         type="submit">REJEITAR</button>
                     </div>
