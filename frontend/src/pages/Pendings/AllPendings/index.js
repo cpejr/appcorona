@@ -12,11 +12,10 @@ export default function AllPendings(props) {
       let ongsResponse = await api.get('admin',
         {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1ODYyMTI2NjksImV4cCI6MTU4NjI5OTA2OX0.9ndRHAVJk9v3qRiCrr9RzX_KlxQ4sbL0Sf0-lG2yqDo`
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1ODYyMTM5OTgsImV4cCI6MTU4NjMwMDM5OH0.88DcWKITA3v2NHBAOnNBlXjjCFXwiXRb4-CY-YTjTYE`
           }
         });
 
-      console.log(ongsResponse.data);
       setOngs(ongsResponse.data);
 
     } catch (err) {
@@ -34,7 +33,7 @@ export default function AllPendings(props) {
       <div className="gridCard">
         {ongs.map((ong, index) => {
           return (
-            <OngView key={index} ong={ong} handleSelect={props.handleSelect} />
+            <OngView key={index} ong={ong} handleSelect={props.handleSelect}/>
           )
         })}
       </div>
