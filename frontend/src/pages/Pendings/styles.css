@@ -26,11 +26,17 @@ img {
 /* ==========================================================================
    #FONT
    ========================================================================== */
+.font-robo {
+    font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
+}
 
 .font-poppins {
     font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
 }
 
+.font-opensans {
+    font-family: "Open Sans", "Arial", "Helvetica Neue", sans-serif;
+}
 
 /* ==========================================================================
     #TEXT
@@ -75,6 +81,16 @@ img {
     width: 100%;
 }
 
+.style-6 {
+    background: #e5e5e5;
+    text-align: left;
+    line-height: 50px;
+    border-radius: 5px;
+    padding: 0 22px;
+    font-size: 16px;
+    color: #555;
+    width: 100%;
+}
 
   .forms-row {
     display: -webkit-box;
@@ -93,6 +109,18 @@ img {
     margin-bottom: 40px;
   }
 
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+  }
+  .row-spaces {
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -moz-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
 /* ==========================================================================
     #GRID
   ========================================================================== */
@@ -114,15 +142,22 @@ img {
     padding-bottom: 5%;
 }
 
-  .m-rg-20 {
-    margin-right: 20px;
-  }
+.col-0 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 
-  .m-lt-20 {
-    margin-left: 20px;
-  }
+}
 
-#btt{ text-align: center;}
+.m-rg-45 {
+    margin-right: 45px;
+  }
+.col-5 {
+    width: -webkit-calc((100% - 30px) / 2);
+    width: -moz-calc((100% - 30px) / 2);
+    width: calc((100% - 30px) / 2);
+  }
+  
+
   .btn1 {
     display: inline-block;
 
