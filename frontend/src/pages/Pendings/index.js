@@ -6,6 +6,9 @@ import OngCard from './Pending/OngCard';
 import AllPendings from './AllPendings'
 
 export default function Pendings(props) {
+  const [token, setToken] = useState(props.location.state.token);
+  console.log(token);
+
   const [ongSelected, setOngSelected] = useState();
 
   const handleSelect = (ong) => {
@@ -16,12 +19,12 @@ export default function Pendings(props) {
     setOngSelected();
   }
 
-  async function handleApproved(ong) {
+  const handleApproved = async (ong) => {
     try {
       await api.put(`admin/${ong._id}`,
         { approved: true },
         {
-          headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1ODYyMTM5OTgsImV4cCI6MTU4NjMwMDM5OH0.88DcWKITA3v2NHBAOnNBlXjjCFXwiXRb4-CY-YTjTYE` }
+          headers: { Authorization: `Bearer ${token}` }
         });
       setOngSelected();
       alert('Aprovado com sucesso!');
@@ -32,10 +35,10 @@ export default function Pendings(props) {
     }
   }
 
-  async function handleRejected(ong) {
+  const handleRejected = async (ong) => {
     try {
       await api.delete(`admin/${ong._id}`, {
-        headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1ODYyMTM5OTgsImV4cCI6MTU4NjMwMDM5OH0.88DcWKITA3v2NHBAOnNBlXjjCFXwiXRb4-CY-YTjTYE` }
+        headers: { Authorization: `Bearer ${token}` }
       });
       setOngSelected();
       alert('Deletado com sucesso!');
@@ -47,7 +50,7 @@ export default function Pendings(props) {
 
   return (
     <div>
-      {ongSelected ? <OngCard ong={ongSelected} handleGoBack={handleGoBack} handleApproved={handleApproved} handleRejected={handleRejected} /> : (<AllPendings handleSelect={handleSelect} />)}
+      {ongSelected ? <OngCard ong={ongSelected} handleGoBack={handleGoBack} handleApproved={handleApproved} handleRejected={handleRejected}/> : (<AllPendings handleSelect={handleSelect} token={token}/>)}
     </div>
   );
 }

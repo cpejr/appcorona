@@ -5,27 +5,27 @@ import OngView from './OngView';
 
 export default function AllPendings(props) {
 
+  let token = props.token;
   const [ongs, setOngs] = useState([]);
 
-  async function getOngs() {
-    try {
-      let ongsResponse = await api.get('admin',
-        {
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1ODYyMTM5OTgsImV4cCI6MTU4NjMwMDM5OH0.88DcWKITA3v2NHBAOnNBlXjjCFXwiXRb4-CY-YTjTYE`
-          }
-        });
-
-      setOngs(ongsResponse.data);
-
-    } catch (err) {
-      console.warn(err);
-    }
-  }
-
   useEffect(() => {
+    async function getOngs() {
+      try {
+        let ongsResponse = await api.get('admin',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+
+        setOngs(ongsResponse.data);
+
+      } catch (err) {
+        console.warn(err);
+      }
+    }
     getOngs();
-  }, []);
+  }, [token]);
 
   return (
     <div>
@@ -33,7 +33,7 @@ export default function AllPendings(props) {
       <div className="gridCard">
         {ongs.map((ong, index) => {
           return (
-            <OngView key={index} ong={ong} handleSelect={props.handleSelect}/>
+            <OngView key={index} ong={ong} handleSelect={props.handleSelect} />
           )
         })}
       </div>
