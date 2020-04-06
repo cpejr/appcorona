@@ -5,28 +5,27 @@ import OngView from './OngView';
 
 export default function AllPendings(props) {
 
+  let token = props.token;
   const [ongs, setOngs] = useState([]);
 
-  async function getOngs() {
-    try {
-      let ongsResponse = await api.get('admin',
-        {
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1ODYyMTI2NjksImV4cCI6MTU4NjI5OTA2OX0.9ndRHAVJk9v3qRiCrr9RzX_KlxQ4sbL0Sf0-lG2yqDo`
-          }
-        });
-
-      console.log(ongsResponse.data);
-      setOngs(ongsResponse.data);
-
-    } catch (err) {
-      console.warn(err);
-    }
-  }
-
   useEffect(() => {
+    async function getOngs() {
+      try {
+        let ongsResponse = await api.get('admin',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+
+        setOngs(ongsResponse.data);
+
+      } catch (err) {
+        console.warn(err);
+      }
+    }
     getOngs();
-  }, []);
+  }, [token]);
 
   return (
     <div>

@@ -11,10 +11,10 @@ export default function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={Login} />
+        <Route path="/" exact component={List} />
         <Route path="/register" component={Register} />
         <Route path="/pendings" component={Pendings} />
-        <Route path="/list" component={List} />
+        <Route path="/login/:senha" component={Login} />
       </Switch>
     </BrowserRouter>
   );

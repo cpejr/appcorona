@@ -2,37 +2,8 @@ import React from 'react';
 import api from '../../../services/api';
 
 export default function OngCard(props) {
-  
-  let ong = {};
-  
-  if (props.ong)
-    ong = props.ong;
 
-  async function handleApprove(e) {
-    e.preventDefault()
-    try {
-      await api.put(`admin/${ong._id}`,
-        { approved: true },
-        {
-          headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1ODU5NTQyNDEsImV4cCI6MTU4NjA0MDY0MX0.H-h_B3NRxlTGZI-ht4eN9VSWDqkf1XZVgxbgUQOcDwM` }
-        });
-    }
-    catch (err) {
-      alert("Erro");
-    }
-  }
-
-  async function handleReject(e) {
-    e.preventDefault()
-    try {
-      await api.delete(`admin/${ong._id}`, {
-        headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1ODU5NTQyNDEsImV4cCI6MTU4NjA0MDY0MX0.H-h_B3NRxlTGZI-ht4eN9VSWDqkf1XZVgxbgUQOcDwM` }
-      });
-    } catch (err) {
-      alert("Erro");
-    }
-  }
-
+  let ong = props.ong;
 
   return (
     <div className="ONGcard">
@@ -113,13 +84,13 @@ export default function OngCard(props) {
         </div>
         <div id="bttn">
           <button
-            onClick={handleApprove}
+            onClick={() => props.handleApproved(ong)}
             className="btn1 btn--green btn--radius m-rg-20"
             type="submit">
             APROVAR
             </button>
           <button
-            onClick={handleReject}
+            onClick={() => props.handleRejected(ong)}
             className="btn1 btn--red btn--radius m-lt-20"
             type="submit">
             REJEITAR
