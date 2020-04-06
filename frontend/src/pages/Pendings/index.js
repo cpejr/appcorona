@@ -83,7 +83,7 @@ export default function Pendings() {
                         <div className="info m-rg-20">PicPay:
                             <div className="style-5">{ongfake.picpay}</div>
                         </div>
-                        <div className="info m-lt-20">Email:
+                        <div className="info m-lt-20">E-mail:
                             <div className="style-5">{ongfake.email}</div>
                         </div>
                     </div>
