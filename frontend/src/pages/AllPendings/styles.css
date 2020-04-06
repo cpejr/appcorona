@@ -34,17 +34,11 @@ img {
 /* ==========================================================================
    #FONT
    ========================================================================== */
-.font-robo {
-    font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
-}
 
 .font-poppins {
     font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
 }
 
-.font-opensans {
-    font-family: "Open Sans", "Arial", "Helvetica Neue", sans-serif;
-}
 
 /* ==========================================================================
     #TEXT
@@ -90,16 +84,6 @@ img {
     width: 100%;
 }
 
-.style-6 {
-    background: #e5e5e5;
-    text-align: left;
-    line-height: 50px;
-    border-radius: 5px;
-    padding: 0 22px;
-    font-size: 16px;
-    color: #555;
-    width: 100%;
-}
 
   .forms-row {
     display: -webkit-box;
@@ -123,13 +107,7 @@ img {
     grid-template-columns: repeat(2, 1fr);
 
   }
-  .row-spaces {
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -moz-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-  }
+
 /* ==========================================================================
     #GRID
   ========================================================================== */
@@ -150,10 +128,6 @@ img {
     padding-bottom: 2%;
 }
 
-
-.m-rg-45 {
-    margin-right: 45px;
-  }
 
 #bttn {text-align: center;}
   .btn2 {

@@ -2,8 +2,31 @@ import React, { useEffect, useState } from 'react';
 import './styles.css';
 import api from '../../services/api';
 
+const ongfake = {
+    name: 'Vinícius Doador Lindao',
+    cnpj: '1111111110202022',
+    state: 'Minas Gerais',
+    description: 'dgsagsfgfsg gsanoafjsibadsji basflmasfoaob asfjaosi jalfdkajf jdanalfa aonjao dgjoifaj fwniefiwenf niefwjiwe ijfweifwi sofjosifjdio jf adjof aid aj fa di dajifja oajif a jaidfj aaijfoiaj f baosfoasjijans fsovijasovis bfisobjsafo',
+    city: 'Belo Horizonte',
+    neighborhood: 'Timirim',
+    street: 'José Rodrigues Menezes',
+    cep: '35160-000',
+    number: '15',
+    complement: '102',
+    ddd: '31',
+    instagram: '@vcmmor4is',
+    picpay: '@vcmmor4is',
+    whatsapp: '31983507978',
+    facebook: 'www.facebook.com/vadfaeijda',
+    email: 'vcm1105@gmail.com',
+    site: 'www.meusite.com.br',
+    agencia: '4582',
+    banco: 'Santander',
+
+};
 
 export default function Pendings() {
+
   const [ongs, setOngs] = useState([]);
   const [currentOng, setCurrentOng] = useState(0);
 
@@ -146,6 +169,13 @@ export default function Pendings() {
             <div id="bttn">
               <button className="btn1 btn--green btn--radius m-rg-45" onClick={handleApprove}>APROVAR</button>
               <button className="btn1 btn--red btn--radius" onClick={handleReject}>REJEITAR</button>
+            </div>
+            <div id="bttn">
+              <button 
+                onClick={event => window.location.href='/list'}
+                className="btn1 btn--radius btn--blue"
+                type="submit">VOLTAR A PÁGINA INICIAL
+              </button>
             </div>
           </div>
         </div>
