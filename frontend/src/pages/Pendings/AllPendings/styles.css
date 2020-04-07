@@ -117,7 +117,10 @@ img {
     padding: 2%;
 
 }
-
+@media screen and (min-width: 700px) {
+  .gridCard{
+    justify-content: left;
+  }
 .gridCard {
     justify-content: center;
     display: grid;
@@ -127,9 +130,10 @@ img {
     padding-top: 2%;
     padding-bottom: 2%;
 }
+}
 
-
-#bttn {text-align: center;}
+#bttn {text-align: center;
+      padding-bottom: 1%;}
   .btn2 {
     display: inline-block;
     text-align: center;

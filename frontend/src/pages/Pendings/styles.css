@@ -96,7 +96,8 @@ img {
 /* ==========================================================================
     #GRID
   ========================================================================== */
-.ONGgrid {
+
+  .ONGgrid {
     transition: 0.3s;
     width: 100%;
     padding: 2%;
@@ -104,7 +105,7 @@ img {
 }
 
 
-.gridCard {
+.gridCard1 {
     justify-content: center;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -125,7 +126,6 @@ img {
 #btt{ text-align: center;}
   .btn1 {
     display: inline-block;
-
     line-height: 50px;
     padding: 0 50px;
     -webkit-transition: all 0.4s ease;

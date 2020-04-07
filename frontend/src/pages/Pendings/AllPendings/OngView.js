@@ -27,7 +27,8 @@ export default function OngView({ ong, handleSelect }) {
             <button
               onClick={() => handleSelect(ong)}
               className="btn2 btn--blue btn--radius"
-              type="submit">ANALISAR APROVAÇÃO</button>
+              type="submit">ANALISAR APROVAÇÃO
+              </button>
           </div>
         </div>
       </div>
