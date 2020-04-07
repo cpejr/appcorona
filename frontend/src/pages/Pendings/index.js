@@ -7,7 +7,6 @@ import AllPendings from './AllPendings'
 
 export default function Pendings(props) {
   const [token, setToken] = useState(props.location.state.token);
-  console.log(token);
 
   const [ongSelected, setOngSelected] = useState();
 

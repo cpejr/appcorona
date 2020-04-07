@@ -723,10 +723,14 @@
     font-weight: 700;
     text-align: center;
     color:black;
+    max-width: 40%;
+    margin-right: 10%;
   }
 
   .logo {
-    width: 20vh;
+    max-width: 20%;
+    margin-right: 10%;
+    margin-left: 0;
   }
 
   /* ==========================================================================
@@ -862,3 +866,8 @@
       line-height: 21px;
       font-size: 16px;
   }
+
+
+.Link{
+  max-width: 35%;
+}
