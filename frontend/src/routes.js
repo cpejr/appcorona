@@ -6,15 +6,18 @@ import Register from './pages/Register';
 import Pendings from './pages/Pendings';
 import AllPendings from './pages/Pendings/AllPendings';
 import List from './pages/List';
+import UploadTest from './pages/UploadTest';
 
 export default function Routes() {
   return (
     <BrowserRouter>
       <Switch>
+
         <Route path="/" exact component={List} />
         <Route path="/register" component={Register} />
         <Route path="/pendings" component={Pendings} />
         <Route path="/login/:senha" component={Login} />
+        <Route path="/imgupload" component={UploadTest} />
       </Switch>
     </BrowserRouter>
   );
