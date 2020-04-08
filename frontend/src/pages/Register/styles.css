@@ -769,3 +769,18 @@
     }
   }
   
+
+  .file-container{
+    display: flex;
+  }
+
+  .file-name{
+    width: 125px;
+    color: #555;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .btn-register-container{
+    margin-top: 25px !important;
+  }

@@ -1,7 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './styles.css';
+import axios from 'axios';
 
-export default function Register(){
+export default function Register({ className, fileName, onSubmit }){
+
+
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const onChangeHandler = (evt) => {
+    const file = evt.target.files[0];
+    setSelectedFile(file);
+  };
+
+  const handleSubmit = () => {
+    const data = new FormData();
+    data.append('teste', selectedFile);
+    onSubmit && onSubmit(data);
+    !onSubmit && axios.post('http://localhost:3333/teste', data);
+  };
+
+
+
+
+
+
+
   return(
     <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
         <div class="wrapper wrapper--w790">
@@ -172,19 +195,45 @@ export default function Register(){
                                     </div>
                                 </div>
                             </div>
+
+
+
+
+                            
                         </div>
 
+                    <div className="file-container">
+                    
+                        <div className="file-name">LOGO DA EMPRESA </div>
+
+                          
+                          <input
+                            type="file"
+                            name={fileName || 'teste'}
+                            onChange={onChangeHandler}
+                          />
 
 
+                        <div className="btn-enviar-container">
+                          <button class="btn btn--radius-2 btn btn-warning" onClick={handleSubmit}>Enviar</button>
+                        </div>
+                    </div>
 
                     
-                        <div>
-                            <button class="btn btn--radius-2 btn btn-warning" type="submit">Register</button>
+                        <div className = "btn-register-container">
+                            <button class=" btn btn-warning" type="submit">Finalizar Cadastro</button>
                         </div>
                     </form>
                 </div>
+
             </div>
+
         </div>
+
+
+  
+
+     
     </div>
     
       
