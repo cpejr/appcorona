@@ -86,266 +86,267 @@ export default function Register({ className, fileName, onSubmit }){
 
   return (
     <div className="page-wrapper bg-gra-03 p-t-45 p-b-50">
-      <div className="wrapper wrapper--w790">
+    <div className="wrapper wrapper--w790">
         <div className="card card-5">
-          <div className="card-heading">
-            <h2 className="title">Cadastre a sua ONG abaixo</h2>
-          </div>
-          <div className="card-body">
-            <form onSubmit={handleRegister}>
-              <div className="form-row">
-                <div className="name">Nome da Ong</div>
-                <div className="value">
-                  <div className="input-group">
-                    <input className="input--style-5" type="text" name="company"
-                      value={name}
-                      onChange={e => setName(e.target.value)}
-                    />
-                  </div>
-                </div>
-              </div>
+            <div className="card-heading">
+                <h2 className="title">Cadastre a sua ONG abaixo</h2>
+            </div>
+            <div className="card-body">
+                <form onSubmit={handleRegister}>
 
-              <div className="form-row">
-                <div className="name">Descrição</div>
-                <div className="value">
-                  <div className="input-group">
-                    <input className="input--style-5" type="text" name="description"
-                      value={description}
-                      onChange={e => setDescription(e.target.value)}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="form-row m-b-55">
-                <div className="name">Local</div>
-                <div className="value">
-                  <div className="row row-space">
-                    <div className="col-6">
-                      <div className="input-group-desc">
-                        <input className="input--style-5" type="text"
-                          name="first_name"
-                          value={city}
-                          onChange={e => setCity(e.target.value)}
-                        />
-                        <label className="label--desc">Cidade</label>
-                      </div>
-                    </div>
-                    <div className="col-6">
-                      <div className="input-group-desc">
-
-
-                        <input className="input--style-5" type="text"
-                          name="last_name"
-                          value={state}
-                          onChange={e => setState(e.target.value)}
-                        />
-                        <label className="label--desc">Estado</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="form-row m-b-55">
-                <div className="name">Endereço</div>
-                <div className="value">
-                  <div className="row row-space">
-                    <div className="col-6">
-                      <div className="input-group-desc">
-                        <input className="input--style-5" type="text"
-                          name="first_name"
-                          value={neighborhood}
-                          onChange={e => setNeighborhood(e.target.value)}
-                        />
-                        <label className="label--desc">Bairro</label>
-                      </div>
-                    </div>
-                    <div className="col-6">
-                      <div className="input-group-desc">
-
-
-                        <input className="input--style-5" type="text"
-                          name="last_name"
-                          value={street}
-                          onChange={e => setStreet(e.target.value)}
-                        />
-                        <label className="label--desc">Rua</label>
-                      </div>
+                    <div className="form-row">
+                        <div className="name">Nome da Ong</div>
+                        <div className="value">
+                            <div className="input-group">
+                                <input className="input--style-5" type="text" name="company"
+                                    value={name}
+                                    onChange={e => setName(e.target.value)}
+                                />
+                            </div>
+                        </div>
                     </div>
 
-
-
-                  </div>
-                </div>
-              </div>
-
-              <div className="form-row m-b-55">
-                <div className="name"></div>
-                <div className="value">
-                  <div className="row row-space">
-                    <div className="col-6">
-                      <div className="input-group-desc">
-                        <input className="input--style-5" type="text"
-                          name="first_name"
-                          value={number}
-                          onChange={e => setNumber(e.target.value)}
-                        />
-                        <label className="label--desc">Número</label>
-                      </div>
+                    <div className="form-row">
+                        <div className="name">Descrição</div>
+                        <div className="value">
+                            <div className="input-group">
+                                <input className="input--style-5" type="text" name="description"
+                                    value={description}
+                                    onChange={e => setDescription(e.target.value)}
+                                />
+                            </div>
+                        </div>
                     </div>
-                    <div className="col-6">
-                      <div className="input-group-desc">
+
+                    <div className="form-row m-b-55">
+                        <div className="name">Local</div>
+                        <div className="value">
+                            <div className="row row-space">
+                                <div className="col-6">
+                                    <div className="input-group-desc">
+                                        <input className="input--style-5" type="text"
+                                            name="first_name"
+                                            value={city}
+                                            onChange={e => setCity(e.target.value)}
+                                        />
+                                        <label className="label--desc">Cidade</label>
+                                    </div>
+                                </div>
+                                <div className="col-6">
+                                    <div className="input-group-desc">
 
 
-                        <input className="input--style-5" type="text"
-                          name="last_name"
-                          value={complement}
-                          onChange={e => setComplement(e.target.value)}
-                        />
-                        <label className="label--desc">Complemento</label>
-                      </div>
+                                        <input className="input--style-5" type="text"
+                                            name="last_name"
+                                            value={state}
+                                            onChange={e => setState(e.target.value)}
+                                        />
+                                        <label className="label--desc">Estado</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-              </div>
 
-              <div className="form-row">
-                <div className="name">CNPJ</div>
-                <div className="value">
-                  <div className="input-group">
-                    <input className="input--style-5" type="text"
-                      name="company"
-                      value={cnpj}
-                      onChange={e => setCnpj(e.target.value)}
-                    />
-                  </div>
-                </div>
-              </div>
+                    <div className="form-row m-b-55">
+                        <div className="name">Endereço</div>
+                        <div className="value">
+                            <div className="row row-space">
+                                <div className="col-6">
+                                    <div className="input-group-desc">
+                                        <input className="input--style-5" type="text"
+                                            name="first_name"
+                                            value={neighborhood}
+                                            onChange={e => setNeighborhood(e.target.value)}
+                                        />
+                                        <label className="label--desc">Bairro</label>
+                                    </div>
+                                </div>
+                                <div className="col-6">
+                                    <div className="input-group-desc">
 
-              <div className="form-row">
-                <div className="name">PICPAY</div>
-                <div className="value">
-                  <div className="input-group">
-                    <input className="input--style-5" type="text"
-                      name="company"
-                      value={picpay}
-                      onChange={e => setPicpay(e.target.value)}
-                    />
-                  </div>
-                </div>
-              </div>
 
-              <div className="form-row">
-                <div className="name">Site</div>
-                <div className="value">
-                  <div className="input-group">
-                    <input className="input--style-5" type="text"
-                      name="company"
-                      value={site}
-                      onChange={e => setSite(e.target.value)}
-                    />
-                  </div>
-                </div>
-              </div>
+                                        <input className="input--style-5" type="text"
+                                            name="last_name"
+                                            value={street}
+                                            onChange={e => setStreet(e.target.value)}
+                                        />
+                                        <label className="label--desc">Rua</label>
+                                    </div>
+                                </div>
 
-              <div className="form-row">
-                <div className="name">Facebook</div>
-                <div className="value">
-                  <div className="input-group">
-                    <input className="input--style-5" type="text"
-                      name="company"
-                      value={facebook}
-                      onChange={e => setFacebook(e.target.value)}
-                    />
-                  </div>
-                </div>
-              </div>
 
-              <div className="form-row">
-                <div className="name">Instagram</div>
-                <div className="value">
-                  <div className="input-group">
-                    <input className="input--style-5" type="text"
-                      name="company"
-                      value={instagram}
-                      onChange={e => setInstsgram(e.target.value)}
-                    />
-                  </div>
-                </div>
-              </div>
 
-              <div className="form-row">
-                <div className="name">Email</div>
-                <div className="value">
-                  <div className="input-group">
-                    <input className="input--style-5" type="email"
-                      name="email"
-                      value={email}
-                      onChange={e => setEmail(e.target.value)}
-                    />
-                  </div>
-
-                </div>
-              </div>
-
-              <div className="form-row m-b-55">
-                <div className="name">Contato</div>
-                <div className="value">
-                  <div className="row row-refine">
-                    <div className="col-3">
-                      <div className="input-group-desc">
-                        <input className="input--style-5" type="text"
-                          name="ddd"
-                          value={ddd}
-                          onChange={e => setDdd(e.target.value)}
-                        />
-                        <label className="label--desc">DDD</label>
-                      </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="col-9">
-                      <div className="input-group-desc">
-                        <input className="input--style-5" type="text"
-                          name="phone"
-                          value={phoneNumber}
-                          onChange={e => setPhoneNumber(e.target.value)}
-                        />
-                        <label className="label--desc">Telefone</label>
-                      </div>
+
+                    <div className="form-row m-b-55">
+                        <div className="name"></div>
+                        <div className="value">
+                            <div className="row row-space">
+                                <div className="col-6">
+                                    <div className="input-group-desc">
+                                        <input className="input--style-5" type="text"
+                                            name="first_name"
+                                            value={number}
+                                            onChange={e => setNumber(e.target.value)}
+                                        />
+                                        <label className="label--desc">Número</label>
+                                    </div>
+                                </div>
+                                <div className="col-6">
+                                    <div className="input-group-desc">
+
+
+                                        <input className="input--style-5" type="text"
+                                            name="last_name"
+                                            value={complement}
+                                            onChange={e => setComplement(e.target.value)}
+                                        />
+                                        <label className="label--desc">Complemento</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-              </div>
 
-              <div className="form-row m-b-55">
-                <div className="name">Dados bancarios</div>
-                <div className="value">
-                  <div className="row row-space">
-                    <div className="col-6">
-                      <div className="input-group-desc">
-                        <input className="input--style-5" type="text"
-                          name="first_name"
-                          value={bank}
-                          onChange={e => setBank(e.target.value)}
-                        />
-                        <label className="label--desc">Banco</label>
-                      </div>
+                    <div className="form-row">
+                        <div className="name">CNPJ</div>
+                        <div className="value">
+                            <div className="input-group">
+                                <input className="input--style-5" type="text"
+                                    name="company"
+                                    value={cnpj}
+                                    onChange={e => setCnpj(e.target.value)}
+                                />
+                            </div>
+                        </div>
                     </div>
-                    <div className="col-6">
-                      <div className="input-group-desc">
+
+                    <div className="form-row">
+                        <div className="name">PICPAY</div>
+                        <div className="value">
+                            <div className="input-group">
+                                <input className="input--style-5" type="text"
+                                    name="company"
+                                    value={picpay}
+                                    onChange={e => setPicpay(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="name">Site</div>
+                        <div className="value">
+                            <div className="input-group">
+                                <input className="input--style-5" type="text"
+                                    name="company"
+                                    value={site}
+                                    onChange={e => setSite(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="name">Facebook</div>
+                        <div className="value">
+                            <div className="input-group">
+                                <input className="input--style-5" type="text"
+                                    name="company"
+                                    value={facebook}
+                                    onChange={e => setFacebook(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="name">Instagram</div>
+                        <div className="value">
+                            <div className="input-group">
+                                <input className="input--style-5" type="text"
+                                    name="company"
+                                    value={instagram}
+                                    onChange={e => setInstsgram(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="name">Email</div>
+                        <div className="value">
+                            <div className="input-group">
+                                <input className="input--style-5" type="email"
+                                    name="email"
+                                    value={email}
+                                    onChange={e => setEmail(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="form-row m-b-55">
+                        <div className="name">Contato</div>
+                        <div className="value">
+                            <div className="row row-refine">
+                                <div className="col-3">
+                                    <div className="input-group-desc">
+                                        <input className="input--style-5" type="text"
+                                            name="ddd"
+                                            value={ddd}
+                                            onChange={e => setDdd(e.target.value)}
+                                        />
+                                        <label className="label--desc">DDD</label>
+                                    </div>
+                                </div>
+                                <div className="col-9">
+                                    <div className="input-group-desc">
+                                        <input className="input--style-5" type="text"
+                                            name="phone"
+                                            value={phoneNumber}
+                                            onChange={e => setPhoneNumber(e.target.value)}
+                                        />
+                                        <label className="label--desc">Telefone</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="form-row m-b-55">
+                        <div className="name">Dados bancarios</div>
+                        <div className="value">
+                            <div className="row row-space">
+                                <div className="col-6">
+                                    <div className="input-group-desc">
+                                        <input className="input--style-5" type="text"
+                                            name="first_name"
+                                            value={bank}
+                                            onChange={e => setBank(e.target.value)}
+                                        />
+                                        <label className="label--desc">Banco</label>
+                                    </div>
+                                </div>
+                                <div className="col-6">
+                                    <div className="input-group-desc">
 
 
-                        <input className="input--style-5" type="text"
-                          name="last_name"
-                          value={branch}
-                          onChange={e => setBranch(e.target.value)}
-                        />
-                        <label className="label--desc">Agência</label>
-                      </div>
-
-                       
+                                        <input className="input--style-5" type="text"
+                                            name="last_name"
+                                            value={branch}
+                                            onChange={e => setBranch(e.target.value)}
+                                        />
+                                        <label className="label--desc">Agência</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div className="file-container">
-                    
                         <div className="file-name">LOGO DA EMPRESA </div>
 
                           
@@ -357,27 +358,47 @@ export default function Register({ className, fileName, onSubmit }){
 
 
                         <div className="btn-enviar-container">
-                          <button class="btn btn--radius-2 btn btn-warning" onClick={handleSubmit}>Enviar</button>
+                          <button className="btn btn--radius-2 btn btn-warning" type="submit" onClick={handleSubmit}>Enviar</button>
                         </div>
                     </div>
 
-                    
-                        <div className = "btn-register-container">
-                            <button class=" btn btn-warning" type="submit">Finalizar Cadastro</button>
-                        </div>
-                    </form>
-                </div>
+                    <div>
 
+                        <button className="btn btn--radius-2 btn btn-warning" type="submit">Register</button>
+
+                    </div>
+                </form>
             </div>
-
         </div>
-
-
-  
-
-
     </div>
-
+</div>
 
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    
