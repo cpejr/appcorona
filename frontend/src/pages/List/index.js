@@ -38,7 +38,7 @@ export default function List(props) {
           <div className="header text-center d-flex flex-wrap justify-content-between">
             <img src="logo cpe.png" className="logo" alt="Logo"></img>
             <h2 className="title d-flex align-items-center">Bem Conectado</h2>
-            <Link className="btn btn--radius-2 btn btn-warning m-2 mr-4 justify-content-end align-self-center" to="/register" type="submit">
+            <Link className="btn1 btn--radius btn--blue m-2 mr-4 justify-content-end align-self-center" to="/register" type="submit">
               Cadastre sua ong
               </Link>
           </div>
