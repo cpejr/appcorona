@@ -10,6 +10,38 @@ const imageUpload = require('./middleware/imageUpload');
 // Ainda faltam criar e adicionar os controllers de cada rota para elas funcionarem.
 // Parametros ja estao sendo validados pelo celebrate.
 
+routes.post('/registerOng', celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    name: Joi.string().required(),
+    cnpj: Joi.string().required(),
+    state: Joi.string().required(),
+    city: Joi.string().required(),
+    neighborhood: Joi.string().required(),
+    street: Joi.string().required(),
+    number: Joi.string().required(),
+    cep: Joi.string().required(),
+    email: Joi.string().required(),
+    complement: Joi.string().optional(),
+    picpay: Joi.string().optional(),
+    facebook: Joi.string().optional(),
+    ddd: Joi.string().optional(),
+    phoneNumber: Joi.string().optional(),
+    site: Joi.string().optional(),
+    branch: Joi.string().optional(),
+    bank: Joi.string().optional(),
+    description: Joi.string().optional(),
+  }),
+}), ongController.create);
+
+routes.get('/ongs', celebrate({
+  [Segments.QUERY]: Joi.object().keys({
+    state: Joi.string().optional(),
+    city: Joi.string().optional(),
+    page: Joi.number().optional(),
+  }),
+}), ongController.index);
+
+
 routes.post('/teste', imageUpload('teste'), (_req, res) =>
   res.status(204).send()
 );
@@ -67,37 +99,28 @@ routes.get(
       authorization: Joi.string().required()
     }).unknown()
   }),
-  sessionController.authenticateToken,
-  adminController.index
-);
 
-routes.put(
-  '/admin/:ongId',
-  celebrate({
-    [Segments.PARAMS]: Joi.object().keys({
-      ongId: Joi.string().required()
-    }),
-    [Segments.BODY]: Joi.object().keys({
-      name: Joi.string().optional(),
-      cnpj: Joi.string().optional(),
-      state: Joi.string().optional(),
-      city: Joi.string().optional(),
-      neighborhood: Joi.string().optional(),
-      street: Joi.string().optional(),
-      number: Joi.string().optional(),
-      complement: Joi.string().optional(),
-      picpay: Joi.string().optional(),
-      facebook: Joi.string().optional(),
-      whatsapp: Joi.string().optional(),
-      email: Joi.string().optional(),
-      site: Joi.string().optional(),
-      agencia: Joi.string().optional(),
-      banco: Joi.string().optional(),
-      approved: Joi.bool().optional()
-    }),
-    [Segments.HEADERS]: Joi.object({
-      authorization: Joi.string().required()
-    }).unknown()
+  [Segments.BODY]: Joi.object().keys({
+    name: Joi.string().optional(),
+    cnpj: Joi.string().optional(),
+    state: Joi.string().optional(),
+    city: Joi.string().optional(),
+    neighborhood: Joi.string().optional(),
+    street: Joi.string().optional(),
+    number: Joi.string().optional(),
+    complement: Joi.string().optional(),
+    cep: Joi.string().optional(),
+    picpay: Joi.string().optional(),
+    facebook: Joi.string().optional(),
+    ddd: Joi.string().optional(),
+    phoneNumber: Joi.string().optional(),
+    email: Joi.string().optional(),
+    site: Joi.string().optional(),
+    branch: Joi.string().optional(),
+    bank: Joi.string().optional(),
+    approved: Joi.bool().optional(),
+    description: Joi.string().optional(),
+
   }),
   sessionController.authenticateToken,
   adminController.update

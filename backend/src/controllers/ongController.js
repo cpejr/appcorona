@@ -11,7 +11,7 @@ module.exports = {
 
         let { _id } = await Ong.createNew(ong);
 
-        return response.json({ _id });
+        return response.json({ _id, name });
       }
       else {
         return response.status(409).json({ error: 'Ong já existente' });
@@ -23,7 +23,13 @@ module.exports = {
   },
   async index(request, response) {
     try {
-      let result = await Ong.getAprovedOngs();
+      const { page, city, state } = request.query;
+
+      let result = await Ong.getAprovedOngs(page, city, state);
+
+      response.header("X-Total-Count", result[0].totalCount);
+      
+      result = result[0].ongs;
 
       return response.json(result);
     } catch (error) {
