@@ -92,14 +92,16 @@ routes.post(
   sessionController.login
 );
 
-routes.get(
-  '/admin',
-  celebrate({
-    [Segments.HEADERS]: Joi.object({
-      authorization: Joi.string().required()
-    }).unknown()
-  }),
+routes.get('/admin', celebrate({
+  [Segments.HEADERS]: Joi.object({
+    authorization: Joi.string().required(),
+  }).unknown(),
+}), sessionController.authenticateToken, adminController.index);
 
+routes.put('/admin/:ongId', celebrate({
+  [Segments.PARAMS]: Joi.object().keys({
+    ongId: Joi.string().required(),
+  }),
   [Segments.BODY]: Joi.object().keys({
     name: Joi.string().optional(),
     cnpj: Joi.string().optional(),
@@ -120,11 +122,12 @@ routes.get(
     bank: Joi.string().optional(),
     approved: Joi.bool().optional(),
     description: Joi.string().optional(),
-
   }),
-  sessionController.authenticateToken,
-  adminController.update
-);
+  [Segments.HEADERS]: Joi.object({
+    authorization: Joi.string().required(),
+  }).unknown(),
+}), sessionController.authenticateToken, adminController.update);
+
 
 routes.delete(
   '/admin/:ongId',
