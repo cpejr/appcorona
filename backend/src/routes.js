@@ -29,6 +29,7 @@ routes.post('/registerOng', celebrate({
     site: Joi.string().optional(),
     branch: Joi.string().optional(),
     bank: Joi.string().optional(),
+    bankAccount: Joi.string().optional(),
     description: Joi.string().optional(),
   }),
 }), ongController.create);
@@ -46,29 +47,7 @@ routes.post('/teste', imageUpload('teste'), (_req, res) =>
   res.status(204).send()
 );
 
-routes.post(
-  '/registerOng',
-  celebrate({
-    [Segments.BODY]: Joi.object().keys({
-      name: Joi.string().required(),
-      cnpj: Joi.string().required(),
-      state: Joi.string().required(),
-      city: Joi.string().required(),
-      neighborhood: Joi.string().required(),
-      street: Joi.string().required(),
-      number: Joi.string().required(),
-      complement: Joi.string().required(),
-      picpay: Joi.string().optional(),
-      facebook: Joi.string().optional(),
-      whatsapp: Joi.string().optional(),
-      email: Joi.string().required(),
-      site: Joi.string().optional(),
-      agencia: Joi.string().required(),
-      banco: Joi.string().required()
-    })
-  }),
-  ongController.create
-);
+
 
 routes.get(
   '/ongs',
@@ -121,6 +100,7 @@ routes.put('/admin/:ongId', celebrate({
     branch: Joi.string().optional(),
     bank: Joi.string().optional(),
     approved: Joi.bool().optional(),
+    bankAccount: Joi.string().optional(),
     description: Joi.string().optional(),
   }),
   [Segments.HEADERS]: Joi.object({

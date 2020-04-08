@@ -73,6 +73,10 @@ const ong = new mongoose.Schema({
     type: String,
     required: false
   },
+  bankAccount: {
+    type: String,
+    required: false
+  },
   approved: {
     type: Boolean,
     required: false,

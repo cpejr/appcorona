@@ -1,4 +1,3 @@
-
 import React, {useState} from 'react';
 import './styles.css';
 import axios from 'axios';
@@ -14,7 +13,7 @@ export default function Register({ className, fileName, onSubmit }){
   const [street, setStreet] = useState('');
   const [neighborhood, setNeighborhood] = useState('');
   const [number, setNumber] = useState('');
-  const [cep, setCep] = useState('cep'); // ATENCAO!! ainda precisa ser criado um imput para cep!!
+  const [cep, setCep] = useState('');
   const [complement, setComplement] = useState('');
   const [cnpj, setCnpj] = useState('');
   const [picpay, setPicpay] = useState('');
@@ -26,6 +25,7 @@ export default function Register({ className, fileName, onSubmit }){
   const [bank, setBank] = useState('');
   const [site, setSite] = useState('');
   const [branch, setBranch] = useState('');
+  const [bankAccount,setBankAccount] = useState('');
   const history = useHistory();
 
 
@@ -71,6 +71,7 @@ export default function Register({ className, fileName, onSubmit }){
     addToData('phoneNumber', phoneNumber);
     addToData('bank', bank);
     addToData('branch', branch);
+    addToData('bankAccount',bankAccount);
 
 
     try {
@@ -109,13 +110,18 @@ export default function Register({ className, fileName, onSubmit }){
                     <div className="form-row">
                         <div className="name">Descrição</div>
                         <div className="value">
-                            <div className="input-group">
-                                <input className="input--style-5" type="text" name="description"
-                                    value={description}
-                                    onChange={e => setDescription(e.target.value)}
-                                />
-                            </div>
+
+                        <div className="description">
+                          
+                          <textarea 
+                            className="form-control description" 
+                            id="exampleFormControlTextarea1" 
+                            rows="3"
+                            value={description}
+                            onChange={e => setDescription(e.target.value)}
+                          />
                         </div>
+                      </div>
                     </div>
 
                     <div className="form-row m-b-55">
@@ -144,6 +150,18 @@ export default function Register({ className, fileName, onSubmit }){
                                         <label className="label--desc">Estado</label>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="form-row">
+                        <div className="name">CEP</div>
+                        <div className="value">
+                            <div className="input-group">
+                                <input className="input--style-5" type="text"
+                                    name="company"
+                                    value={cep}
+                                    onChange={e => setCep(e.target.value)}
+                                />
                             </div>
                         </div>
                     </div>
@@ -342,10 +360,30 @@ export default function Register({ className, fileName, onSubmit }){
                                         />
                                         <label className="label--desc">Agência</label>
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div className="form-row m-b-55">
+                        <div className="name"></div>
+                        <div className="value">
+                            <div className="row row-space">
+                                <div className="col-12">
+                                    <div className="input-group-desc">
+                                        <input className="input--style-5" type="text"
+                                            name="bank_account"
+                                            value={bankAccount}
+                                            onChange={e => setBankAccount(e.target.value)}
+                                        />
+                                        <label className="label--desc">Número da Conta</label>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
                     <div className="file-container">
                         <div className="file-name">LOGO DA EMPRESA </div>
 
@@ -362,11 +400,7 @@ export default function Register({ className, fileName, onSubmit }){
                         </div>
                     </div>
 
-                    <div>
-
-                        <button className="btn btn--radius-2 btn btn-warning" type="submit">Register</button>
-
-                    </div>
+                 
                 </form>
             </div>
         </div>
