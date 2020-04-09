@@ -8,6 +8,7 @@ module.exports = {
       console.log(exist);
       if (!exist) {
         let ong = request.body;
+        ong.imageSrc = request.file.filename;
 
         let { _id } = await Ong.createNew(ong);
 
@@ -28,7 +29,7 @@ module.exports = {
       let result = await Ong.getAprovedOngs(page, city, state);
 
       response.header("X-Total-Count", result[0].totalCount);
-      
+
       result = result[0].ongs;
 
       return response.json(result);

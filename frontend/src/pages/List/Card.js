@@ -27,7 +27,7 @@ export default function Card(props) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="cachorro.jpg"
+          image={props.imageSrc}
           title="Contemplative Reptile"
         />
         <CardContent>

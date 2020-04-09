@@ -81,6 +81,10 @@ const ong = new mongoose.Schema({
     type: Boolean,
     required: false,
     default: false,
+  },
+  imageSrc: {
+    type: String,
+    required: true,
   }
 },
   { timestamps: true }
@@ -159,7 +163,7 @@ class OngsActions {
             }
           }
         ]);
-        
+
         resolve(result);
       } catch (err) {
         console.log(err);
