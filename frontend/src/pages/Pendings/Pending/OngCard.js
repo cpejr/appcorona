@@ -1,5 +1,5 @@
 import React from 'react';
-import Container from './OngContainer'
+import Container from '../../../components/OngContainer'
 
 export default function OngCard(props) {
 
