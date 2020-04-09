@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './styles.css';
-import api from '../../services/api';
-import { Redirect } from 'react-router-dom';
-import OngCard from './Pending/OngCard';
 import AllPendings from './AllPendings'
 
 export default function Pendings(props) {
@@ -11,7 +8,7 @@ export default function Pendings(props) {
   if (props && props.location && props.location.state)
     reference = props.location.state.token
 
-  const [token, setToken] = useState(reference);
+  const [token] = useState(reference);
 
   
   return (

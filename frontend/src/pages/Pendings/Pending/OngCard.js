@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Container from '../../../components/OngContainer'
 import { Link, Redirect } from 'react-router-dom';
-import Pendings from '..';
 import api from '../../../services/api';
 
 export default function OngCard(props) {

@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { Redirect, Link } from 'react-router-dom';
-
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import OngCard from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';

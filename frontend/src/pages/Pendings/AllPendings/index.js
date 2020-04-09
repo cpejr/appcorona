@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './styles.css';
 import api from '../../../services/api';
 import OngView from './OngView';
-import { Link } from 'react-router-dom';
+
 
 export default function AllPendings(props) {
 

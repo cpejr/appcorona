@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './styles.css';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import api from '../../services/api';
 import ImageUpload from '../../components/ImageUpload';
