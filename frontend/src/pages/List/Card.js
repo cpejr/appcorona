@@ -1,4 +1,5 @@
-import React from 'react';
+import React , { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import OngCard from '@material-ui/core/Card';
@@ -20,28 +21,41 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Card(props) {
+export default function Card({ong}) {
+
+  const [select, setSelect] = useState(false)
+
+  function handleSelect() {
+    setSelect(true);
+  }
+
   const classes = useStyles();
-  return (
+
+  return (!select ? 
     <OngCard className={classes.root}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={props.imageSrc}
+          image={ong.imageSrc}
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {props.name}
+            {ong.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {props.description}
+            {ong.description}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <button className="btn btn--radius-2 btn btn-warning p-2 mx-auto" type="submit">Saiba mais</button>
+        <button className="btn btn--radius-2 btn btn-warning p-2 mx-auto" type="submit" onClick={handleSelect}>Saiba mais</button>
       </CardActions>
     </OngCard>
-  );
+  : 
+    <Redirect to={{
+      pathname: `/ONG/${ong.name}`,
+      state: { ong: ong }}}
+    />
+  )
 }
