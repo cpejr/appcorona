@@ -2,10 +2,15 @@ import React, { useState, useEffect } from 'react';
 import './styles.css';
 import api from '../../../services/api';
 import OngView from './OngView';
+import { Link } from 'react-router-dom';
 
 export default function AllPendings(props) {
 
   let token = props.token;
+
+  if (!token && props && props.location && props.location.state)
+    token = props.location.state.token;
+
   const [ongs, setOngs] = useState([]);
 
   useEffect(() => {
@@ -27,13 +32,16 @@ export default function AllPendings(props) {
     getOngs();
   }, [token]);
 
+
+
+
   return (
     <div>
       <div className="allPendingsTitle">ONGs pendentes ({ongs.length})</div>
       <div className="gridCard">
         {ongs.map((ong, index) => {
           return (
-            <OngView key={index} ong={ong} handleSelect={props.handleSelect} />
+            <OngView key={index} ong={ong} token={token}/>
           )
         })}
       </div>

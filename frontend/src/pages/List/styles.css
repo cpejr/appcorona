@@ -65,3 +65,12 @@ img {
   height: 140px !important;
   width: 140px !important;
 }
+
+.searchBar{
+  background-color: #cfa944;
+  width: 100%;
+  padding: 10px;
+  color: #fff;
+  text-align: center;
+  display: flex;
+}
