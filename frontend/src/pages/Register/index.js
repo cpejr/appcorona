@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import api from '../../services/api';
 import ImageUpload from '../../components/ImageUpload';
+import SelectStates from '../../components/SelectStates';
 
 
 export default function Register({ className, fileName, onSubmit }) {
@@ -125,6 +126,15 @@ export default function Register({ className, fileName, onSubmit }) {
                 <div className="name">Local</div>
                 <div className="value">
                   <div className="row row-space">
+                  <div className="col-6">
+                      <div className="input-group-desc">
+                        <SelectStates
+                          className="input--style-5 col-lg-12 selectStates"
+                          onChange={e => setState(e)}
+                        />
+                        <label className="label--desc">Estado</label>
+                      </div>
+                    </div>
                     <div className="col-6">
                       <div className="input-group-desc">
                         <input className="input--style-5" type="text"
@@ -133,18 +143,6 @@ export default function Register({ className, fileName, onSubmit }) {
                           onChange={e => setCity(e.target.value)}
                         />
                         <label className="label--desc">Cidade</label>
-                      </div>
-                    </div>
-                    <div className="col-6">
-                      <div className="input-group-desc">
-
-
-                        <input className="input--style-5" type="text"
-                          name="last_name"
-                          value={state}
-                          onChange={e => setState(e.target.value)}
-                        />
-                        <label className="label--desc">Estado</label>
                       </div>
                     </div>
                   </div>

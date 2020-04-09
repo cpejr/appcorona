@@ -47,7 +47,7 @@ export default function AllPendings(props) {
       </div>
       <div id="bttn">
         <button
-          onClick={event => window.location.href = '/list'}
+          onClick={event => window.location.href = '/'}
           className="btn1 btn--radius btn--blue"
           type="submit">VOLTAR A PÁGINA INICIAL
         </button>
