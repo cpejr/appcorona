@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Redirect, Link } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import OngCard from '@material-ui/core/Card';
@@ -21,27 +22,37 @@ const useStyles = makeStyles({
 });
 
 export default function Card(props) {
+  let ong = props.ong;
+
+
   const classes = useStyles();
+
   return (
     <OngCard className={classes.root}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={props.imageSrc}
+          image={`http://localhost:3333/images/${ong.imageSrc}`}
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {props.name}
+            {ong.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {props.description}
+            {ong.description}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <button className="btn btn--radius-2 btn btn-warning p-2 mx-auto" type="submit">Saiba mais</button>
+        <Link className="btn btn--radius-2 btn btn-warning p-2 mx-auto" to={{
+          pathname: '/ONG',
+          state: {
+            ong: ong
+          }
+        }}>Saiba mais</Link>
       </CardActions>
     </OngCard>
-  );
+  )
+
 }

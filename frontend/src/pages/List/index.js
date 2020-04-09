@@ -3,6 +3,7 @@ import './styles.css';
 import Card from './Card';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
+import SelectState from '../../components/SelectStates';
 
 
 export default function List(props) {
@@ -10,11 +11,29 @@ export default function List(props) {
   console.log(props);
 
   const [ongsList, setOngs] = useState([]);
+  const [stateFilter, setStateFilter] = useState();
+  const [cityFilter, setCityFilter] = useState();
+  const [nameFilter, setNameFilter] = useState();
 
   useEffect(() => {
     async function getOngs() {
       try {
-        let ongsResponse = await api.get('/ongs');
+
+        let queryParams = [];
+
+        if (stateFilter)
+          queryParams.push(`state=${stateFilter}`);
+
+        if (cityFilter)
+          queryParams.push(`city=${cityFilter}`);
+
+        if (nameFilter)
+          queryParams.push(`name=${nameFilter}`);
+
+        queryParams = queryParams.join(',');
+
+
+        let ongsResponse = await api.get(`/ongs?${queryParams}`);
 
         setOngs((ongsResponse.data).reverse());
 
@@ -23,14 +42,26 @@ export default function List(props) {
       }
     }
     getOngs();
-  }, []);
+  }, [stateFilter, cityFilter, nameFilter]);
 
-  console.log(ongsList)
   const ongs = ongsList.map(function (ong) {
     return (
-      <Card key={ong._id} name={ong.name} imageSrc={`http://localhost:3333/images/${ong.imageSrc}` } description={ong.description} />
+      <Card key={ong._id} ong={ong} imageSrc={`http://localhost:3333/images/${ong.imageSrc}`} description={ong.description} />
     );
   });
+
+
+  function handleOnChangeState(state) {
+    setStateFilter(state);
+  }
+
+  function handleOnChangeCity(city) {
+    setCityFilter(city.target.value);
+  }
+
+  function handleOnChangeOng(ong) {
+    setNameFilter(ong.target.value);
+  }
 
   return (
     <div className="page-wrapper">
@@ -42,6 +73,12 @@ export default function List(props) {
             <Link className="btn1 btn--radius btn--blue m-2 mr-4 justify-content-end align-self-center" to="/register" type="submit">
               Cadastre sua ong
               </Link>
+
+          </div>
+          <div className="searchBar">
+            Filtro por:  <SelectState onChange={handleOnChangeState} nullable={true} />
+            Cidade: <input type='text' onChange={handleOnChangeCity}></input>
+            Nome da ONG: <input type='text' onChange={handleOnChangeOng}></input>
           </div>
 
           <div className="card-body d-flex flex-wrap justify-content-center">

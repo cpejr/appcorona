@@ -1,12 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default function OngView({ ong, handleSelect }) {
+export default function OngView({ ong, handleSelect, token}) {
 
   return (
     <div className="ONGrid">
       <div className="ONGcard1">
         <div className="container">
-          <img src="ong.png" alt="Foto da ONG" />
+          <img src={`http://localhost:3333/images/${ong.imageSrc}`} alt="Foto da ONG" />
           <div className="forms-row">
             <div className="name">Nome da ONG/Projeto: </div>
             <div className="info style-5">{ong.name}</div>
@@ -24,11 +25,14 @@ export default function OngView({ ong, handleSelect }) {
             </div>
           </div>
           <div id="bttn">
-            <button
-              onClick={() => handleSelect(ong)}
-              className="btn2 btn--blue btn--radius"
-              type="submit">ANALISAR APROVAÇÃO
-              </button>
+            <Link className="btn2 btn--blue btn--radius" to={{
+              pathname: '/adminONG',
+              state: {
+                ong: ong,
+                token: token,
+              }
+            }}> Analizar aprovação
+            </Link>
           </div>
         </div>
       </div>
