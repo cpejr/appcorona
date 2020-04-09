@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-export default function ImageUpload({ className, fileName, onSubmit }) {
+export default function ImageUpload({ className, fileName, onSubmit, onChange }) {
   const [selectedFile, setSelectedFile] = useState(null);
 
-  const onChangeHandler = (evt) => {
+  const changeHandler = (evt) => {
     const file = evt.target.files[0];
     setSelectedFile(file);
+
+    if (!onSubmit && onChange)
+      onChange(file);
   };
 
   const handleSubmit = () => {
     const data = new FormData();
-    data.append('teste', selectedFile);
+    data.append(fileName, selectedFile);
     onSubmit && onSubmit(data);
-    !onSubmit && axios.post('http://localhost:3333/teste', data);
   };
 
   return (
@@ -21,9 +23,9 @@ export default function ImageUpload({ className, fileName, onSubmit }) {
       <input
         type="file"
         name={fileName || 'teste'}
-        onChange={onChangeHandler}
+        onChange={changeHandler}
       />
-      <button onClick={handleSubmit}>Enviar</button>
+      {onSubmit && <button onClick={handleSubmit}>Enviar</button>}
     </div>
   );
 }

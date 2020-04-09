@@ -27,7 +27,7 @@ export default function List(props) {
 
   const ongs = ongsList.map(function (ong) {
     return (
-      <Card key={ong._id} name={ong.name} description={ong.description} />
+      <Card key={ong._id} name={ong.name} imageSrc={`http://localhost:3333/images/${ong.imageSrc}` } description={ong.description} />
     );
   });
 

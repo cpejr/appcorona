@@ -1,9 +1,7 @@
 const multer = require('multer');
-const path = require('path');
-const appDir = path.dirname(require.main.filename);
 
 const storage = multer.diskStorage({
-  destination: `${appDir}/../../public`,
+  destination: `public/images`,
   filename: (_req, file, cb) => {
     cb(null, `${Date.now()}-${file.originalname}`);
   }

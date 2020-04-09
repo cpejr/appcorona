@@ -10,7 +10,7 @@ const imageUpload = require('./middleware/imageUpload');
 // Ainda faltam criar e adicionar os controllers de cada rota para elas funcionarem.
 // Parametros ja estao sendo validados pelo celebrate.
 
-routes.post('/registerOng', celebrate({
+routes.post('/registerOng', imageUpload('imageFile'), celebrate({
   [Segments.BODY]: Joi.object().keys({
     name: Joi.string().required(),
     cnpj: Joi.string().required(),
@@ -102,6 +102,7 @@ routes.put('/admin/:ongId', celebrate({
     approved: Joi.bool().optional(),
     bankAccount: Joi.string().optional(),
     description: Joi.string().optional(),
+    imageFile: Joi.optional()
   }),
   [Segments.HEADERS]: Joi.object({
     authorization: Joi.string().required(),
