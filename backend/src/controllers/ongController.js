@@ -32,7 +32,6 @@ module.exports = {
       {
         response.header("X-Total-Count", 0);
         result = [];
-
       }
       else
       {
