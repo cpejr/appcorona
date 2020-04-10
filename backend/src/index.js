@@ -6,9 +6,13 @@ require('dotenv').config();
 
 const app = express();
 
+const corsOptions = {
+  exposedHeaders: 'X-Total-Count',
+};
+
 app.use(express.static('public'));
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(routes);
 app.use(errors());

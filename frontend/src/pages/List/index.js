@@ -10,6 +10,10 @@ export default function List(props) {
 
   console.log(props);
 
+  const ONGSPERPAGE = 10;
+
+  const [pageCount, setPageCount] = useState(1);
+  const [totalCount, setTotalCount] = useState(1);
   const [ongsList, setOngs] = useState([]);
   const [stateFilter, setStateFilter] = useState();
   const [cityFilter, setCityFilter] = useState();
@@ -35,7 +39,8 @@ export default function List(props) {
 
         let ongsResponse = await api.get(`/ongs?${queryParams}`);
 
-        setOngs((ongsResponse.data).reverse());
+        setTotalCount(ongsResponse.headers['x-total-count']);
+        setOngs(ongsResponse.data);
 
       } catch (err) {
         console.warn(err);
@@ -43,6 +48,48 @@ export default function List(props) {
     }
     getOngs();
   }, [stateFilter, cityFilter, nameFilter]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', function () {
+      let totalPages = Math.ceil(totalCount / ONGSPERPAGE);
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { //Reached the end of the page.
+         alert(totalCount);
+        if (pageCount < totalPages) {
+          async function addNewOngs() {
+            try {
+
+              let queryParams = [];
+
+              if (stateFilter)
+                queryParams.push(`state=${stateFilter}`);
+
+              if (cityFilter)
+                queryParams.push(`city=${cityFilter}`);
+
+              if (nameFilter)
+                queryParams.push(`name=${nameFilter}`);
+
+              queryParams.push(`page=${pageCount}`);
+
+              queryParams = queryParams.join(',');
+
+
+              let ongsResponse = await api.get(`/ongs?${queryParams}`);
+              let newOngs = { ...ongsList };
+              newOngs.push(ongsResponse.data);
+
+              setTotalCount(ongsResponse.headers['x-total-count']);
+              setOngs(newOngs);
+
+            } catch (err) {
+              console.warn(err);
+            }
+          }
+          addNewOngs();
+        }
+      }
+    });
+  }, []);
 
   const ongs = ongsList.map(function (ong) {
     return (
