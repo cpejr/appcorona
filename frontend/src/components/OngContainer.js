@@ -66,17 +66,19 @@ export default function OngContainer({ ong }) {
             <div className="style-5">{ong.ddd}</div>
         </div>
         <div className="info m-lt-20">Telefone:
-            <div className="style-5">Telefone</div>
+            <div className="style-5">{ong.phoneNumber}</div>
         </div>
       </div>
       <div className="forms-row grid">
         <div className="info m-rg-20">Banco:
-                <div className="style-5">Banco</div>
+                <div className="style-5">{ong.bank}</div>
         </div>
         <div className="info m-lt-20">Agência:
-            <div className="style-5">Agência</div>
+            <div className="style-5">{ong.branch}</div>
         </div>
-
+        <div className="info m-lt-20">Conta:
+            <div className="style-5">{ong.bankAccount}</div>
+        </div>
       </div>
     </div>
   )
