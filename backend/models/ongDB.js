@@ -85,6 +85,10 @@ const ong = new mongoose.Schema({
   imageSrc: {
     type: String,
     required: true,
+  },
+  category:{
+    type: String,
+    required: false,
   }
 },
   { timestamps: true }

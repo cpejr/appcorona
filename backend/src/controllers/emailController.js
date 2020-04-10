@@ -38,13 +38,11 @@ class Email {
     });
   }
 
-
-
   static userWaitingForApproval(to, firstName) {
 
     const content = `Prezado(a) ${firstName},
-    Você acabou de cadastrar na plataforma Lamico. Aguarde a ativação do seu cadastro para começar a utilizar o sistema.`;
-    const subject = 'LAMICO: Aguardando ativação de cadastro';
+    Você acabou de cadastrar na plataforma Bem Conectado. Aguarde a ativação do seu cadastro para que os usuários possam ver sua ONG.`;
+    const subject = 'Bem Conectado: Aguardando ativação de cadastro';
     const emailContent = {
       to: to,
       subject: subject,
@@ -60,8 +58,8 @@ class Email {
   static userApprovedEmail(to, firstName) {
     console.log('Cadastro de usuário aprovado');
     const content = `Prezado(a) ${firstName},
-    Seu cadastro foi realizado e aprovado com sucesso. Entre na plataforma com seu email e senha`;
-    const subject = 'LAMICO: Cadastro ativado com sucesso';
+    Seu cadastro foi realizado e aprovado com sucesso. Agora sua ONG está visível ao público!`;
+    const subject = 'Bem Conectado: Cadastro ativado com sucesso';
     const emailContent = {
       to: to,
       subject: subject,
@@ -77,8 +75,8 @@ class Email {
   static userRejectedEmail(to, fullname) {
     console.log('Cadastro de usuário reprovado');
     const content = `Prezado(a) ${fullname},
-    Seu cadastro foi reprovado. Entre em contato com o admin para maiores informações.`;
-    const subject = 'LAMICO: Cadastro reprovado';
+    Seu cadastro foi reprovado. Entre em contato com este email para mais informações.`;
+    const subject = 'Bem conectado: Cadastro reprovado';
     const emailContent = {
       to: to,
       subject: subject,

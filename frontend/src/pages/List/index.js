@@ -33,11 +33,11 @@ export default function List(props) {
 
         let ongsResponse = await api.get(`/ongs?${queryParams}`);
 
-       
+
         const totalCount = ongsResponse.headers['x-total-count'];
         console.log('qaaaaaaaa');
         console.log(totalCount);
-        
+
         setTotalCount(totalCount);
 
         setOngs(ongsResponse.data);
@@ -57,35 +57,35 @@ export default function List(props) {
       let totalPages = Math.ceil(totalCount / ONGSPERPAGE);
       if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { //Reached the end of the page.
         console.log(totalCount);
-        
+
         if (pageCount < totalPages) {
           let currentPage = pageCount + 1;
 
           async function addNewOngs() {
             try {
-  
+
               let queryParams = [];
-  
+
               if (stateFilter)
                 queryParams.push(`state=${stateFilter}`);
-  
+
               if (cityFilter)
                 queryParams.push(`city=${cityFilter}`);
-  
-  
+
+
               queryParams.push(`page=${currentPage}`);
-  
+
               queryParams = queryParams.join(',');
-  
-  
+
+
               let ongsResponse = await api.get(`/ongs?${queryParams}`);
 
-              let newOngs = [ ...ongsList, ...ongsResponse.data ];
-  
+              let newOngs = [...ongsList, ...ongsResponse.data];
+
               setPageCount(currentPage);
               setTotalCount(ongsResponse.headers['x-total-count']);
               setOngs(newOngs);
-  
+
             } catch (err) {
               console.warn(err);
             }
@@ -96,11 +96,11 @@ export default function List(props) {
     }
 
     window.addEventListener('scroll', updateOngs);
-    
+
     return () => {
       window.removeEventListener('scroll', updateOngs);
     }
-  
+
   }, [cityFilter, ongsList, pageCount, stateFilter, totalCount]);
 
   const ongs = ongsList.map(function (ong) {
@@ -126,7 +126,7 @@ export default function List(props) {
             <img src="logo cpe.png" className="logo" alt="Logo"></img>
             <h2 className="title d-flex align-items-center">Bem Conectado</h2>
             <Link className="btn1 btn--radius btn--blue m-2 mr-4 justify-content-end align-self-center" to="/register" type="submit">
-              Cadastre sua ong {totalCount}
+              Cadastre sua ongs
               </Link>
 
           </div>
