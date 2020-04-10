@@ -15,7 +15,6 @@ export default function List(props) {
   const [ongsList, setOngs] = useState([]);
   const [stateFilter, setStateFilter] = useState();
   const [cityFilter, setCityFilter] = useState();
-  const [nameFilter, setNameFilter] = useState();
 
   useEffect(() => {
     const getOngs = async () => {
@@ -29,19 +28,16 @@ export default function List(props) {
         if (cityFilter)
           queryParams.push(`city=${cityFilter}`);
 
-        if (nameFilter)
-          queryParams.push(`name=${nameFilter}`);
-
         queryParams = queryParams.join(',');
 
 
         let ongsResponse = await api.get(`/ongs?${queryParams}`);
 
-       
+
         const totalCount = ongsResponse.headers['x-total-count'];
         console.log('qaaaaaaaa');
         console.log(totalCount);
-        
+
         setTotalCount(totalCount);
 
         setOngs(ongsResponse.data);
@@ -51,7 +47,7 @@ export default function List(props) {
       }
     }
     getOngs();
-  }, [stateFilter, cityFilter, nameFilter]);
+  }, [stateFilter, cityFilter]);
 
 
 
@@ -61,37 +57,35 @@ export default function List(props) {
       let totalPages = Math.ceil(totalCount / ONGSPERPAGE);
       if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { //Reached the end of the page.
         console.log(totalCount);
-        
+
         if (pageCount < totalPages) {
           let currentPage = pageCount + 1;
 
           async function addNewOngs() {
             try {
-  
+
               let queryParams = [];
-  
+
               if (stateFilter)
                 queryParams.push(`state=${stateFilter}`);
-  
+
               if (cityFilter)
                 queryParams.push(`city=${cityFilter}`);
-  
-              if (nameFilter)
-                queryParams.push(`name=${nameFilter}`);
-  
+
+
               queryParams.push(`page=${currentPage}`);
-  
+
               queryParams = queryParams.join(',');
-  
-  
+
+
               let ongsResponse = await api.get(`/ongs?${queryParams}`);
 
-              let newOngs = [ ...ongsList, ...ongsResponse.data ];
-  
+              let newOngs = [...ongsList, ...ongsResponse.data];
+
               setPageCount(currentPage);
               setTotalCount(ongsResponse.headers['x-total-count']);
               setOngs(newOngs);
-  
+
             } catch (err) {
               console.warn(err);
             }
@@ -102,12 +96,12 @@ export default function List(props) {
     }
 
     window.addEventListener('scroll', updateOngs);
-    
+
     return () => {
       window.removeEventListener('scroll', updateOngs);
     }
-  
-  }, [cityFilter, nameFilter, ongsList, pageCount, stateFilter, totalCount]);
+
+  }, [cityFilter, ongsList, pageCount, stateFilter, totalCount]);
 
   const ongs = ongsList.map(function (ong) {
     return (
@@ -124,10 +118,6 @@ export default function List(props) {
     setCityFilter(city.target.value);
   }
 
-  function handleOnChangeOng(ong) {
-    setNameFilter(ong.target.value);
-  }
-
   return (
     <div className="page-wrapper">
       <div className="wrapper wrapper--w960">
@@ -136,14 +126,13 @@ export default function List(props) {
             <img src="logo cpe.png" className="logo" alt="Logo"></img>
             <h2 className="title d-flex align-items-center">Bem Conectado</h2>
             <Link className="btn1 btn--radius btn--blue m-2 mr-4 justify-content-end align-self-center" to="/register" type="submit">
-              Cadastre sua ong {totalCount}
+              Cadastre sua ongs
               </Link>
 
           </div>
           <div className="searchBar">
             Filtro por:  <SelectState onChange={handleOnChangeState} nullable={true} />
             Cidade: <input type='text' onChange={handleOnChangeCity}></input>
-            Nome da ONG: <input type='text' onChange={handleOnChangeOng}></input>
           </div>
 
           <div className="card-body d-flex flex-wrap justify-content-center">

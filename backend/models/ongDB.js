@@ -85,6 +85,10 @@ const ong = new mongoose.Schema({
   imageSrc: {
     type: String,
     required: true,
+  },
+  category:{
+    type: String,
+    required: false,
   }
 },
   { timestamps: true }
@@ -108,6 +112,8 @@ class OngsActions {
     });
   }
 
+  
+
   static deleteOng(id) {
     return new Promise((resolve, reject) => {
       Ong.deleteOne({ _id: id }).then((result) => {
@@ -118,8 +124,19 @@ class OngsActions {
       });
     });
   }
+  static getById(id) {
+    return new Promise((resolve, reject) => {
+      Ong.findById(id).then((result) => {
+        resolve(result);
+      }).catch((error) => {
+        reject(error);
+        console.log(error);
+      });
+    });
+  }
 
-  static getAprovedOngs(page, city, state) {
+
+  static getAprovedOngs(page, city, state, name) {
     return new Promise(async (resolve, reject) => {
       try {
         let query = {
@@ -175,28 +192,6 @@ class OngsActions {
   static getWaitingAprovement() {
     return new Promise((resolve, reject) => {
       Ong.find({ approved: false }).then((results) => {
-        resolve(results);
-      }).catch((error) => {
-        reject(error);
-        console.log(error);
-      });
-    });
-  }
-
-  static filterByCity(target) {
-    return new Promise((resolve, reject) => {
-      Ong.find({ approved: true, city: target }).then((results) => {
-        resolve(results);
-      }).catch((error) => {
-        reject(error);
-        console.log(error);
-      });
-    });
-  }
-
-  static filterByState(target) {
-    return new Promise((resolve, reject) => {
-      Ong.find({ approved: true, state: target }).then((results) => {
         resolve(results);
       }).catch((error) => {
         reject(error);

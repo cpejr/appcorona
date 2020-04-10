@@ -24,7 +24,7 @@ module.exports = {
   },
   async index(request, response) {
     try {
-      const { page, city, state } = request.query;
+      const { page, city, state} = request.query;
 
       let result = await Ong.getAprovedOngs(page, city, state);
 
@@ -49,7 +49,11 @@ module.exports = {
     try {
       let id = request.params.ongId;
 
+      let ongEmail = await ong.getById(id).email;
+      emailController.userRejectedEmail(ongEmail);
+
       let result = await Ong.deleteOng(id);
+      
 
       return response.json({ object: result, message: 'deletado com sucesso' });
     } catch (error) {

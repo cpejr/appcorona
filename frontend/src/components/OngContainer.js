@@ -47,18 +47,21 @@ export default function OngContainer({ ong }) {
       </div>
       <div className="forms-row grid">
         <div className="info m-rg-20">Facebook:
-              <div className="style-5">{ong.facebook}</div>
+          <div className="style-5" ><a href={ong.facebook}>{ong.facebook}</a></div>
         </div>
         <div className="info m-lt-20">Instagram:
-              <div className="style-5">{ong.instagram}</div>
+          <div className="style-5">{ong.instagram}</div>
         </div>
       </div>
       <div className="forms-row grid">
         <div className="info m-rg-20">PicPay:
-              <div className="style-5">{ong.picpay}</div>
+          <div className="style-5" ><a href={ong.picpay}>{ong.picpay}</a></div>
         </div>
         <div className="info m-lt-20">E-mail:
-               <div className="style-5">{ong.email}</div>
+          <div className="style-5" >{ong.email}</div>
+        </div>
+        <div className="info m-lt-20">Site:
+          <div className="style-5" ><a href={ong.site}>{ong.site}</a></div>
         </div>
       </div>
       <div className="forms-row grid">
