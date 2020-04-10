@@ -8,19 +8,17 @@ import SelectState from '../../components/SelectStates';
 
 export default function List(props) {
 
-  console.log(props);
-
   const ONGSPERPAGE = 10;
 
   const [pageCount, setPageCount] = useState(1);
-  const [totalCount, setTotalCount] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
   const [ongsList, setOngs] = useState([]);
   const [stateFilter, setStateFilter] = useState();
   const [cityFilter, setCityFilter] = useState();
   const [nameFilter, setNameFilter] = useState();
 
   useEffect(() => {
-    async function getOngs() {
+    const getOngs = async () => {
       try {
 
         let queryParams = [];
@@ -39,7 +37,13 @@ export default function List(props) {
 
         let ongsResponse = await api.get(`/ongs?${queryParams}`);
 
-        setTotalCount(ongsResponse.headers['x-total-count']);
+       
+        const totalCount = ongsResponse.headers['x-total-count'];
+        console.log('qaaaaaaaa');
+        console.log(totalCount);
+        
+        setTotalCount(totalCount);
+
         setOngs(ongsResponse.data);
 
       } catch (err) {
@@ -49,38 +53,45 @@ export default function List(props) {
     getOngs();
   }, [stateFilter, cityFilter, nameFilter]);
 
+
+
   useEffect(() => {
-    window.addEventListener('scroll', function () {
+
+    const updateOngs = () => {
       let totalPages = Math.ceil(totalCount / ONGSPERPAGE);
       if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { //Reached the end of the page.
-         alert(totalCount);
+        console.log(totalCount);
+        
         if (pageCount < totalPages) {
+          let currentPage = pageCount + 1;
+
           async function addNewOngs() {
             try {
-
+  
               let queryParams = [];
-
+  
               if (stateFilter)
                 queryParams.push(`state=${stateFilter}`);
-
+  
               if (cityFilter)
                 queryParams.push(`city=${cityFilter}`);
-
+  
               if (nameFilter)
                 queryParams.push(`name=${nameFilter}`);
-
-              queryParams.push(`page=${pageCount}`);
-
+  
+              queryParams.push(`page=${currentPage}`);
+  
               queryParams = queryParams.join(',');
-
-
+  
+  
               let ongsResponse = await api.get(`/ongs?${queryParams}`);
-              let newOngs = { ...ongsList };
-              newOngs.push(ongsResponse.data);
 
+              let newOngs = [ ...ongsList, ...ongsResponse.data ];
+  
+              setPageCount(currentPage);
               setTotalCount(ongsResponse.headers['x-total-count']);
               setOngs(newOngs);
-
+  
             } catch (err) {
               console.warn(err);
             }
@@ -88,8 +99,15 @@ export default function List(props) {
           addNewOngs();
         }
       }
-    });
-  }, []);
+    }
+
+    window.addEventListener('scroll', updateOngs);
+    
+    return () => {
+      window.removeEventListener('scroll', updateOngs);
+    }
+  
+  }, [cityFilter, nameFilter, ongsList, pageCount, stateFilter, totalCount]);
 
   const ongs = ongsList.map(function (ong) {
     return (
@@ -118,7 +136,7 @@ export default function List(props) {
             <img src="logo cpe.png" className="logo" alt="Logo"></img>
             <h2 className="title d-flex align-items-center">Bem Conectado</h2>
             <Link className="btn1 btn--radius btn--blue m-2 mr-4 justify-content-end align-self-center" to="/register" type="submit">
-              Cadastre sua ong
+              Cadastre sua ong {totalCount}
               </Link>
 
           </div>
