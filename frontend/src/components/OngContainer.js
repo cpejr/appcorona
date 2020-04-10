@@ -47,7 +47,7 @@ export default function OngContainer({ ong }) {
       </div>
       <div className="forms-row grid">
         <div className="info m-rg-20">Facebook:
-              <div className="style-5">{ong.facebook}</div>
+              <a className="style-5" href={ong.facebook}>{ong.facebook}</a>
         </div>
         <div className="info m-lt-20">Instagram:
               <div className="style-5">{ong.instagram}</div>
@@ -55,10 +55,13 @@ export default function OngContainer({ ong }) {
       </div>
       <div className="forms-row grid">
         <div className="info m-rg-20">PicPay:
-              <div className="style-5">{ong.picpay}</div>
+              <a className="style-5" href={ong.picpay}>{ong.picpay}</a>
         </div>
         <div className="info m-lt-20">E-mail:
-               <div className="style-5">{ong.email}</div>
+               <a className="style-5" href={ong.email}>{ong.email}</a>
+        </div>
+        <div className="info m-lt-20">Site:
+               <a className="style-5" href={ong.site}>{ong.site}</a>
         </div>
       </div>
       <div className="forms-row grid">

@@ -15,7 +15,6 @@ export default function List(props) {
   const [ongsList, setOngs] = useState([]);
   const [stateFilter, setStateFilter] = useState();
   const [cityFilter, setCityFilter] = useState();
-  const [nameFilter, setNameFilter] = useState();
 
   useEffect(() => {
     const getOngs = async () => {
@@ -28,9 +27,6 @@ export default function List(props) {
 
         if (cityFilter)
           queryParams.push(`city=${cityFilter}`);
-
-        if (nameFilter)
-          queryParams.push(`name=${nameFilter}`);
 
         queryParams = queryParams.join(',');
 
@@ -51,7 +47,7 @@ export default function List(props) {
       }
     }
     getOngs();
-  }, [stateFilter, cityFilter, nameFilter]);
+  }, [stateFilter, cityFilter]);
 
 
 
@@ -76,8 +72,6 @@ export default function List(props) {
               if (cityFilter)
                 queryParams.push(`city=${cityFilter}`);
   
-              if (nameFilter)
-                queryParams.push(`name=${nameFilter}`);
   
               queryParams.push(`page=${currentPage}`);
   
@@ -107,7 +101,7 @@ export default function List(props) {
       window.removeEventListener('scroll', updateOngs);
     }
   
-  }, [cityFilter, nameFilter, ongsList, pageCount, stateFilter, totalCount]);
+  }, [cityFilter, ongsList, pageCount, stateFilter, totalCount]);
 
   const ongs = ongsList.map(function (ong) {
     return (
@@ -122,10 +116,6 @@ export default function List(props) {
 
   function handleOnChangeCity(city) {
     setCityFilter(city.target.value);
-  }
-
-  function handleOnChangeOng(ong) {
-    setNameFilter(ong.target.value);
   }
 
   return (
@@ -143,7 +133,6 @@ export default function List(props) {
           <div className="searchBar">
             Filtro por:  <SelectState onChange={handleOnChangeState} nullable={true} />
             Cidade: <input type='text' onChange={handleOnChangeCity}></input>
-            Nome da ONG: <input type='text' onChange={handleOnChangeOng}></input>
           </div>
 
           <div className="card-body d-flex flex-wrap justify-content-center">

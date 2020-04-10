@@ -38,49 +38,13 @@ class Email {
     });
   }
 
-  static contactEmail(to, subject, name) { // Função Estragada
-    const config = {
-      from: `${process.env.EMAIL_USER}`,
-      to: to,
-      subject: subject,
-      text: `Mensagem enviada por: ${name}
 
-      ${data.content}`
-    };
-    return new Promise((resolve) => {
-      transporter.sendMail(config, (error, info) => {
-        if (error) {
-          resolve(error);
-        }
-        else {
-          console.log(`Email enviado ${info.response}`);
-          resolve(info);
-        }
-      });
-    });
-  }
 
   static userWaitingForApproval(to, firstName) {
 
     const content = `Prezado(a) ${firstName},
     Você acabou de cadastrar na plataforma Lamico. Aguarde a ativação do seu cadastro para começar a utilizar o sistema.`;
     const subject = 'LAMICO: Aguardando ativação de cadastro';
-    const emailContent = {
-      to: to,
-      subject: subject,
-      text: content
-    };
-    return new Promise((resolve) => {
-      Email.sendEmail(emailContent).then((info) => {
-        resolve(info);
-      });
-    });
-  }
-
-  static newUserNotificationEmail(to) {
-    console.log('Email enviado');
-    const content = `Prezada Kelly, novo cadastro a ser aprovado na plataforma`;
-    const subject = 'Novo cadastro';
     const emailContent = {
       to: to,
       subject: subject,

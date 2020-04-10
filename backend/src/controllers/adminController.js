@@ -1,4 +1,5 @@
 const Ong = require('../../models/ongDB')
+const emailController = require('./emailController')
 
 module.exports = {
 
@@ -17,6 +18,12 @@ module.exports = {
     try {
       let id = request.params.ongId;
       let updateFields = request.body;
+      
+
+      if (updateFields.approved){
+        let ongEmail = await ong.getById(id).email;
+        emailController.userApprovedEmail(ongEmail);
+      }
 
       let result = await Ong.update(id, updateFields);
 
