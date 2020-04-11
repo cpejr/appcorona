@@ -49,7 +49,7 @@ module.exports = {
     try {
       let id = request.params.ongId;
 
-      let ongEmail = await ong.getById(id).email;
+      let ongEmail = await Ong.getById(id).email;
       emailController.userRejectedEmail(ongEmail);
 
       let result = await Ong.deleteOng(id);

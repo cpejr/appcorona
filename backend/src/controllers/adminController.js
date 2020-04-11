@@ -21,7 +21,7 @@ module.exports = {
       
 
       if (updateFields.approved){
-        let ongEmail = await ong.getById(id).email;
+        let ongEmail = await Ong.getById(id).email;
         emailController.userApprovedEmail(ongEmail);
       }
 
