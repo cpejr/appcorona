@@ -4,6 +4,8 @@ import Card from './Card';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import SelectState from '../../components/SelectStates';
+import { FaFilter } from 'react-icons/fa';
+
 
 
 export default function List(props) {
@@ -15,6 +17,7 @@ export default function List(props) {
   const [ongsList, setOngs] = useState([]);
   const [stateFilter, setStateFilter] = useState();
   const [cityFilter, setCityFilter] = useState();
+  const [activeFilter, setActiveFilter] = useState(false);
 
   useEffect(() => {
     const getOngs = async () => {
@@ -48,8 +51,6 @@ export default function List(props) {
     }
     getOngs();
   }, [stateFilter, cityFilter]);
-
-
 
   useEffect(() => {
 
@@ -109,13 +110,17 @@ export default function List(props) {
     );
   });
 
-
   function handleOnChangeState(state) {
     setStateFilter(state);
   }
 
   function handleOnChangeCity(city) {
     setCityFilter(city.target.value);
+  }
+
+  function handleClickFilter() {
+      setActiveFilter(!activeFilter);
+      console.log(activeFilter);
   }
 
   return (
@@ -131,8 +136,13 @@ export default function List(props) {
 
           </div>
           <div className="searchBar d-flex flex-wrap">
-            Selecione o estado:  <SelectState className="input--style-5 selectStates col-12 mb-2" onChange={handleOnChangeState} nullable={true} />
-            Digite o nome da cidade: <input className="input--style-5" type='text' onChange={handleOnChangeCity}></input>
+          <button className="btn1 btn--radius btn--blue m-2 mr-4 justify-content-end align-self-center" onClick={handleClickFilter} type="submit">
+            <FaFilter/>
+          </button>
+          <div style={{ display: (activeFilter ? 'block' : 'none') }}>
+            <p>Selecione o estado: </p> <SelectState className="input--style-5 selectStates col-12 mb-2" onChange={handleOnChangeState} nullable={true} />
+            <p>Digite o nome da cidade: </p> <input className="input--style-5" type='text' onChange={handleOnChangeCity}></input>
+          </div>
           </div>
 
           <div className="card-body d-flex flex-wrap justify-content-center">
