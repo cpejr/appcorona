@@ -130,9 +130,9 @@ export default function List(props) {
               </Link>
 
           </div>
-          <div className="searchBar">
-            Filtro por:  <SelectState onChange={handleOnChangeState} nullable={true} />
-            Cidade: <input type='text' onChange={handleOnChangeCity}></input>
+          <div className="searchBar d-flex flex-wrap">
+            Selecione o estado:  <SelectState className="input--style-5 selectStates col-12 mb-2" onChange={handleOnChangeState} nullable={true} />
+            Digite o nome da cidade: <input className="input--style-5" type='text' onChange={handleOnChangeCity}></input>
           </div>
 
           <div className="card-body d-flex flex-wrap justify-content-center">
