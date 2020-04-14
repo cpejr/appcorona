@@ -86,7 +86,7 @@ const ong = new mongoose.Schema({
     type: String,
     required: true,
   },
-  category:{
+  category: {
     type: String,
     required: false,
   }
@@ -112,7 +112,7 @@ class OngsActions {
     });
   }
 
-  
+
 
   static deleteOng(id) {
     return new Promise((resolve, reject) => {
@@ -136,7 +136,7 @@ class OngsActions {
   }
 
 
-  static getAprovedOngs(page, city, state, name) {
+  static getAprovedOngs(page, city, state) {
     return new Promise(async (resolve, reject) => {
       try {
         let query = {
@@ -225,6 +225,33 @@ class OngsActions {
     });
   }
 
+  static getTotalApprovedOngs(city, state) {
+    return new Promise(async (resolve, reject) => {
+      console.log(state)
+      try {
+
+        let query = {
+          approved: true,
+        }
+
+        if (city) 
+          query.city = city;
+        
+        if (state) 
+          query.state = state;
+        
+
+        const result = await Ong.countDocuments(query);
+
+       
+
+        resolve(result);
+      } catch (err) {
+        console.log(err);
+        reject(err);
+      }
+    });
+  }
 }
 
 module.exports = OngsActions;

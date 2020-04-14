@@ -5,21 +5,27 @@ import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import SelectState from '../../components/SelectStates';
 
+function shuffle(array) {
+  array.sort(() => Math.random() - 0.5);
+}
 
 export default function List(props) {
 
   const ONGSPERPAGE = 10;
 
-  const [pageCount, setPageCount] = useState(1);
-  const [totalCount, setTotalCount] = useState(0);
-  const [ongsList, setOngs] = useState([]);
   const [stateFilter, setStateFilter] = useState();
   const [cityFilter, setCityFilter] = useState();
+
+  const [ongsData, setOngsData] = useState({
+    pagesVector: [],
+    ongs: [],
+    currentPageIndex: 0,
+  })
 
   useEffect(() => {
     const getOngs = async () => {
       try {
-
+        console.log("banana")
         let queryParams = [];
 
         if (stateFilter)
@@ -28,38 +34,77 @@ export default function List(props) {
         if (cityFilter)
           queryParams.push(`city=${cityFilter}`);
 
-        queryParams = queryParams.join(',');
+        queryParams = queryParams.join(',')
+
+        const totalCountResponse = await api.get(`/ongsCount?${queryParams}`);
+        const totalCount = totalCountResponse.headers['x-total-count'];
+
+        const pagesVector = [];
+        const pages = Math.ceil(totalCount / ONGSPERPAGE);
+
+        for (let i = 1; i <= pages; i++)
+          pagesVector.push(i)
+
+        shuffle(pagesVector);
+
+        let pagesQuery;
+        if (queryParams)
+          pagesQuery = `,page=${pagesVector[0]}`;
+        else
+          pagesQuery = `page=${pagesVector[0]}`;
+
+        let ongsResponse = await api.get(`/ongs?${queryParams}${pagesQuery}`);
+
+        let newOngs = [...ongsResponse.data]
+
+        let currentPageIndex = 0;
+
+        if (newOngs.length < ONGSPERPAGE && pagesVector.length > 0) {
+          currentPageIndex++
+
+          let currentPage = pagesVector[currentPageIndex];
+
+          let pagesQuery;
+          if (queryParams)
+            pagesQuery = `,page=${currentPage}`;
+          else
+            pagesQuery = `page=${currentPage}`;
+
+          const ongsComplementResponse = await api.get(`/ongs?${queryParams}${pagesQuery}`);
+
+          newOngs = [...newOngs, ...ongsComplementResponse.data]
+        }
 
 
-        let ongsResponse = await api.get(`/ongs?${queryParams}`);
+        let newOngsData = { ...ongsData };
 
+        newOngsData.pagesVector = pagesVector;
+        newOngsData.ongs = newOngs;
+        newOngsData.currentPageIndex = currentPageIndex;
 
-        const totalCount = ongsResponse.headers['x-total-count'];
-        console.log('qaaaaaaaa');
-        console.log(totalCount);
-
-        setTotalCount(totalCount);
-
-        setOngs(ongsResponse.data);
-
+        setOngsData(newOngsData)
       } catch (err) {
         console.warn(err);
       }
     }
     getOngs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stateFilter, cityFilter]);
 
-
+  console.log('renderizou')
 
   useEffect(() => {
-
     const updateOngs = () => {
-      let totalPages = Math.ceil(totalCount / ONGSPERPAGE);
       if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { //Reached the end of the page.
-        console.log(totalCount);
+        console.log('bb')
+        const totalPages = ongsData.pagesVector.length;
+        let currentPageIndex = ongsData.currentPageIndex;
+        console.log(currentPageIndex);
 
-        if (pageCount < totalPages) {
-          let currentPage = pageCount + 1;
+        if (currentPageIndex < totalPages - 1) {
+          currentPageIndex++;
+
+          let currentPage = ongsData.pagesVector[currentPageIndex];
 
           async function addNewOngs() {
             try {
@@ -72,19 +117,43 @@ export default function List(props) {
               if (cityFilter)
                 queryParams.push(`city=${cityFilter}`);
 
-
-              queryParams.push(`page=${currentPage}`);
-
               queryParams = queryParams.join(',');
 
+              let newOngs = [];
 
-              let ongsResponse = await api.get(`/ongs?${queryParams}`);
+              let pagesQuery;
+              if (queryParams)
+                pagesQuery = `,page=${currentPage}`;
+              else
+                pagesQuery = `page=${currentPage}`;
 
-              let newOngs = [...ongsList, ...ongsResponse.data];
+              const ongsResponse = await api.get(`/ongs?${queryParams}${pagesQuery}`);
 
-              setPageCount(currentPage);
-              setTotalCount(ongsResponse.headers['x-total-count']);
-              setOngs(newOngs);
+
+              newOngs = [...ongsResponse.data]
+
+              if (newOngs.length < ONGSPERPAGE && ongsData.pagesVector.length > currentPageIndex) {
+                currentPageIndex++
+
+                currentPage = ongsData.pagesVector[currentPageIndex];
+
+                let pagesQuery;
+                if (queryParams)
+                  pagesQuery = `,page=${currentPage}`;
+                else
+                  pagesQuery = `page=${currentPage}`;
+
+                const ongsComplementResponse = await api.get(`/ongs?${queryParams}${pagesQuery}`);
+
+                newOngs = [...newOngs, ...ongsComplementResponse.data]
+              }
+
+              const newOngsData = { ...ongsData }
+
+              newOngsData.currentPageIndex = currentPageIndex;
+              newOngsData.ongs = [...newOngsData.ongs, ...newOngs]
+
+              setOngsData(newOngsData);
 
             } catch (err) {
               console.warn(err);
@@ -101,9 +170,9 @@ export default function List(props) {
       window.removeEventListener('scroll', updateOngs);
     }
 
-  }, [cityFilter, ongsList, pageCount, stateFilter, totalCount]);
+  }, [cityFilter, ongsData, stateFilter]);
 
-  const ongs = ongsList.map(function (ong) {
+  const ongs = ongsData.ongs.map(function (ong) {
     return (
       <Card key={ong._id} ong={ong} imageSrc={`http://localhost:3333/images/${ong.imageSrc}`} description={ong.description} />
     );

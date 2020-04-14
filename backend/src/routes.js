@@ -53,13 +53,23 @@ routes.get(
   '/ongs',
   celebrate({
     [Segments.QUERY]: Joi.object().keys({
-      name: Joi.string().optional(),
       state: Joi.string().optional(),
       city: Joi.string().optional(),
       page: Joi.number().optional()
     })
   }),
   ongController.index
+);
+
+routes.get(
+  '/ongsCount',
+  celebrate({
+    [Segments.QUERY]: Joi.object().keys({
+      state: Joi.string().optional(),
+      city: Joi.string().optional(),
+    })
+  }),
+  ongController.totalApproved
 );
 
 routes.post(
