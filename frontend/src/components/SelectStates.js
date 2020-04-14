@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-export default function SelectState({ className, onChange, id, nullable }) {
+
+
+export default function SelectState({ className, onChange, id}) {
 
   const [state, setState] = useState("");
 
@@ -11,7 +13,7 @@ export default function SelectState({ className, onChange, id, nullable }) {
 
   return (
     <select id={id} name="estado" value={state} onChange={handleChange} className={className}>
-      {nullable && <option value="">--</option>}
+      <option value="">--</option>
       <option value="AC">Acre</option>
       <option value="AL">Alagoas</option>
       <option value="AP">Amapá</option>
