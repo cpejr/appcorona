@@ -200,7 +200,7 @@ export default function List(props) {
 
           </div>
           <div className="searchBar d-flex flex-wrap">
-            Selecione o estado:  <SelectState className="input--style-5 selectStates col-12 mb-2" onChange={handleOnChangeState} nullable={true} />
+            Selecione o estado:  <SelectState className="input--style-5 selectStates col-12 mb-2" onChange={handleOnChangeState} />
             Digite o nome da cidade: <input className="input--style-5" type='text' onChange={handleOnChangeCity}></input>
           </div>
 
