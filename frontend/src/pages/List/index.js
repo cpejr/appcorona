@@ -34,7 +34,7 @@ export default function List(props) {
         if (cityFilter)
           queryParams.push(`city=${cityFilter}`);
 
-        queryParams = queryParams.join(',')
+        queryParams = queryParams.join('&')
 
         const totalCountResponse = await api.get(`/ongsCount?${queryParams}`);
         const totalCount = totalCountResponse.headers['x-total-count'];
@@ -47,42 +47,52 @@ export default function List(props) {
 
         shuffle(pagesVector);
 
-        let pagesQuery;
-        if (queryParams)
-          pagesQuery = `,page=${pagesVector[0]}`;
-        else
-          pagesQuery = `page=${pagesVector[0]}`;
-
-        let ongsResponse = await api.get(`/ongs?${queryParams}${pagesQuery}`);
-
-        let newOngs = [...ongsResponse.data]
-
-        let currentPageIndex = 0;
-
-        if (newOngs.length < ONGSPERPAGE && pagesVector.length > 0) {
-          currentPageIndex++
-
-          let currentPage = pagesVector[currentPageIndex];
-
+        if (pagesVector.length > 0) {
           let pagesQuery;
           if (queryParams)
-            pagesQuery = `,page=${currentPage}`;
+            pagesQuery = `&page=${pagesVector[0]}`;
           else
-            pagesQuery = `page=${currentPage}`;
+            pagesQuery = `page=${pagesVector[0]}`;
 
-          const ongsComplementResponse = await api.get(`/ongs?${queryParams}${pagesQuery}`);
+          let ongsResponse = await api.get(`/ongs?${queryParams}${pagesQuery}`);
 
-          newOngs = [...newOngs, ...ongsComplementResponse.data]
+          let newOngs = [...ongsResponse.data]
+
+          let currentPageIndex = 0;
+
+          if (newOngs.length < ONGSPERPAGE && pagesVector.length > 1) {
+            currentPageIndex++
+
+            let currentPage = pagesVector[currentPageIndex];
+
+            let pagesQuery;
+            if (queryParams)
+              pagesQuery = `&page=${currentPage}`;
+            else
+              pagesQuery = `page=${currentPage}`;
+
+            const ongsComplementResponse = await api.get(`/ongs?${queryParams}${pagesQuery}`);
+
+            newOngs = [...newOngs, ...ongsComplementResponse.data]
+          }
+
+
+          let newOngsData = { ...ongsData };
+
+          newOngsData.pagesVector = pagesVector;
+          newOngsData.ongs = newOngs;
+          newOngsData.currentPageIndex = currentPageIndex;
+
+          setOngsData(newOngsData)
+        } else {
+          let newOngsData = { ...ongsData };
+
+          newOngsData.pagesVector = [];
+          newOngsData.ongs = [];
+          newOngsData.currentPageIndex = 0;
+
+          setOngsData(newOngsData)
         }
-
-
-        let newOngsData = { ...ongsData };
-
-        newOngsData.pagesVector = pagesVector;
-        newOngsData.ongs = newOngs;
-        newOngsData.currentPageIndex = currentPageIndex;
-
-        setOngsData(newOngsData)
       } catch (err) {
         console.warn(err);
       }
@@ -115,13 +125,13 @@ export default function List(props) {
               if (cityFilter)
                 queryParams.push(`city=${cityFilter}`);
 
-              queryParams = queryParams.join(',');
+              queryParams = queryParams.join('&');
 
               let newOngs = [];
 
               let pagesQuery;
               if (queryParams)
-                pagesQuery = `,page=${currentPage}`;
+                pagesQuery = `&page=${currentPage}`;
               else
                 pagesQuery = `page=${currentPage}`;
 
@@ -137,7 +147,7 @@ export default function List(props) {
 
                 let pagesQuery;
                 if (queryParams)
-                  pagesQuery = `,page=${currentPage}`;
+                  pagesQuery = `&page=${currentPage}`;
                 else
                   pagesQuery = `page=${currentPage}`;
 

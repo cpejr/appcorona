@@ -26,6 +26,7 @@ module.exports = {
   async index(request, response) {
     try {
       const { page, city, state } = request.query;
+      console.log(request.query)
 
       let result = await Ong.getAprovedOngs(page, city, state);
 

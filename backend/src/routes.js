@@ -53,9 +53,9 @@ routes.get(
   '/ongs',
   celebrate({
     [Segments.QUERY]: Joi.object().keys({
+      page: Joi.number().optional(),
       state: Joi.string().optional(),
-      city: Joi.string().optional(),
-      page: Joi.number().optional()
+      city: Joi.string().optional()
     })
   }),
   ongController.index
