@@ -96,10 +96,8 @@ export default function List(props) {
   useEffect(() => {
     const updateOngs = () => {
       if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { //Reached the end of the page.
-        console.log('bb')
         const totalPages = ongsData.pagesVector.length;
         let currentPageIndex = ongsData.currentPageIndex;
-        console.log(currentPageIndex);
 
         if (currentPageIndex < totalPages - 1) {
           currentPageIndex++;
@@ -132,7 +130,7 @@ export default function List(props) {
 
               newOngs = [...ongsResponse.data]
 
-              if (newOngs.length < ONGSPERPAGE && ongsData.pagesVector.length > currentPageIndex) {
+              if (newOngs.length < ONGSPERPAGE && ongsData.pagesVector.length - 1 > currentPageIndex) {
                 currentPageIndex++
 
                 currentPage = ongsData.pagesVector[currentPageIndex];
