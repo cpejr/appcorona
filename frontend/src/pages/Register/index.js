@@ -379,16 +379,19 @@ export default function Register({ className, fileName, onSubmit }) {
                 </div>
               </div>
 
-              <div className="file-name">LOGO DA EMPRESA </div>
-              <ImageUpload onChange={handleImage} fileName={'imageFile'} />
-
-              <div className="file-container">
-
-
-                <div className="btn-enviar-container">
-                  <button className="btn btn--radius-2 btn btn-warning" type="submit">Enviar</button>
+              <div className="form-row">
+                <div className="name">Logo da Empresa</div>
+                <div className="value">
+                  <div className="input-group">
+                  <ImageUpload onChange={handleImage} fileName={'imageFile'} />
+                  </div>
                 </div>
               </div>
+
+              <div className="btn-enviar-container">
+                  <button className="btn btn--radius-2 btn btn-warning" type="submit">Enviar</button>
+              </div>             
+
             </form>
           </div>
         </div>
