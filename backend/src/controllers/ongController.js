@@ -22,19 +22,19 @@ module.exports = {
       return response.status(500).json({ error: error });
     }
   },
+
   async index(request, response) {
     try {
-      const { page, city, state} = request.query;
+      const { page, city, state } = request.query;
+      console.log(request.query)
 
       let result = await Ong.getAprovedOngs(page, city, state);
 
-      if (!result[0] || !result[0].totalCount)
-      {
+      if (!result[0] || !result[0].totalCount) {
         response.header("X-Total-Count", 0);
         result = [];
       }
-      else
-      {
+      else {
         response.header("X-Total-Count", result[0].totalCount);
         result = result[0].ongs;
       }
@@ -45,6 +45,7 @@ module.exports = {
       return response.status(500).json({ error: error });
     }
   },
+
   async delete(request, response) {
     try {
       let id = request.params.ongId;
@@ -53,7 +54,7 @@ module.exports = {
       emailController.userRejectedEmail(ongEmail);
 
       let result = await Ong.deleteOng(id);
-      
+
 
       return response.json({ object: result, message: 'deletado com sucesso' });
     } catch (error) {
@@ -64,5 +65,20 @@ module.exports = {
       console.log(error);
       return response.status(500).json({ error: error });
     }
-  }
+  },
+
+  async totalApproved(request, response) {
+    try {
+      const { city, state } = request.query;
+
+      const result = await Ong.getTotalApprovedOngs(city, state);
+      response.header("X-Total-Count", result);
+      return response.status(200).json("ok");
+
+    } catch (error) {
+      console.log(error);
+      return response.status(500).json({ error: error });
+    }
+  },
+
 };
