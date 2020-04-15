@@ -133,16 +133,18 @@ export default function List(props) {
             <Link className="btn1 btn--radius btn--blue m-2 mr-4 justify-content-end align-self-center" to="/register" type="submit">
               Cadastre sua ongs
               </Link>
-
           </div>
           <div className="searchBar d-flex flex-wrap">
-          <button className="btn1 btn--radius btn--blue m-2 mr-4 justify-content-end align-self-center" onClick={handleClickFilter} type="submit">
-            <FaFilter/>
-          </button>
-          <div style={{ display: (activeFilter ? 'block' : 'none') }}>
-            <p>Selecione o estado: </p> <SelectState className="input--style-5 selectStates col-12 mb-2" onChange={handleOnChangeState} nullable={true} />
-            <p>Digite o nome da cidade: </p> <input className="input--style-5" type='text' onChange={handleOnChangeCity}></input>
-          </div>
+            <button className="btn1 btn--radius btn--blue m-2 mr-4 justify-content-end align-self-center" onClick={handleClickFilter} type="submit">
+              <FaFilter/>
+            </button>
+
+            <div className="col-12" style={{ display: (activeFilter ? "block" : "none") }}>
+              <p>Selecione o estado: </p> 
+              <SelectState className="input--style-5 selectStates col-12 mb-2" onChange={handleOnChangeState} nullable={true} />
+              <p>Digite o nome da cidade: </p> 
+              <input className="input--style-5" type='text' onChange={handleOnChangeCity}></input>
+            </div>
           </div>
 
           <div className="card-body d-flex flex-wrap justify-content-center">
