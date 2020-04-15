@@ -78,14 +78,10 @@ export default function List(props) {
 
             newOngs = [...newOngs, ...ongsComplementResponse.data]
           }
-
-
           let newOngsData = { ...ongsData };
-
           newOngsData.pagesVector = pagesVector;
           newOngsData.ongs = newOngs;
           newOngsData.currentPageIndex = currentPageIndex;
-
           setOngsData(newOngsData)
         } else {
           let newOngsData = { ...ongsData };
@@ -138,32 +134,23 @@ export default function List(props) {
 
               const ongsResponse = await api.get(`/ongs?${queryParams}${pagesQuery}`);
 
-
               newOngs = [...ongsResponse.data]
 
               if (newOngs.length < ONGSPERPAGE && ongsData.pagesVector.length - 1 > currentPageIndex) {
                 currentPageIndex++
-
                 currentPage = ongsData.pagesVector[currentPageIndex];
-
                 let pagesQuery;
                 if (queryParams)
                   pagesQuery = `&page=${currentPage}`;
                 else
                   pagesQuery = `page=${currentPage}`;
-
                 const ongsComplementResponse = await api.get(`/ongs?${queryParams}${pagesQuery}`);
-
                 newOngs = [...newOngs, ...ongsComplementResponse.data]
               }
-
               const newOngsData = { ...ongsData }
-
               newOngsData.currentPageIndex = currentPageIndex;
-              newOngsData.ongs = [...newOngsData.ongs, ...newOngs]
-
+              newOngsData.ongs = [...newOngsData.ongs, ...newOngs];
               setOngsData(newOngsData);
-
             } catch (err) {
               console.warn(err);
             }
@@ -196,8 +183,7 @@ export default function List(props) {
   }
 
   function handleClickFilter() {
-      setActiveFilter(!activeFilter);
-      console.log(activeFilter);
+    setActiveFilter(!activeFilter);
   }
 
   return (
@@ -209,7 +195,7 @@ export default function List(props) {
             <h2 className="title d-flex align-items-center">Bem Conectado</h2>
             <Link className="btn1 btn--radius btn--blue m-2 mr-4 justify-content-end align-self-center" to="/register" type="submit">
               Cadastre sua ongs
-              </Link>
+            </Link>
           </div>
           <div className="searchBar d-flex flex-wrap">
             <button className="btn1 btn--radius btn--blue m-2 mr-4 justify-content-end align-self-center" onClick={handleClickFilter} type="submit">
