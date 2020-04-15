@@ -4,6 +4,8 @@ import Card from './Card';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import SelectState from '../../components/SelectStates';
+import { FaFilter } from 'react-icons/fa';
+
 
 function shuffle(array) {
   array.sort(() => Math.random() - 0.5);
@@ -15,6 +17,7 @@ export default function List(props) {
 
   const [stateFilter, setStateFilter] = useState();
   const [cityFilter, setCityFilter] = useState();
+  const [activeFilter, setActiveFilter] = useState(false);
 
   const [ongsData, setOngsData] = useState({
     pagesVector: [],
@@ -101,8 +104,6 @@ export default function List(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stateFilter, cityFilter]);
 
-  console.log('renderizou')
-
   useEffect(() => {
     const updateOngs = () => {
       if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { //Reached the end of the page.
@@ -186,13 +187,17 @@ export default function List(props) {
     );
   });
 
-
   function handleOnChangeState(state) {
     setStateFilter(state);
   }
 
   function handleOnChangeCity(city) {
     setCityFilter(city.target.value);
+  }
+
+  function handleClickFilter() {
+      setActiveFilter(!activeFilter);
+      console.log(activeFilter);
   }
 
   return (
@@ -205,11 +210,18 @@ export default function List(props) {
             <Link className="btn1 btn--radius btn--blue m-2 mr-4 justify-content-end align-self-center" to="/register" type="submit">
               Cadastre sua ongs
               </Link>
-
           </div>
           <div className="searchBar d-flex flex-wrap">
-            Selecione o estado:  <SelectState className="input--style-5 selectStates col-12 mb-2" onChange={handleOnChangeState} />
-            Digite o nome da cidade: <input className="input--style-5" type='text' onChange={handleOnChangeCity}></input>
+            <button className="btn1 btn--radius btn--blue m-2 mr-4 justify-content-end align-self-center" onClick={handleClickFilter} type="submit">
+              <FaFilter/>
+            </button>
+
+            <div className="col-12" style={{ display: (activeFilter ? "block" : "none") }}>
+              <p>Selecione o estado: </p> 
+              <SelectState className="input--style-5 selectStates col-12 mb-2" onChange={handleOnChangeState} nullable={true} />
+              <p>Digite o nome da cidade: </p> 
+              <input className="input--style-5" type='text' onChange={handleOnChangeCity}></input>
+            </div>
           </div>
 
           <div className="card-body d-flex flex-wrap justify-content-center">
