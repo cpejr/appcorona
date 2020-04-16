@@ -17,6 +17,7 @@ export default function List(props) {
 
   const [stateFilter, setStateFilter] = useState();
   const [cityFilter, setCityFilter] = useState();
+  const [nameFilter, setNameFilter] = useState();
   const [activeFilter, setActiveFilter] = useState(false);
 
   const [ongsData, setOngsData] = useState({
@@ -28,7 +29,6 @@ export default function List(props) {
   useEffect(() => {
     const getOngs = async () => {
       try {
-        console.log("banana")
         let queryParams = [];
 
         if (stateFilter)
@@ -36,6 +36,9 @@ export default function List(props) {
 
         if (cityFilter)
           queryParams.push(`city=${cityFilter}`);
+
+        if (nameFilter)
+          queryParams.push(`name=${nameFilter}`);
 
         queryParams = queryParams.join('&')
 
@@ -98,7 +101,7 @@ export default function List(props) {
     }
     getOngs();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stateFilter, cityFilter]);
+  }, [stateFilter, cityFilter, nameFilter]);
 
   useEffect(() => {
     const updateOngs = () => {
@@ -121,6 +124,9 @@ export default function List(props) {
 
               if (cityFilter)
                 queryParams.push(`city=${cityFilter}`);
+
+              if (nameFilter)
+                queryParams.push(`name=${nameFilter}`);
 
               queryParams = queryParams.join('&');
 
@@ -166,7 +172,7 @@ export default function List(props) {
       window.removeEventListener('scroll', updateOngs);
     }
 
-  }, [cityFilter, ongsData, stateFilter]);
+  }, [cityFilter, nameFilter, ongsData, stateFilter]);
 
   const ongs = ongsData.ongs.map(function (ong) {
     return (
@@ -180,6 +186,10 @@ export default function List(props) {
 
   function handleOnChangeCity(city) {
     setCityFilter(city.target.value);
+  }
+
+  function handleOnChangeName(name) {
+    setNameFilter(name.target.value);
   }
 
   function handleClickFilter() {
@@ -199,14 +209,16 @@ export default function List(props) {
           </div>
           <div className="searchBar d-flex flex-wrap">
             <button className="btn1 btn--radius btn--blue m-2 mr-4 justify-content-end align-self-center" onClick={handleClickFilter} type="submit">
-              <FaFilter/>
+              <FaFilter />
             </button>
 
             <div className="col-12" style={{ display: (activeFilter ? "block" : "none") }}>
-              <p>Selecione o estado: </p> 
+              <p>Selecione o estado: </p>
               <SelectState className="input--style-5 selectStates col-12 mb-2" onChange={handleOnChangeState} nullable={true} />
-              <p>Digite o nome da cidade: </p> 
+              <p>Digite o nome da cidade: </p>
               <input className="input--style-5" type='text' onChange={handleOnChangeCity}></input>
+              <p>Digite o nome da ONG: </p>
+              <input className="input--style-5" type='text' onChange={handleOnChangeName}></input>
             </div>
           </div>
 

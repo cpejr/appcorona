@@ -39,6 +39,7 @@ routes.get('/ongs', celebrate({
     state: Joi.string().optional(),
     city: Joi.string().optional(),
     page: Joi.number().optional(),
+    name: Joi.string().optional(),
   }),
 }), ongController.index);
 
@@ -47,26 +48,13 @@ routes.post('/teste', imageUpload('teste'), (_req, res) =>
   res.status(204).send()
 );
 
-
-
-routes.get(
-  '/ongs',
-  celebrate({
-    [Segments.QUERY]: Joi.object().keys({
-      page: Joi.number().optional(),
-      state: Joi.string().optional(),
-      city: Joi.string().optional()
-    })
-  }),
-  ongController.index
-);
-
 routes.get(
   '/ongsCount',
   celebrate({
     [Segments.QUERY]: Joi.object().keys({
       state: Joi.string().optional(),
       city: Joi.string().optional(),
+      name: Joi.string().optional(),
     })
   }),
   ongController.totalApproved

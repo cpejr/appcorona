@@ -25,10 +25,9 @@ module.exports = {
 
   async index(request, response) {
     try {
-      const { page, city, state } = request.query;
-      console.log(request.query)
+      const { page, city, state, name } = request.query;
 
-      let result = await Ong.getAprovedOngs(page, city, state);
+      let result = await Ong.getAprovedOngs(page, city, state, name);
 
       if (!result[0] || !result[0].totalCount) {
         response.header("X-Total-Count", 0);
@@ -69,9 +68,9 @@ module.exports = {
 
   async totalApproved(request, response) {
     try {
-      const { city, state } = request.query;
+      const { city, state, name } = request.query;
 
-      const result = await Ong.getTotalApprovedOngs(city, state);
+      const result = await Ong.getTotalApprovedOngs(city, state, name);
       response.header("X-Total-Count", result);
       return response.status(200).json("ok");
 
