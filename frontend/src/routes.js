@@ -8,12 +8,14 @@ import List from './pages/List';
 import UploadTest from './pages/UploadTest';
 import ONG from './pages/ONG'
 import Pending from './pages/Pendings/Pending/OngCard'
+import Home from './pages/Home'
 
 export default function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={List} />
+        <Route path="/" exact component={Home} />
+        <Route path="/list" exact component={List} />
         <Route path="/register" component={Register} />
         <Route path="/pendings" component={Pendings} />
         <Route path="/adminONG" component={Pending} />
