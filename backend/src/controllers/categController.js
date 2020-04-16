@@ -40,9 +40,33 @@ module.exports = {
 
     async delete(request, response) {
         try {
-            let data = request.body;
+            let data = request.params;
             let result = await Categ.deleteOne(data);
 
+            return response.json(result);
+        } catch (error) {
+            console.log(error);
+            return response.status(500).json({ error: error });
+        }
+    },
+
+    async searchCategs(request, response) {
+        try {
+            let data = request.params;
+            let result = await Categ.searchCategsWithOng(data);
+
+            return response.json(result);
+        } catch (error) {
+            console.log(error);
+            return response.status(500).json({ error: error });
+        }
+    },
+
+    async searchOngs(request, response) {
+        try {
+            let data = request.body;
+            let result = await Categ.searchOngsWithCategs(data);
+            
             return response.json(result);
         } catch (error) {
             console.log(error);

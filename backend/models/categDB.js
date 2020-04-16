@@ -38,9 +38,9 @@ class CategActions {
   }
 
   static deleteOne(receivedData) {
-    return new Promise((resolve, reject) =>{
+    return new Promise((resolve, reject) => {
       const receivedName = receivedData.name;
-      Categ.findOneAndDelete({name: receivedName}).then((result) =>{
+      Categ.findOneAndDelete({ name: receivedName }).then((result) => {
         resolve(result);
       }).catch((error) => {
         console.log(error);
@@ -70,10 +70,9 @@ class CategActions {
     })
   }
 
-
-  static searchCategsWithOng(receivedOng) {
+  static searchCategsWithOng(receivedData) {
     return new Promise((resolve, reject) => {
-      let id = receivedOng._id;
+      let id = receivedData.ongId;
       Categ.find({ ongs: id }).then((results) => {
         resolve(results);
       }).catch((error) => {
@@ -83,9 +82,38 @@ class CategActions {
     })
   }
 
-  static searchOngsWithCategs(receivedCategs) {
+  static searchOngsWithCategs(receivedData) {
     return new Promise((resolve, reject) => {
-
+      let names = receivedData.names;
+      Categ.aggregate(
+        [{
+          $match: {
+            name: {$in: names}
+          }
+        }, {
+          $project: {
+            ongs: 1
+          }
+        }
+        ]).then((results) => {
+          let aux = [];
+          if(results !== undefined){
+            for (let i = 0; i < results.length; i++){
+              let current = results[i].ongs;
+                for (let j = 0; j < current.length; j++){
+                  current[j] = current[j].toString();
+                }
+              aux = [...aux, ...current];
+            }
+          }
+          let unique = (aux) => aux.filter((v,i) => aux.indexOf(v) === i);
+          console.log(unique(aux));
+          
+          resolve(unique(aux));
+        }).catch((error) =>{
+          console.log(error);
+          reject(error);
+        });
     })
   }
 
