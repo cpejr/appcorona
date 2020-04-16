@@ -86,7 +86,7 @@ const ong = new mongoose.Schema({
     type: String,
     required: true,
   },
-  category: {
+  categs: {
     type: String,
     required: false,
   }
@@ -106,35 +106,33 @@ class OngsActions {
       Ong.create(ongData).then((result) => {
         resolve(result);
       }).catch((error) => {
-        reject(error);
         console.log(error);
+        reject(error);
       });
     });
   }
-
-
 
   static deleteOng(id) {
     return new Promise((resolve, reject) => {
       Ong.deleteOne({ _id: id }).then((result) => {
         resolve(result);
       }).catch((error) => {
-        reject(error);
         console.log(error);
+        reject(error);
       });
     });
   }
+
   static getById(id) {
     return new Promise((resolve, reject) => {
       Ong.findById(id).then((result) => {
         resolve(result);
       }).catch((error) => {
-        reject(error);
         console.log(error);
+        reject(error);
       });
     });
   }
-
 
   static getAprovedOngs(page, city, state) {
     return new Promise(async (resolve, reject) => {
@@ -182,9 +180,9 @@ class OngsActions {
         ]);
 
         resolve(result);
-      } catch (err) {
-        console.log(err);
-        reject(err);
+      } catch (error) {
+        console.log(error);
+        reject(error);
       }
     });
   }
@@ -194,8 +192,8 @@ class OngsActions {
       Ong.find({ approved: false }).then((results) => {
         resolve(results);
       }).catch((error) => {
-        reject(error);
         console.log(error);
+        reject(error);
       });
     });
   }
@@ -205,8 +203,8 @@ class OngsActions {
       Ong.findOneAndUpdate({ _id: id }, newFields).then((results) => {
         resolve(results);
       }).catch((error) => {
-        reject(error);
         console.log(error);
+        reject(error);
       });
     });
   }
@@ -219,8 +217,8 @@ class OngsActions {
         else
           resolve(false);
       }).catch((error) => {
+        console.log(error);
         reject(error);
-        resolve(error);
       });
     });
   }
@@ -246,9 +244,9 @@ class OngsActions {
        
 
         resolve(result);
-      } catch (err) {
-        console.log(err);
-        reject(err);
+      } catch (error) {
+        console.log(error);
+        reject(error);
       }
     });
   }

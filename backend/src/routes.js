@@ -4,6 +4,7 @@ const routes = express.Router();
 const adminController = require('./controllers/adminController');
 const ongController = require('./controllers/ongController');
 const sessionController = require('./controllers/SessionController');
+const categController = require('./controllers/categController');
 const ongDB = require('../models/ongDB');
 const imageUpload = require('./middleware/imageUpload');
 
@@ -48,27 +49,22 @@ routes.post('/teste', imageUpload('teste'), (_req, res) =>
 );
 
 
-
-routes.get(
-  '/ongs',
-  celebrate({
-    [Segments.QUERY]: Joi.object().keys({
-      page: Joi.number().optional(),
-      state: Joi.string().optional(),
-      city: Joi.string().optional()
-    })
-  }),
+routes.get('/ongs', celebrate({
+  [Segments.QUERY]: Joi.object().keys({
+    page: Joi.number().optional(),
+    state: Joi.string().optional(),
+    city: Joi.string().optional()
+  })
+}),
   ongController.index
 );
 
-routes.get(
-  '/ongsCount',
-  celebrate({
-    [Segments.QUERY]: Joi.object().keys({
-      state: Joi.string().optional(),
-      city: Joi.string().optional(),
-    })
-  }),
+routes.get('/ongsCount', celebrate({
+  [Segments.QUERY]: Joi.object().keys({
+    state: Joi.string().optional(),
+    city: Joi.string().optional(),
+  })
+}),
   ongController.totalApproved
 );
 
@@ -121,18 +117,34 @@ routes.put('/admin/:ongId', celebrate({
 }), sessionController.authenticateToken, adminController.update);
 
 
-routes.delete(
-  '/admin/:ongId',
-  celebrate({
-    [Segments.PARAMS]: Joi.object().keys({
-      ongId: Joi.string().required()
-    }),
-    [Segments.HEADERS]: Joi.object({
-      authorization: Joi.string().required()
-    }).unknown()
+routes.delete('/admin/:ongId', celebrate({
+  [Segments.PARAMS]: Joi.object().keys({
+    ongId: Joi.string().required()
   }),
+  [Segments.HEADERS]: Joi.object({
+    authorization: Joi.string().required()
+  }).unknown()
+}),
   sessionController.authenticateToken,
   ongController.delete
+);
+
+routes.get('/categ', celebrate({
+  [Segments.QUERY]: Joi.object().keys({
+    cat: Joi.array().optional()
+  })
+}),
+  categController.index
+)
+
+routes.post('/categ', celebrate({
+  [Segments.PARAMS]: Joi.object().keys({
+    name: Joi.string().required(),
+    ongs: Joi.array().optional()
+  })
+}),
+  sessionController.authenticateToken,
+  categController.create
 );
 
 module.exports = routes;
