@@ -205,3 +205,9 @@ input {
   margin-top: 7px;
   left: 0;
 }
+
+.locationContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
