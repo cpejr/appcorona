@@ -112,8 +112,6 @@ class OngsActions {
     });
   }
 
-
-
   static deleteOng(id) {
     return new Promise((resolve, reject) => {
       Ong.deleteOne({ _id: id }).then((result) => {
@@ -124,6 +122,7 @@ class OngsActions {
       });
     });
   }
+
   static getById(id) {
     return new Promise((resolve, reject) => {
       Ong.findById(id).then((result) => {
@@ -135,21 +134,25 @@ class OngsActions {
     });
   }
 
-
-  static getAprovedOngs(page, city, state) {
+  static getAprovedOngs(page, city, state, name) {
     return new Promise(async (resolve, reject) => {
       try {
+
         let query = {
           approved: true,
         }
 
-        if (city) {
-          query.city = city;
-        }
+        if (city)
+          query.city = toApproximationRegex(city);
 
-        if (state) {
+
+        if (state)
           query.state = state;
-        }
+
+        if (name)
+          query.name = toApproximationRegex(name);
+
+        //  console.log(query)
 
         let pg = 0;
 
@@ -225,25 +228,27 @@ class OngsActions {
     });
   }
 
-  static getTotalApprovedOngs(city, state) {
+  static getTotalApprovedOngs(city, state, name) {
     return new Promise(async (resolve, reject) => {
-      console.log(state)
       try {
 
         let query = {
           approved: true,
         }
 
-        if (city) 
-          query.city = city;
-        
-        if (state) 
+        if (city)
+          query.city = toApproximationRegex(city);
+
+        if (state)
           query.state = state;
-        
 
+        if (name)
+          query.name = toApproximationRegex(name);
+
+        console.log(query)
         const result = await Ong.countDocuments(query);
+        console.log(result)
 
-       
 
         resolve(result);
       } catch (err) {
@@ -252,6 +257,18 @@ class OngsActions {
       }
     });
   }
+}
+
+function toApproximationRegex(string) {
+  const words = string.split(' ');
+
+  let regex = ''
+
+  words.forEach(word => {
+    regex += `(?=.*${word})`
+  });
+
+  return { $regex: regex, $options: 'i' }
 }
 
 module.exports = OngsActions;
