@@ -31,7 +31,7 @@ export default function OngView({ ong, handleSelect, token}) {
                 ong: ong,
                 token: token,
               }
-            }}> Analizar aprovação
+            }}> Analisar aprovação
             </Link>
           </div>
         </div>
