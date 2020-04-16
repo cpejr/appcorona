@@ -152,8 +152,6 @@ class OngsActions {
         if (name)
           query.name = toApproximationRegex(name);
 
-        //  console.log(query)
-
         let pg = 0;
 
         if (page)
@@ -245,9 +243,7 @@ class OngsActions {
         if (name)
           query.name = toApproximationRegex(name);
 
-        console.log(query)
         const result = await Ong.countDocuments(query);
-        console.log(result)
 
 
         resolve(result);
