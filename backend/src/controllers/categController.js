@@ -25,4 +25,29 @@ module.exports = {
             return response.status(500).json({ error: error });
         }
     },
+
+    async categorize(request, response) {
+        try {
+            let data = request.body;
+            let result = await Categ.categorize(data);
+
+            return response.json(result);
+        } catch (error) {
+            console.log(error);
+            return response.status(500).json({ error: error });
+        }
+    },
+
+    async delete(request, response) {
+        try {
+            let data = request.body;
+            let result = await Categ.deleteOne(data);
+
+            return response.json(result);
+        } catch (error) {
+            console.log(error);
+            return response.status(500).json({ error: error });
+        }
+    },
+
 }

@@ -135,16 +135,44 @@ routes.get('/categ', celebrate({
   })
 }),
   categController.index
-)
+);
 
 routes.post('/categ', celebrate({
-  [Segments.PARAMS]: Joi.object().keys({
+  [Segments.BODY]: Joi.object().keys({
     name: Joi.string().required(),
     ongs: Joi.array().optional()
-  })
+  }),
+  [Segments.HEADERS]: Joi.object({
+    authorization: Joi.string().required()
+  }).unknown()
 }),
   sessionController.authenticateToken,
   categController.create
+);
+
+routes.put('/categ', celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    ong: Joi.object().required(),
+    categ: Joi.array().required()
+  }),
+  [Segments.HEADERS]: Joi.object({
+    authorization: Joi.string().required()
+  }).unknown()
+}),
+  sessionController.authenticateToken,
+  categController.categorize
+);
+
+routes.delete('/categ', celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    name: Joi.string().required()
+  }),
+  [Segments.HEADERS]: Joi.object({
+    authorization: Joi.string().required()
+  }).unknown()
+}),
+  sessionController.authenticateToken,
+  categController.delete
 );
 
 module.exports = routes;

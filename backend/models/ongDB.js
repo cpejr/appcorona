@@ -99,7 +99,7 @@ const Ong = mongoose.model('Ong', ong);
 // Use this to define the maximum number of ongs in a page
 const ONGS_PER_PAGE = 10;
 
-class OngsActions {
+class OngActions {
 
   static createNew(ongData) {
     return new Promise((resolve, reject) => {
@@ -252,4 +252,4 @@ class OngsActions {
   }
 }
 
-module.exports = OngsActions;
+module.exports = OngActions;
