@@ -12,36 +12,7 @@ import { Button } from '@material-ui/core';
 import { FaFacebookF, FaCodeBranch } from "react-icons/fa";
 import picpayIcon from '../../../../images/picpay.png';
 
-let ong = {
-    "_id": "5e91df8e4ac3977555a31ee0",
-      "approved": true,
-      "name": "Comida é para todos",
-      "description": "Uma ONG que coleta fundos para distribuição de alimentos para moradores de rua do centro de BH",
-      "city": "Belo Horizonte",
-      "state": "MG",
-      "street": "Rua Julia Nunes Guerra",
-      "cep": "30380400",
-      "site": "www.ComidaEParaTodos.org.br",
-      "neighborhood": "Luxemburgo",
-      "number": "194",
-      "complement": "301",
-      "cnpj": "133081876980",
-      "picpay": "picPay/ComidaParaTodos",
-      "facebook": "www.facebook/ComidaEParaTodos.com",
-      "email": "contato@cpt.br",
-      "ddd": "31",
-      "phoneNumber": "346891093",
-      "bank": "Sicoob",
-      "branch": "3891",
-      "bankAccount": "2389139901-1",
-      "imageSrc": "cachorro.jpg",
-      "createdAt": "2020-04-11T15:17:34.400Z",
-      "updatedAt": "2020-04-11T15:17:48.605Z",
-      "instagram": 'asdas',
-      "__v": 0
-}
-
-export default function Desktop(){
+export default function Desktop({ong}){
     return (
         <div className="Desktop">
             <div className="backButton">
