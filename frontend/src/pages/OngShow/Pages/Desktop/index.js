@@ -41,7 +41,7 @@ let ong = {
       "__v": 0
 }
 
-export default function Desktop({ong}){
+export default function Desktop(){
     return (
         <div className="Desktop">
             <div className="backButton">
@@ -59,23 +59,21 @@ export default function Desktop({ong}){
                     <div className="leftHalf">
 
                         <div>
-                            <h1>Nome da ong</h1>
-                            <p>CNPJ: 29503728040</p>
+                            <h2>{ong.name}</h2>
+                            <p>CNPJ: {ong.cnpj}</p>
                         </div>
                         
                         <div className="adressAndPhone">
                             <div className="adress">
-                                <IconContext.Provider value={{ className: 'instagramColor', size: '2.5em' }}>
+                                <IconContext.Provider value={{size: '2.5em' }}>
                                     <MdPlace/>
                                 </IconContext.Provider>
                                 <a target="_blank" rel="noopener noreferrer" href={`http://maps.google.com/maps?q=${ong.street},${ong.number},${ong.city},${ong.state},${ong.cep}`}>
-                                    {ong.state}, {ong.city}, {ong.neighborhood}
-                                    <br />
-                                    {ong.street} {ong.number}, {ong.cep}
+                                    {ong.state}, {ong.city}, {ong.street}, {ong.number}
                                 </a>
                             </div>
                             <div className="phone">
-                                <IconContext.Provider value={{ className: 'instagramColor', size: '1.8em' }}>
+                                <IconContext.Provider value={{ size: '1.8em' }}>
                                     <MdLocalPhone/>
                                 </IconContext.Provider>
                                 <div>{ong.phoneNumber}</div>
