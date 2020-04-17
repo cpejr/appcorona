@@ -62,8 +62,8 @@
 }
 
 img {
-  height: 140px !important;
-  width: 140px !important;
+  height: 140px;
+  width: 140px;
 }
 
 .searchBar{
