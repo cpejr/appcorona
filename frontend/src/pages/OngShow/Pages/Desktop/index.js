@@ -108,7 +108,7 @@ export default function Desktop({ong}){
 
                     <div className="rightHalf ">
 
-                        <img src='http://localhost:3333/images/cachorro.jpg' alt="Logo" className="ongLogo"/>
+                        <img src={`http://localhost:3333/images/${ong.imageSrc}`} alt="Logo" className="ongLogo"/>
 
                         <div className="donationInfo">
                             <div><b>INFORMAÇÕES PARA DOAÇÃO</b></div>
