@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
@@ -29,6 +29,7 @@ const useStyles = makeStyles({
     backgroundAttachment: 'fixed',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'contain',
+    backgroundPositionX: 'center',
   },
   header: {
     display: 'flex',
@@ -65,7 +66,11 @@ const useStyles = makeStyles({
   },
   divButtons: {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+  },
+  divLinks: {
+    marginBottom: 20,
+    marginTop: 20,
   },
   linkContent: {
     display: 'flex',
@@ -74,7 +79,7 @@ const useStyles = makeStyles({
     borderWidth: 1,
     borderStyle: 'solid',
     borderRadius: 5,
-    marginBottom: 20,
+    marginBottom: 10,
     height: 38,
   },
   link: {
@@ -153,51 +158,36 @@ const useStyles = makeStyles({
 });
 
 export default function Mobile(props) {
-  const [ong, setOng] = useState(
-    {
-      "_id": "5e91df8e4ac3977555a31ee0",
-      "approved": true,
-      "name": "Comida é para todos",
-      "description": "Uma ONG que coleta fundos para distribuição de alimentos para moradores de rua do centro de BH",
-      "city": "Belo Horizonte",
-      "state": "MG",
-      "street": "Rua Julia Nunes Guerra",
-      "cep": "30380400",
-      "site": "www.ComidaEParaTodos.org.br",
-      "neighborhood": "Luxemburgo",
-      "number": "194",
-      "complement": "301",
-      "cnpj": "133081876980",
-      "picpay": "picPay/ComidaParaTodos",
-      "facebook": "www.facebook/ComidaEParaTodos.com",
-      "email": "contato@cpt.br",
-      "ddd": "31",
-      "phoneNumber": "346891093",
-      "bank": "Sicoob",
-      "branch": "3891",
-      "bankAccount": "2389139901-1",
-      "imageSrc": "cachorro.jpg",
-      "createdAt": "2020-04-11T15:17:34.400Z",
-      "updatedAt": "2020-04-11T15:17:48.605Z",
-      "instagram": 'asdas',
-      "__v": 0
-    });
+  const [ong, setOng] = useState(props.ong ? props.ong : {});
   const [expanded, setExpanded] = React.useState(false);
-
   const classes = useStyles();
+
+  useEffect(() => {
+    if (props.ong) setOng(props.ong);
+  }, [props.ong])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
+
+  const getImage = () => {
+    if (ong.imageSrc) {
+      return `url(http://localhost:3333/images/${ong.imageSrc})`;
+    }
+  }
+
   return (
     <div className={classes.root}>
-      <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-      </head>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
 
-      <div alt='logoImage' className={classes.image} style={{ backgroundImage: `url(${ong.imageSrc})` }} />
+      <div alt='logoImage' className={classes.image} style={{ backgroundImage: getImage() }} />
 
       <div className={classes.content}>
 
@@ -211,10 +201,8 @@ export default function Mobile(props) {
           </IconButton>
           <div className={classes.center}>
             <Typography variant="h4">{ong.name}</Typography>
-            <Typography variant="body2">
-              <p className={classes.textCnpj}>
-                cnpj: {ong.cnpj}
-              </p>
+            <Typography variant="body2" className={classes.textCnpj}>
+              cnpj: {ong.cnpj}
             </Typography>
           </div>
         </div>
@@ -259,7 +247,7 @@ export default function Mobile(props) {
 
         <div className={classes.divButtons}>
           {ong.facebook && (
-            <Button variant="outlined" href={`https://${ong.facebook}`} className={[classes.iconButton, classes.facebookBorder]}>
+            <Button variant="outlined" href={`https://${ong.facebook}`} className={`${classes.iconButton} ${classes.facebookBorder} instagramBorder`}>
               <div>
                 <IconContext.Provider value={{ color: "#3b5998", size: '1.7em' }}>
                   <FaFacebookF />
@@ -269,17 +257,17 @@ export default function Mobile(props) {
           )}
 
           {ong.instagram && (
-            <Button variant="outlined" href={`https://${ong.instagram}`} className={[classes.iconButton, 'instagramBorder']}>
+            <Button variant="outlined" href={`https://${ong.instagram}`} className={`${classes.iconButton} instagramBorder`}>
               <div className={classes.center}>
-                <i class="fa fa-instagram" />
+                <i className="fa fa-instagram" />
               </div>
             </Button>
           )}
         </div>
 
-        <div>
+        <div className={classes.divLinks}>
           {ong.site && (
-            <div className={[classes.linkContent]}>
+            <div className={classes.linkContent}>
               <div className={classes.linkIcon}>
                 <IconContext.Provider value={{ color: "#495057", size: '1.1em' }}>
                   <FaLink />
@@ -293,7 +281,7 @@ export default function Mobile(props) {
             </div>
           )}
           {ong.email && (
-            <div className={[classes.linkContent]}>
+            <div className={classes.linkContent}>
               <div className={classes.linkIcon}>
                 <IconContext.Provider value={{ color: "#495057", size: '1.1em' }}>
                   <MdEmail />
@@ -325,7 +313,7 @@ export default function Mobile(props) {
           </div>
           <div className={classes.divButtons}>
             {ong.picpay && (
-              <Button variant="outlined" href={`https://${ong.picpay}`} className={[classes.iconButton, classes.PicPayBorder]}>
+              <Button variant="outlined" href={`https://${ong.picpay}`} className={`${classes.iconButton} ${classes.PicPayBorder}`}>
                 <div>
                   <IconContext.Provider value={{ color: "#11C76F", size: '1.7em' }}>
                     <img src={picpayIcon} alt="logo" className={classes.icon} />
@@ -337,7 +325,7 @@ export default function Mobile(props) {
         </div>
 
         <div className={classes.image} />
-        
+
       </div>
     </div>
   )
