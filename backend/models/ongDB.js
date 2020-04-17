@@ -288,4 +288,4 @@ function toApproximationRegex(string) {
   return { $regex: regex, $options: 'i' }
 }
 
-module.exports = OngsActions;
+module.exports = OngActions;
