@@ -1,0 +1,30 @@
+*:focus {
+  outline: none !important;
+}
+
+.instagramBorder {
+  background: linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(
+        to left,
+        rgba(131, 58, 180, 1) 0%,
+        rgba(253, 29, 29, 1) 55%,
+        rgba(252, 176, 69, 1) 100%
+      )
+      border-box;
+  border: 5px solid transparent;
+  border-radius: 15px;
+}
+
+.fa {
+  font-size: 1.9em !important;
+  color: #9c47fc;
+  background: -webkit-linear-gradient(
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 29, 1) 55%,
+    rgba(252, 176, 69, 1) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+

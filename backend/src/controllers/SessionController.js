@@ -4,7 +4,6 @@ module.exports = {
 
   async login(request, response) {
     try {
-    console.log('aa');
 
       // Autenticate user
       const password = request.params.password;

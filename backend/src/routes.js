@@ -11,29 +11,7 @@ const imageUpload = require('./middleware/imageUpload');
 
 //ONGS
 
-routes.post('/registerOng', imageUpload('imageFile'), celebrate({
-  [Segments.BODY]: Joi.object().keys({
-    name: Joi.string().required(),
-    cnpj: Joi.string().required(),
-    state: Joi.string().required(),
-    city: Joi.string().required(),
-    neighborhood: Joi.string().required(),
-    street: Joi.string().required(),
-    number: Joi.string().required(),
-    cep: Joi.string().required(),
-    email: Joi.string().required(),
-    complement: Joi.string().optional(),
-    picpay: Joi.string().optional(),
-    facebook: Joi.string().optional(),
-    ddd: Joi.string().optional(),
-    phoneNumber: Joi.string().optional(),
-    site: Joi.string().optional(),
-    branch: Joi.string().optional(),
-    bank: Joi.string().optional(),
-    bankAccount: Joi.string().optional(),
-    description: Joi.string().optional(),
-  }),
-}), ongController.create);
+routes.post('/registerOng', imageUpload('imageFile'), ongController.create);
 
 routes.get('/ongs', celebrate({
   [Segments.QUERY]: Joi.object().keys({
@@ -106,7 +84,7 @@ routes.put('/admin/:ongId', celebrate({
     approved: Joi.bool().optional(),
     bankAccount: Joi.string().optional(),
     description: Joi.string().optional(),
-    imageFile: Joi.optional()
+    imageSrc: Joi.string().optional(),
   }),
   [Segments.HEADERS]: Joi.object({
     authorization: Joi.string().required(),

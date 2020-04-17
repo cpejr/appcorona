@@ -61,7 +61,7 @@ export default function Card(props) {
 
       <CardActions className="mt-auto">
         <Link className="btn btn--radius-2 btn btn-warning p-2 mx-auto" to={{
-          pathname: '/ONG',
+          pathname: '/ongshow',
           state: {
             ong: ong
           }
