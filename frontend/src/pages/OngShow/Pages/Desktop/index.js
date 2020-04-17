@@ -4,7 +4,17 @@ import { IconContext } from "react-icons";
 import { MdPlace, MdLocalPhone, MdEmail } from "react-icons/md";
 import { AiOutlineGlobal } from "react-icons/ai";
 
-export default function Desktop({ong}){
+import Map from '../Components/Map'
+
+
+let ong = {
+    street: "Julia Nunes Guerra",
+    state: "MG",
+    number: 194,
+    city: "Belo Horizonte"
+}
+
+export default function Desktop(){
     return (
         <div className="Desktop">
             <div className="ong">
@@ -17,10 +27,12 @@ export default function Desktop({ong}){
                     
                     <div className="adressAndPhone">
                         <div className="adress">
-                            <IconContext.Provider value={{ className: 'instagramColor', size: '1.8em' }}>
+                            <IconContext.Provider value={{ className: 'instagramColor', size: '2.5em' }}>
                                 <MdPlace/>
                             </IconContext.Provider>
-                            <div>Estado, Bairro, Cidade, Rua/Complemento</div>
+                            <a href="http://maps.google.com/maps?q=210+Louise+Ave,+Nashville,+TN+37203"> 
+                                Estado, Bairro, Cidade, Rua/Complemento
+                            </a>
                         </div>
                         <div className="phone">
                             <IconContext.Provider value={{ className: 'instagramColor', size: '1.8em' }}>
@@ -64,15 +76,16 @@ export default function Desktop({ong}){
                     </div>
 
                     <div className="donationInfo">
-                        <div>Banco <div>Banco do Brasil</div></div>
-                        <div>Agencia <div>47820</div></div>
-                        <div>Conta <div>3884783930-5</div></div>
+                        <div><b>Banco</b> <div>Banco do Brasil</div></div>
+                        <div><b>Agencia</b> <div>47820</div></div>
+                        <div><b>Conta</b> <div>3884783930-5</div></div>
                     </div>
 
                 </div>
 
                 <div className="rightHalf ">
                     <img src='http://localhost:3333/images/cachorro.jpg' alt="Logo" className="ongLogo"/>
+                    {/* <Map ong={ong} className="map"/> */}
                 </div>
             </div>
         </div>
