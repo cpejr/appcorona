@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Categ = require('./categDB');
 
 const ong = new mongoose.Schema({
   name: {
@@ -134,12 +135,14 @@ class OngActions {
     });
   }
 
-  static getAprovedOngs(page, city, state) {
+  static getAprovedOngs(page, city, state, categs) {
     return new Promise(async (resolve, reject) => {
       try {
         let query = {
           approved: true,
         }
+
+        let categOngs = [];
 
         if (city) {
           query.city = city;
@@ -148,19 +151,29 @@ class OngActions {
         if (state) {
           query.state = state;
         }
-
+        
         let pg = 0;
 
         if (page)
           pg = (page - 1);
 
+        if (categs !== undefined) {
+          let ongIds = await Categ.searchOngsWithCategs(categs);
+          if (ongIds.length >= 0){
+            for (let i = 0; i < ongIds.length; i++){
+              ongIds[i] = mongoose.Types.ObjectId(ongIds[i]);
+            }
+            console.log(ongIds);
+            query._id = {$in: ongIds};
+          }
+        }
+
         const result = await Ong.aggregate([
           {
             $match: {
-              ...query
+              ...query,
             }
-          },
-          {
+          },  {
             $group: {
               _id: null,
               ongs: { $push: '$$ROOT' }
@@ -223,9 +236,8 @@ class OngActions {
     });
   }
 
-  static getTotalApprovedOngs(city, state) {
+  static getTotalApprovedOngs(city, state, categs) {
     return new Promise(async (resolve, reject) => {
-      console.log(state)
       try {
 
         let query = {
@@ -238,10 +250,7 @@ class OngActions {
         if (state) 
           query.state = state;
         
-
         const result = await Ong.countDocuments(query);
-
-       
 
         resolve(result);
       } catch (error) {

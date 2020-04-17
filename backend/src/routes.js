@@ -37,18 +37,14 @@ routes.post('/registerOng', imageUpload('imageFile'), celebrate({
 
 routes.get('/ongs', celebrate({
   [Segments.QUERY]: Joi.object().keys({
+    page: Joi.number().optional(),
     state: Joi.string().optional(),
     city: Joi.string().optional(),
-    page: Joi.number().optional(),
+    
   }),
-}), ongController.index);
-
-routes.get('/ongs', celebrate({
-  [Segments.QUERY]: Joi.object().keys({
-    page: Joi.number().optional(),
-    state: Joi.string().optional(),
-    city: Joi.string().optional()
-  })
+  [Segments.BODY]: Joi.object().keys({
+    categs: Joi.array().optional(),
+  }),
 }),
   ongController.index
 );
@@ -57,7 +53,11 @@ routes.get('/ongsCount', celebrate({
   [Segments.QUERY]: Joi.object().keys({
     state: Joi.string().optional(),
     city: Joi.string().optional(),
-  })
+    categs: Joi.array().optional(),
+  }),
+  [Segments.BODY]: Joi.object().keys({
+    categs: Joi.array().optional(),
+  }),
 }),
   ongController.totalApproved
 );

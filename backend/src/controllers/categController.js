@@ -64,8 +64,8 @@ module.exports = {
 
     async searchOngs(request, response) {
         try {
-            let data = request.body;
-            let result = await Categ.searchOngsWithCategs(data);
+            let { categs } = request.body;
+            let result = await Categ.searchOngsWithCategs(categs);
             
             return response.json(result);
         } catch (error) {

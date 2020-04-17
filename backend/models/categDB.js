@@ -82,13 +82,12 @@ class CategActions {
     })
   }
 
-  static searchOngsWithCategs(receivedData) {
+  static searchOngsWithCategs(categs) {
     return new Promise((resolve, reject) => {
-      let names = receivedData.names;
       Categ.aggregate(
         [{
           $match: {
-            name: {$in: names}
+            name: {$in: categs}
           }
         }, {
           $project: {
@@ -107,9 +106,9 @@ class CategActions {
             }
           }
           let unique = (aux) => aux.filter((v,i) => aux.indexOf(v) === i);
-          console.log(unique(aux));
           
-          resolve(unique(aux));
+          let finalResult = unique(aux);
+          resolve(finalResult);
         }).catch((error) =>{
           console.log(error);
           reject(error);
