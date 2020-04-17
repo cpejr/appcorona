@@ -14,7 +14,6 @@ export default function OngShow(props) {
   const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
   const [ong, setOng] = useState({});
 
-  console.log(ong)
   useEffect(() => {
     if (props.location.state && props.location.state.ong) setOng(props.location.state.ong);
   }, [props.location.state])

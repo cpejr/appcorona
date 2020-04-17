@@ -13,6 +13,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Button, IconButton } from '@material-ui/core';
 import './styles.css';
 import picpayIcon from '../../../../images/picpay.png';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -158,6 +159,7 @@ const useStyles = makeStyles({
 });
 
 export default function Mobile(props) {
+  const history = useHistory();
   const [ong, setOng] = useState(props.ong ? props.ong : {});
   const [expanded, setExpanded] = React.useState(false);
   const classes = useStyles();
@@ -192,7 +194,7 @@ export default function Mobile(props) {
       <div className={classes.content}>
 
         <div className={classes.header}>
-          <IconButton aria-label="Voltar" className={classes.backIcon}>
+          <IconButton aria-label="Voltar" className={classes.backIcon} onClick={() => history.goBack()}>
             <div className={classes.center}>
               <IconContext.Provider value={{ color: "#444", size: "1em" }}>
                 <MdKeyboardBackspace />
