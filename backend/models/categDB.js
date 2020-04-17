@@ -15,10 +15,26 @@ const Categ = mongoose.model('Categ', categSchema);
 
 class CategActions {
 
-  static getAll() {
+  static getAll(){
     return new Promise((resolve, reject) => {
       Categ.find().then((results) => {
         resolve(results);
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  }
+
+  static getAllNames() {
+    return new Promise((resolve, reject) => {
+      Categ.find({},  {_id: 0, ongs: 0, __v: 0}).then((results) => {
+        let resultVector = [];
+        if(results !== undefined){
+          for(let i = 0; i < results.length; i++){
+            resultVector.push(results[i].name);
+          }
+        }
+        resolve(resultVector);
       }).catch((err) => {
         reject(err);
       });
