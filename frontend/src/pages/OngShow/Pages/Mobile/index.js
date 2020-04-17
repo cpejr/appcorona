@@ -131,9 +131,12 @@ const useStyles = makeStyles({
     borderRightColor: '#ced4da',
     borderStyle: 'solid',
     height: 38,
+    width: 90,
     color: '#495057',
     display: 'flex',
     alignItems: 'center',
+    alignContent: 'end',
+    justifyContent: 'flex-end',
   },
   bankGroup: {
     height: 40,
@@ -143,7 +146,7 @@ const useStyles = makeStyles({
     borderRadius: 5,
     display: 'flex',
     flexDirection: 'row',
-    margin: 5,
+    marginBottom: 10,
     alignItems: 'center',
     flexGrow: 1
   },
@@ -176,6 +179,7 @@ export default function Mobile(props) {
       "imageSrc": "cachorro.jpg",
       "createdAt": "2020-04-11T15:17:34.400Z",
       "updatedAt": "2020-04-11T15:17:48.605Z",
+      "instagram": 'asdas',
       "__v": 0
     });
   const [expanded, setExpanded] = React.useState(false);
@@ -224,6 +228,8 @@ export default function Mobile(props) {
               {ong.state}, {ong.city}, {ong.neighborhood}
               <br />
               {ong.street} {ong.number}
+              <br />
+              {ong.cep}
             </Typography>
           </div>
           <div className={classes.textInfo}>
@@ -304,15 +310,13 @@ export default function Mobile(props) {
 
         <div>
           <div>
-            <div className={classes.bankRow}>
-              <div className={classes.bankGroup}>
-                <div className={classes.bankText}>Banco:</div>
-                <div className={classes.inputBank}>{ong.bank}</div>
-              </div>
-              <div className={classes.bankGroup}>
-                <div className={classes.bankText}>Agência:</div>
-                <div className={classes.inputBank}>{ong.branch}</div>
-              </div>
+            <div className={classes.bankGroup}>
+              <div className={classes.bankText}>Banco:</div>
+              <div className={classes.inputBank}>{ong.bank}</div>
+            </div>
+            <div className={classes.bankGroup}>
+              <div className={classes.bankText}>Agência:</div>
+              <div className={classes.inputBank}>{ong.branch}</div>
             </div>
             <div className={classes.bankGroup}>
               <div className={classes.bankText}>Conta:</div>
@@ -333,6 +337,7 @@ export default function Mobile(props) {
         </div>
 
         <div className={classes.image} />
+        
       </div>
     </div>
   )
