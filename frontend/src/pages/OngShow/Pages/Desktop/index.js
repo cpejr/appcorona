@@ -11,7 +11,7 @@ export default function Desktop({ong}){
                 <div className="leftHalf">
 
                     <div>
-                        <h1 style={{color: "#888"}}>Nome da ong</h1>
+                        <h1>Nome da ong</h1>
                         <p>CNPJ: 29503728040</p>
                     </div>
                     
