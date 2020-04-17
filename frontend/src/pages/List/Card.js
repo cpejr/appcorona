@@ -8,12 +8,17 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
+import { MdLocationOn } from "react-icons/md";
+import { IconContext } from "react-icons";
+
 const useStyles = makeStyles({
   root: {
     margin: '10px',
     'margin-bottom': '15px',
     maxWidth: 320,
     minWidth: 300,
+    display: 'flex',
+    flexDirection: 'column',
   },
   media: {
     height: 140,
@@ -42,8 +47,19 @@ export default function Card(props) {
             {ong.description}
           </Typography>
         </CardContent>
+        <CardContent>
+          <IconContext.Provider value={{ color: "#444", size: "1.2em" }}>
+            <div className='locationContainer'>
+            <MdLocationOn />
+            <Typography variant="caption" component="h2" >
+              {ong.state}, {ong.city}
+            </Typography>
+            </div>
+          </IconContext.Provider>
+        </CardContent>
       </CardActionArea>
-      <CardActions>
+
+      <CardActions className="mt-auto">
         <Link className="btn btn--radius-2 btn btn-warning p-2 mx-auto" to={{
           pathname: '/ONG',
           state: {

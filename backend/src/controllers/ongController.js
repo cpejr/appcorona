@@ -26,10 +26,11 @@ module.exports = {
 
   async index(request, response) {
     try {
-      const { page, city, state } = request.query;
+      
+      const { page, city, state, name } = request.query;
       const { categs } = request.body;
 
-      let result = await Ong.getAprovedOngs(page, city, state, categs);
+      let result = await Ong.getAprovedOngs(page, city, state, name, categs);
 
       if (!result[0] || !result[0].totalCount) {
         response.header("X-Total-Count", 0);
@@ -70,10 +71,12 @@ module.exports = {
 
   async totalApproved(request, response) {
     try {
-      const { city, state } = request.query;
+
+      const { city, state, name } = request.query;
       const { categs } = request.body;
 
-      const result = await Ong.getTotalApprovedOngs(city, state, categs);
+      const result = await Ong.getTotalApprovedOngs(city, state, name, categs);
+
       response.header("X-Total-Count", result);
       return response.status(200).json("ok");
 

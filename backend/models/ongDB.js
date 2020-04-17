@@ -135,23 +135,30 @@ class OngActions {
     });
   }
 
-  static getAprovedOngs(page, city, state, categs) {
+
+  static getAprovedOngs(page, city, state, name, categs) {
+
     return new Promise(async (resolve, reject) => {
       try {
+
         let query = {
           approved: true,
         }
 
+
         let categOngs = [];
 
-        if (city) {
-          query.city = city;
-        }
+        if (city)
+          query.city = toApproximationRegex(city);
 
-        if (state) {
+        if (state)
           query.state = state;
-        }
-        
+
+        if (name)
+          query.name = toApproximationRegex(name);
+
+        //  console.log(query)
+
         let pg = 0;
 
         if (page)
@@ -236,7 +243,8 @@ class OngActions {
     });
   }
 
-  static getTotalApprovedOngs(city, state, categs) {
+  static getTotalApprovedOngs(city, state, name, categs) {
+
     return new Promise(async (resolve, reject) => {
       try {
 
@@ -244,13 +252,19 @@ class OngActions {
           approved: true,
         }
 
-        if (city) 
-          query.city = city;
-        
-        if (state) 
+        if (city)
+          query.city = toApproximationRegex(city);
+
+        if (state)
           query.state = state;
-        
+
+        if (name)
+          query.name = toApproximationRegex(name);
+
+        console.log(query)
+
         const result = await Ong.countDocuments(query);
+        console.log(result)
 
         resolve(result);
       } catch (error) {
@@ -261,4 +275,17 @@ class OngActions {
   }
 }
 
-module.exports = OngActions;
+
+function toApproximationRegex(string) {
+  const words = string.split(' ');
+
+  let regex = ''
+
+  words.forEach(word => {
+    regex += `(?=.*${word})`
+  });
+
+  return { $regex: regex, $options: 'i' }
+}
+
+module.exports = OngsActions;

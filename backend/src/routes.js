@@ -40,7 +40,8 @@ routes.get('/ongs', celebrate({
     page: Joi.number().optional(),
     state: Joi.string().optional(),
     city: Joi.string().optional(),
-    
+    page: Joi.number().optional(),
+    name: Joi.string().optional(),
   }),
   [Segments.BODY]: Joi.object().keys({
     categs: Joi.array().optional(),
@@ -53,7 +54,7 @@ routes.get('/ongsCount', celebrate({
   [Segments.QUERY]: Joi.object().keys({
     state: Joi.string().optional(),
     city: Joi.string().optional(),
-    categs: Joi.array().optional(),
+    name: Joi.string().optional(),
   }),
   [Segments.BODY]: Joi.object().keys({
     categs: Joi.array().optional(),
