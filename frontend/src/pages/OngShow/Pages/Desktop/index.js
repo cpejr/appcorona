@@ -4,9 +4,6 @@ import { IconContext } from "react-icons";
 import { MdPlace, MdLocalPhone, MdEmail } from "react-icons/md";
 import { AiOutlineGlobal } from "react-icons/ai";
 
-import Map from '../Components/Map'
-
-
 let ong = {
     street: "Julia Nunes Guerra",
     state: "MG",
@@ -85,7 +82,6 @@ export default function Desktop(){
 
                 <div className="rightHalf ">
                     <img src='http://localhost:3333/images/cachorro.jpg' alt="Logo" className="ongLogo"/>
-                    {/* <Map ong={ong} className="map"/> */}
                 </div>
             </div>
         </div>

@@ -11,6 +11,7 @@ import Pending from './pages/Pendings/Pending/OngCard'
 import Home from './pages/Home'
 import Mobile from './pages/OngShow/Pages/Mobile'
 import Desktop from './pages/OngShow/Pages/Desktop'
+import OngShow from './pages/OngShow'
 
 export default function Routes() {
   return (
@@ -24,6 +25,7 @@ export default function Routes() {
         <Route path="/login/:senha" component={Login} />
         <Route path="/imgupload" component={UploadTest} />
         <Route path="/ONG" component={ONG} />
+        <Route path="/ongShow" component={OngShow} />
         <Route path="/tempmobile" component={Mobile} />
         <Route path="/tempdesktop" component={Desktop} />
       </Switch>

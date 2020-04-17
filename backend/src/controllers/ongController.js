@@ -1,7 +1,47 @@
 const Ong = require('../../models/ongDB')
+const fs = require('fs');
+const { Joi } = require('celebrate');
 
 module.exports = {
   async create(request, response) {
+
+    const schema = Joi.object({
+      name: Joi.string().required(),
+      cnpj: Joi.string().required(),
+      state: Joi.string().required(),
+      city: Joi.string().required(),
+      neighborhood: Joi.string().required(),
+      street: Joi.string().required(),
+      number: Joi.string().required(),
+      cep: Joi.string().required(),
+      email: Joi.string().required(),
+      complement: Joi.string().optional(),
+      picpay: Joi.string().optional(),
+      facebook: Joi.string().optional(),
+      ddd: Joi.string().optional(),
+      phoneNumber: Joi.string().optional(),
+      site: Joi.string().optional(),
+      branch: Joi.string().optional(),
+      bank: Joi.string().optional(),
+      bankAccount: Joi.string().optional(),
+      description: Joi.string().optional(),
+      imageSrc: Joi.string().optional(),
+    })
+
+    const validation = schema.validate(request.body);
+
+    if (validation.error) {
+      try {
+        if (request.file && request.file.filename)
+          fs.unlinkSync(`public/images/${request.file.filename}`);
+      } catch (err) {
+        console.log(err)
+        return response.status(500).json({ error: 'error while generating file' });
+      }
+      return response.status(400).json(validation.error.details[0].message);
+    }
+
+
     try {
       let { name, cnpj } = request.body;
       const exist = await Ong.checkExistence(name, cnpj)
