@@ -178,9 +178,6 @@ export default function Mobile(props) {
 
   const getImage = () => {
     if (ong.imageSrc) {
-      console.log("asdasd")
-      console.log(ong.imageSrc)
-      console.log(`url(http://localhost:3333/images/${ong.imageSrc})`)
       return `url(http://localhost:3333/images/${ong.imageSrc})`;
     }
   }
