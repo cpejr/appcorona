@@ -11,6 +11,11 @@ body
     background-color: #ffcf4f
     height: 100%
     width: 100%
+
+.DesktopInside
+    background-color: #ffcf4f
+    height: 100%
+    width: 100%
     display: flex
     justify-content: center
     align-items: center
@@ -66,11 +71,14 @@ body
     margin-bottom: 2%
 
 .fieldIcon
-    width: 10%
+    background-color: #e9ecef
+    min-width: 10%
     border-right: 1px solid black
     display: flex
     align-items: center
     justify-content: center
+    padding-left: 5px
+    padding-right: 5px
 
 .fieldInfo
     display: flex
@@ -80,22 +88,50 @@ body
 .donationInfo
     display: flex
     align-items: center
-    justify-content: space-between
+    flex-direction: column
+    width: 80%
 
-.donationInfo > div
+
+
+.divButtons
+    display: flex
+    justify-content: center
+
+
+.iconButton
+    min-height: 50
+    min-hidth: 50
+    height: 50
+    width: 50
+    margin: 10
+
+.facebookBorder
+    border-color: #3b5998
+
+
+.center
     display: flex
     flex-direction: column
-    margin-right: 7%
     align-items: center
-    flex-wrap: wrap
+    align-self: center
+    margin: auto
 
-.donationInfo > div > div
-    border: 2px solid black
-    padding: 3%
-    margin: 2%
-    white-space: nowrap
-    padding: 4%
+.PicPayBorder
+    border-color:#11C76F
 
-.map
-    width: 10%
-    height: 10%
+.icon
+    height: 2.3em !important
+    width: 2.3em !important
+    align-self: center
+
+.backButton
+    margin: 1%
+    position: fixed
+    display: flex
+    align-items: center
+    justify-content: center
+    background-color: blue
+    padding-right: 1%
+    padding-top: 0.5%
+    padding-bottom: 0.5%
+    border-radius: 10px
