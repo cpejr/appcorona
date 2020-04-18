@@ -1,24 +1,36 @@
-import React, { useState } from 'react';
-import Container from '../../../components/OngContainer'
+import React, { useState, useRef } from 'react';
+import Container from './OngContainer'
 import { Link, Redirect } from 'react-router-dom';
 import api from '../../../services/api';
+import { Button } from '@material-ui/core';
 
 export default function OngCard(props) {
 
   const [finalized, setFinalized] = useState(false);
 
-  let ong;
+  const ong = useRef();
   let token;
 
   if (props && props.location && props.location.state) {
-    ong = props.location.state.ong;
+    ong.current = props.location.state.ong;
     token = props.location.state.token;
   }
 
-  const handleApproved = async (ong) => {
+  const handleApproved = async () => {
+
+    const _ong = {...ong.current};
+    delete _ong._id;
+    delete _ong.createdAt;
+    delete _ong.updatedAt;
+    delete _ong.__v;
+
+    console.log(_ong)
     try {
-      await api.put(`admin/${ong._id}`,
-        { approved: true },
+      await api.put(`admin/${ong.current._id}`,
+        {
+          ..._ong, 
+          approved: true
+         },
         {
           headers: { Authorization: `Bearer ${token}` }
         });
@@ -31,9 +43,9 @@ export default function OngCard(props) {
     }
   }
 
-  const handleRejected = async (ong) => {
+  const handleRejected = async () => {
     try {
-      await api.delete(`admin/${ong._id}`, {
+      await api.delete(`admin/${ong.current._id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert('Deletado com sucesso!');
@@ -46,7 +58,7 @@ export default function OngCard(props) {
 
   return (
     <div>
-      {ong && !finalized ? (
+      {ong.current && !finalized ? (
         <div className="ONGcard">
 
           <div id="bttn" style={{ "margin-bottom": "20px" }}>
@@ -60,20 +72,10 @@ export default function OngCard(props) {
             </Link>
           </div>
           <h1 className="pendingsTitle">ONG PENDENTE</h1>
-          <Container ong={ong} />
+          <Container ong={ong.current} onChange={(_ong) => ong.current = _ong} />
           <div id="bttn">
-            <button
-              onClick={() => handleApproved(ong)}
-              className="btn1 btn--green btn--radius m-rg-20"
-              type="submit">
-              APROVAR
-          </button>
-            <button
-              onClick={() => handleRejected(ong)}
-              className="btn1 btn--red btn--radius m-lt-20"
-              type="submit">
-              REJEITAR
-            </button>
+            <Button variant="contained" onClick={() => handleApproved()} style={{ backgroundColor: '#3ae857' }} >APROVAR</Button>
+            <Button variant="contained" onClick={() => handleRejected()} style={{ backgroundColor: '#e83a3a' }} > REPROVAR</Button>
           </div>
         </div>
       ) : (

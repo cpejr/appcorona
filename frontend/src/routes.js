@@ -6,7 +6,6 @@ import Register from './pages/Register';
 import Pendings from './pages/Pendings';
 import List from './pages/List';
 import UploadTest from './pages/UploadTest';
-import ONG from './pages/ONG'
 import Pending from './pages/Pendings/Pending/OngCard'
 import Home from './pages/Home'
 import Mobile from './pages/OngShow/Pages/Mobile'
@@ -24,10 +23,7 @@ export default function Routes() {
         <Route path="/adminONG" component={Pending} />
         <Route path="/login/:senha" component={Login} />
         <Route path="/imgupload" component={UploadTest} />
-        <Route path="/ONG" component={ONG} />
         <Route path="/ongShow" component={OngShow} />
-        <Route path="/tempmobile" component={Mobile} />
-        <Route path="/tempdesktop" component={Desktop} />
       </Switch>
     </BrowserRouter>
   );
