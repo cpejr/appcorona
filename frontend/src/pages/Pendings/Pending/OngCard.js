@@ -1,12 +1,17 @@
-import React, { useState, useRef } from 'react';
+
+import React, { useState, useEffect, useRef } from 'react';
 import Container from './OngContainer'
 import { Link, Redirect } from 'react-router-dom';
 import api from '../../../services/api';
+import CategContainer from '../../../components/Categ/CategContainer'
 import { Button } from '@material-ui/core';
+
 
 export default function OngCard(props) {
 
   const [finalized, setFinalized] = useState(false);
+  const [categVec, setCategVec] = useState([]);
+  const checkedVector = useRef([]);
 
   const ong = useRef();
   let token;
@@ -14,6 +19,25 @@ export default function OngCard(props) {
   if (props && props.location && props.location.state) {
     ong.current = props.location.state.ong;
     token = props.location.state.token;
+  }
+
+
+  useEffect(() => {
+    api.get('categ').then((categNamesResponse) => {
+      console.log(categNamesResponse.data);
+      setCategVec(categNamesResponse.data);
+    });
+  }, []);
+
+  const handleCheck = async (state) => {
+    let auxVector = [];
+    Object.keys(state).forEach((value) => {
+      if (state[value]) {
+        auxVector.push(value);
+      }
+    })
+    checkedVector.current = auxVector;
+
   }
 
   const handleApproved = async () => {
@@ -34,6 +58,13 @@ export default function OngCard(props) {
         {
           headers: { Authorization: `Bearer ${token}` }
         });
+
+      await api.put('categ',
+        { ong: { _id: ong._id }, categ: checkedVector.current },
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
       alert('Aprovado com sucesso!');
       setFinalized(true);
     }
@@ -56,6 +87,8 @@ export default function OngCard(props) {
     }
   }
 
+
+
   return (
     <div>
       {ong.current && !finalized ? (
@@ -72,8 +105,8 @@ export default function OngCard(props) {
             </Link>
           </div>
           <h1 className="pendingsTitle">ONG PENDENTE</h1>
-          <Container ong={ong.current} onChange={(_ong) => ong.current = _ong} />
-          <div id="bttn">
+           <Container ong={ong.current} onChange={(_ong) => ong.current = _ong} />
+           <CategContainer categNames={categVec} onChange={(state) => handleCheck(state)} />
             <Button variant="contained" onClick={() => handleApproved()} style={{ backgroundColor: '#3ae857' }} >APROVAR</Button>
             <Button variant="contained" onClick={() => handleRejected()} style={{ backgroundColor: '#e83a3a' }} > REPROVAR</Button>
           </div>

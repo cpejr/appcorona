@@ -5,7 +5,7 @@ module.exports = {
 
     async index(request, response) {
         try {
-            let result = await Categ.getAll();
+            let result = await Categ.getAllNames();
             return response.json(result);
         } catch (error) {
             console.log(error);
