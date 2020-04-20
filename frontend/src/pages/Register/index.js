@@ -65,7 +65,8 @@ export default function Register({ className, fileName, onSubmit }) {
       alert(`Olá ${response.data.name}, seu cadastro foi realizado com sucesso`);
       history.push('/');
     } catch (err) {
-      alert(`${err}`);
+      console.log(err.response)
+      alert(`${err.response.data}`);
     }
   }
 

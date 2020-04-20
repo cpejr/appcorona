@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 
-export default function SelectState({ className, onChange, id}) {
+export default function SelectState({ className, onChange, id, initialValue }) {
 
-  const [state, setState] = useState("");
+  const [state, setState] = useState(initialValue ? initialValue : "");
 
 
   function handleChange(event) {
