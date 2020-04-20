@@ -24,7 +24,6 @@ export default function OngCard(props) {
 
   useEffect(() => {
     api.get('categ').then((categNamesResponse) => {
-      console.log(categNamesResponse.data);
       setCategVec(categNamesResponse.data);
     });
   }, []);
@@ -42,25 +41,24 @@ export default function OngCard(props) {
 
   const handleApproved = async () => {
 
-    const _ong = {...ong.current};
+    const _ong = { ...ong.current };
     delete _ong._id;
     delete _ong.createdAt;
     delete _ong.updatedAt;
     delete _ong.__v;
 
-    console.log(_ong)
     try {
       await api.put(`admin/${ong.current._id}`,
         {
-          ..._ong, 
+          ..._ong,
           approved: true
-         },
+        },
         {
           headers: { Authorization: `Bearer ${token}` }
         });
 
       await api.put('categ',
-        { ong: { _id: ong._id }, categ: checkedVector.current },
+        { ong: { _id: ong.current._id }, categ: checkedVector.current },
         {
           headers: { Authorization: `Bearer ${token}` }
         }
@@ -105,11 +103,10 @@ export default function OngCard(props) {
             </Link>
           </div>
           <h1 className="pendingsTitle">ONG PENDENTE</h1>
-           <Container ong={ong.current} onChange={(_ong) => ong.current = _ong} />
-           <CategContainer categNames={categVec} onChange={(state) => handleCheck(state)} />
-            <Button variant="contained" onClick={() => handleApproved()} style={{ backgroundColor: '#3ae857' }} >APROVAR</Button>
-            <Button variant="contained" onClick={() => handleRejected()} style={{ backgroundColor: '#e83a3a' }} > REPROVAR</Button>
-          </div>
+          <Container ong={ong.current} onChange={(_ong) => ong.current = _ong} />
+          <CategContainer categNames={categVec} onChange={(state) => handleCheck(state)} />
+          <Button variant="contained" onClick={() => handleApproved()} style={{ backgroundColor: '#3ae857' }} >APROVAR</Button>
+          <Button variant="contained" onClick={() => handleRejected()} style={{ backgroundColor: '#e83a3a' }} > REPROVAR</Button>
         </div>
       ) : (
           <Redirect to={{

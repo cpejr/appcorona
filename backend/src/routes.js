@@ -20,9 +20,7 @@ routes.get('/ongs', celebrate({
     city: Joi.string().optional(),
     page: Joi.number().optional(),
     name: Joi.string().optional(),
-  }),
-  [Segments.BODY]: Joi.object().keys({
-    categs: Joi.array().optional(),
+    categs: Joi.string().optional(),
   }),
 }),
   ongController.index
@@ -33,9 +31,7 @@ routes.get('/ongsCount', celebrate({
     state: Joi.string().optional(),
     city: Joi.string().optional(),
     name: Joi.string().optional(),
-  }),
-  [Segments.BODY]: Joi.object().keys({
-    categs: Joi.array().optional(),
+    categs: Joi.string().optional(),
   }),
 }),
   ongController.totalApproved

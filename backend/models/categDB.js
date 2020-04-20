@@ -67,7 +67,6 @@ class CategActions {
 
   static categorize(receivedData) {
     return new Promise(async (resolve, reject) => {
-      console.log(receivedData);
       let ongId = receivedData.ong._id;
       let categ = receivedData.categ;
       let promises = [];

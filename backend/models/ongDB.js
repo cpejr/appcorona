@@ -137,16 +137,12 @@ class OngActions {
 
 
   static getAprovedOngs(page, city, state, name, categs) {
-
     return new Promise(async (resolve, reject) => {
       try {
 
         let query = {
           approved: true,
         }
-
-
-        let categOngs = [];
 
         if (city)
           query.city = toApproximationRegex(city);
@@ -164,12 +160,11 @@ class OngActions {
 
         if (categs !== undefined) {
           let ongIds = await Categ.searchOngsWithCategs(categs);
-          if (ongIds.length >= 0){
-            for (let i = 0; i < ongIds.length; i++){
+          if (ongIds.length >= 0) {
+            for (let i = 0; i < ongIds.length; i++) {
               ongIds[i] = mongoose.Types.ObjectId(ongIds[i]);
             }
-            console.log(ongIds);
-            query._id = {$in: ongIds};
+            query._id = { $in: ongIds };
           }
         }
 
@@ -178,7 +173,7 @@ class OngActions {
             $match: {
               ...query,
             }
-          },  {
+          }, {
             $group: {
               _id: null,
               ongs: { $push: '$$ROOT' }
@@ -258,6 +253,16 @@ class OngActions {
 
         if (name)
           query.name = toApproximationRegex(name);
+
+        if (categs !== undefined) {
+          let ongIds = await Categ.searchOngsWithCategs(categs);
+          if (ongIds.length >= 0) {
+            for (let i = 0; i < ongIds.length; i++) {
+              ongIds[i] = mongoose.Types.ObjectId(ongIds[i]);
+            }
+            query._id = { $in: ongIds };
+          }
+        }
 
         const result = await Ong.countDocuments(query);
 

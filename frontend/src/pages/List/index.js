@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import SelectState from '../../components/SelectStates';
 import { FaFilter } from 'react-icons/fa';
+import CategSelector from '../../components/Categ/CategSelector';
 
 
 function shuffle(array) {
@@ -18,7 +19,10 @@ export default function List(props) {
   const [stateFilter, setStateFilter] = useState();
   const [cityFilter, setCityFilter] = useState();
   const [nameFilter, setNameFilter] = useState();
+  const [categFilter, setCategFilter] = useState();
   const [activeFilter, setActiveFilter] = useState(false);
+
+  const [categs, setCategs] = useState([]);
 
   const [ongsData, setOngsData] = useState({
     pagesVector: [],
@@ -39,6 +43,9 @@ export default function List(props) {
 
         if (nameFilter)
           queryParams.push(`name=${nameFilter}`);
+
+        if (categFilter)
+          queryParams.push(`categs=${categFilter}`);
 
         queryParams = queryParams.join('&')
 
@@ -101,7 +108,7 @@ export default function List(props) {
     }
     getOngs();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stateFilter, cityFilter, nameFilter]);
+  }, [stateFilter, cityFilter, nameFilter, categFilter]);
 
   useEffect(() => {
     const updateOngs = () => {
@@ -128,11 +135,14 @@ export default function List(props) {
               if (nameFilter)
                 queryParams.push(`name=${nameFilter}`);
 
+              if (categFilter)
+                queryParams.push(`categs=${categFilter}`);
+
               queryParams = queryParams.join('&');
 
               let newOngs = [];
-
               let pagesQuery;
+
               if (queryParams)
                 pagesQuery = `&page=${currentPage}`;
               else
@@ -172,7 +182,13 @@ export default function List(props) {
       window.removeEventListener('scroll', updateOngs);
     }
 
-  }, [cityFilter, nameFilter, ongsData, stateFilter]);
+  }, [cityFilter, nameFilter, ongsData, stateFilter, categFilter]);
+
+  useEffect(() => {
+    api.get('categ').then((categNamesResponse) => {
+      setCategs(categNamesResponse.data);
+    });
+  }, [])
 
   const ongs = ongsData.ongs.map(function (ong) {
     return (
@@ -182,6 +198,11 @@ export default function List(props) {
 
   function handleOnChangeState(state) {
     setStateFilter(state);
+  }
+
+  function handleOnChangeCateg(categ) {
+    if (categ !== '') setCategFilter([categ]);
+    else setCategFilter();
   }
 
   function handleOnChangeCity(city) {
@@ -219,6 +240,8 @@ export default function List(props) {
               <input className="input--style-5" type='text' onChange={handleOnChangeCity}></input>
               <p>Digite o nome da ONG: </p>
               <input className="input--style-5" type='text' onChange={handleOnChangeName}></input>
+              <p>Selecione a categoria: </p>
+              <CategSelector className="input--style-5 selectStates col-12 mb-2" onChange={handleOnChangeCateg} categNames={categs} />
             </div>
           </div>
 
