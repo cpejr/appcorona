@@ -8,8 +8,6 @@ import List from './pages/List';
 import UploadTest from './pages/UploadTest';
 import Pending from './pages/Pendings/Pending/OngCard'
 import Home from './pages/Home'
-import Mobile from './pages/OngShow/Pages/Mobile'
-import Desktop from './pages/OngShow/Pages/Desktop'
 import OngShow from './pages/OngShow'
 
 export default function Routes() {

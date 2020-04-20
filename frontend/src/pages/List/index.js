@@ -192,7 +192,7 @@ export default function List(props) {
 
   const ongs = ongsData.ongs.map(function (ong) {
     return (
-      <Card key={ong._id} ong={ong} imageSrc={`http://localhost:3333/images/${ong.imageSrc}`} description={ong.description} />
+      <Card key={ong._id} ong={ong}/>
     );
   });
 
