@@ -88,8 +88,13 @@ class CategActions {
   static searchCategsWithOng(receivedData) {
     return new Promise((resolve, reject) => {
       let id = receivedData.ongId;
-      Categ.find({ ongs: id }).then((results) => {
-        resolve(results);
+      Categ.find({ ongs: id }, {_id: 0, ongs: 0, __v: 0}).then((results) => {
+        let resultVector = [];
+        if(results){
+          for(let i = 0; i < results.length; i++){
+            resultVector.push(results[i].name);          }
+        }
+        resolve(resultVector);
       }).catch((error) => {
         console.log(error);
         reject(error);

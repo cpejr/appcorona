@@ -10,7 +10,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Button, IconButton } from '@material-ui/core';
+import { Button, IconButton, Chip } from '@material-ui/core';
 import './styles.css';
 import picpayIcon from '../../../../images/picpay.png';
 import { useHistory } from "react-router-dom";
@@ -163,10 +163,15 @@ export default function Mobile(props) {
   const [ong, setOng] = useState(props.ong ? props.ong : {});
   const [expanded, setExpanded] = React.useState(false);
   const classes = useStyles();
+  const [categs, setCategs] = useState([]);
 
   useEffect(() => {
     if (props.ong) setOng(props.ong);
   }, [props.ong])
+
+  useEffect(() => {
+    if (props.categs) setCategs(props.categs);
+  }, [props.categs])
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -215,11 +220,13 @@ export default function Mobile(props) {
               <MdLocationOn />
             </IconContext.Provider>
             <Typography variant="body1">
-              {ong.state}, {ong.city}, {ong.neighborhood}
-              <br />
-              {ong.street} {ong.number}
-              <br />
-              {ong.cep}
+              <a target="_blank" rel="noopener noreferrer" href={`http://maps.google.com/maps?q=${ong.street},${ong.number},${ong.city},${ong.state},${ong.cep}`}>
+                {ong.state}, {ong.city}, {ong.neighborhood}
+                <br />
+                {ong.street} {ong.number}
+                <br />
+                {ong.cep}
+              </a>
             </Typography>
           </div>
           <div className={classes.textInfo}>
@@ -230,7 +237,19 @@ export default function Mobile(props) {
               ({ong.ddd}) {ong.phoneNumber}
             </Typography>
           </div>
+
+          <div style={{ display: 'flex', marginTop: 12, marginBottom: 12 }}>
+            {
+              categs && categs.map((name) => {
+                return (
+                  <Chip key={name} size="small" label={name} style={{marginRight: 5}} />
+                )
+              })
+            }
+          </div>
         </div>
+
+
 
         <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
           <ExpansionPanelSummary
