@@ -85,7 +85,7 @@ export default function Register({ className, fileName, onSubmit }) {
                <h2 className="title">Cadastre a sua ONG abaixo</h2>
                <div id="bttn1">
                     <button
-                        onClick={event => window.location.href = '/'}
+                        onClick={event => window.location.href = '/list'}
                         className="btn3 btn--radius btn--blue"
                         type="submit">VOLTAR A PÁGINA INICIAL
                     </button>
