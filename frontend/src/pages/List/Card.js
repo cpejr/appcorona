@@ -64,7 +64,7 @@ export default function OngCard(props) {
             {
               categs && categs.map((name) => {
                 return (
-                  <Chip key={name} size="small" label={name} />
+                  <Chip key={name} size="small" label={name} style={{ marginRight: 5 }} />
                 )
               })
             }
@@ -76,7 +76,8 @@ export default function OngCard(props) {
         <Link className="btn btn--radius-2 btn btn-warning p-2 mx-auto" to={{
           pathname: '/ongshow',
           state: {
-            ong: ong
+            ong: ong,
+            categs: categs
           }
         }}>Saiba mais</Link>
       </CardActions>

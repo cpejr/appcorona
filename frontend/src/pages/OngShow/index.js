@@ -13,9 +13,14 @@ function getWindowDimensions() {
 export default function OngShow(props) {
   const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
   const [ong, setOng] = useState({});
+  const [categs, setCategs] = useState([]);
 
   useEffect(() => {
     if (props.location.state && props.location.state.ong) setOng(props.location.state.ong);
+  }, [props.location.state])
+
+  useEffect(() => {
+    if (props.location.state && props.location.state.categs) setCategs(props.location.state.categs);
   }, [props.location.state])
 
   useEffect(() => {
@@ -31,10 +36,10 @@ export default function OngShow(props) {
 
   if (windowWidth <= 850)
     return (
-      <Mobile ong={ong} />
+      <Mobile ong={ong} categs={categs} />
     );
   else
     return (
-      <Desktop ong={ong} />
+      <Desktop ong={ong} categs={categs} />
     );
 }
