@@ -11,7 +11,7 @@ function getWindowDimensions() {
 }
 
 
-export default function Page2(props) {
+export default function QuemSomos(props) {
   const [showImage, setShowImage] = useState( () => {
       if (getWindowDimensions().width > 850) 
         return true;
@@ -47,8 +47,9 @@ export default function Page2(props) {
           </Col>
         </Row>
         <Row className='h-100 align-items-center'>
-          
-          {  showImage && (
+
+          {  
+            showImage && (
               <Col xl={3} className="imgCol">
               <div style={{height: "10%"}}/>
               <img src='logolampada.png' alt='logoCpe' className='infoImage1' />

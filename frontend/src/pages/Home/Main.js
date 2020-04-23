@@ -22,7 +22,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Page1(props) {
+export default function Main(props) {
+
+  function handleNextPage(){
+    props.handlePageChange(1)
+  }
 
   const classes = useStyles();
   return (
@@ -40,12 +44,16 @@ export default function Page1(props) {
             <p className='buttonText'>AJUDAR AGORA</p>
           </Button>
         </Link>
-        <div className='saibaMais'>
-          Saiba mais
-          <IconContext.Provider value={{ size: '1.5em', color: "#ffff" }} >
-            <MdKeyboardArrowDown />
-          </IconContext.Provider>
-        </div>
+        {
+          props.saibaMais && (
+            <div className='saibaMais' onClick={handleNextPage} style={{cursor: "pointer"}}>
+              Saiba mais
+              <IconContext.Provider value={{ size: '1.5em', color: "#ffff" }} >
+                <MdKeyboardArrowDown />
+              </IconContext.Provider>
+            </div>
+          )
+        }
       </div>
     </div>
 

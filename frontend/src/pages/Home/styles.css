@@ -92,8 +92,8 @@
 }
 
 .fullHeight{
-  height: 80%;
-  margin-bottom: 10px;
+  margin-top: 10px;
+  height: 70%;
 }
 
 @media screen and (min-width: 1200px) {

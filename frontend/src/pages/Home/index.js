@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReactPageScroller from "react-page-scroller";
 import './styles.css';
 
-import Page1 from './Page1';
+import Main from './Main';
 import QuemSomos from './QuemSomos';
 import Page3 from './Page3';
 
@@ -15,15 +15,12 @@ export default function Home(props) {
 
   return (
     <React.Fragment>
-      <ReactPageScroller
-        pageOnChange={handlePageChange}
-        customPageNumber={currentPage}
-      >
-        <Page1 />
-        <QuemSomos />
+      <ReactPageScroller pageOnChange={handlePageChange} customPageNumber={currentPage}>
+        <Main handlePageChange={handlePageChange} saibaMais={true}/>
         <Page3 />
-        <Page1 />
-      </ReactPageScroller>
+        <QuemSomos />
+        <Main saibaMais={false}/>
+      </ReactPageScroller >
     </React.Fragment>
   )
 }
