@@ -82,7 +82,7 @@ export default function Register({ className, fileName, onSubmit }) {
       <div className="wrapper wrapper--w790">
         <div className="card card-5">
             <div className="card-heading">
-               <h2 className="title">Cadastre a sua ONG abaixo</h2>
+               <h2 className="title">Cadastre a sua instituição abaixo</h2>
                <div id="bttn1">
                     <button
                         onClick={event => window.location.href = '/list'}
@@ -95,7 +95,7 @@ export default function Register({ className, fileName, onSubmit }) {
                 <form onSubmit={handleRegister}>
 
               <div className="form-row">
-                <div className="name">Nome da Ong</div>
+                <div className="name">Nome da instituição</div>
                 <div className="value">
                   <div className="input-group">
                     <input className="input--style-5" type="text" name="company"

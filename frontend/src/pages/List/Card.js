@@ -73,7 +73,8 @@ export default function OngCard(props) {
       </CardActionArea>
 
       <CardActions className="mt-auto">
-        <Link className="btn btn--radius-2 btn btn-warning p-2 mx-auto" to={{
+        <Link style={{"border-radius": "400px"}}
+          className="btn btn btn-warning p-2 mx-auto" to={{
           pathname: '/ongshow',
           state: {
             ong: ong,

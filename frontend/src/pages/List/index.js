@@ -224,12 +224,12 @@ export default function List(props) {
           <div className="header text-center d-flex flex-wrap justify-content-between">
             <img src="logo cpe.png" className="logo" alt="Logo"></img>
             <h2 className="title d-flex align-items-center">Bem Conectado</h2>
-            <Link className="btn1 btn--radius btn--blue m-2 mr-4 justify-content-end align-self-center" to="/register" type="submit">
-              Cadastre sua ongs
+            <Link className="btn1 redondo btn--blue m-2 mr-4 justify-content-end align-self-center" to="/register" type="submit">
+              Cadastre sua instituição
             </Link>
           </div>
           <div className="searchBar d-flex flex-wrap">
-            <button className="btn1 btn--radius btn--blue m-2 mr-4 justify-content-end align-self-center" onClick={handleClickFilter} type="submit">
+            <button className="btn1 redondo btn--blue m-2 mr-4 justify-content-end align-self-center" onClick={handleClickFilter} type="submit">
               <FaFilter />
             </button>
 
@@ -238,7 +238,7 @@ export default function List(props) {
               <SelectState className="input--style-5 selectStates col-12 mb-2" onChange={handleOnChangeState} nullable={true} />
               <p>Digite o nome da cidade: </p>
               <input className="input--style-5" type='text' onChange={handleOnChangeCity}></input>
-              <p>Digite o nome da ONG: </p>
+              <p>Digite o nome da instituição: </p>
               <input className="input--style-5" type='text' onChange={handleOnChangeName}></input>
               <p>Selecione a categoria: </p>
               <CategSelector className="input--style-5 selectStates col-12 mb-2" onChange={handleOnChangeCateg} categNames={categs} />

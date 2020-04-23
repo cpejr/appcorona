@@ -13,7 +13,7 @@ function getWindowDimensions() {
 
 export default function QuemSomos(props) {
   const [showImage, setShowImage] = useState( () => {
-      if (getWindowDimensions().width > 850) 
+      if (getWindowDimensions().width > 1000) 
         return true;
       else 
         return false
@@ -22,7 +22,7 @@ export default function QuemSomos(props) {
 
   useEffect(() => {
     function handleResize() {
-      if (getWindowDimensions().width > 850) 
+      if (getWindowDimensions().width > 1000) 
         setShowImage(true);
       else 
         setShowImage(false);
@@ -57,9 +57,13 @@ export default function QuemSomos(props) {
             )
           }
 
-          <Col className="fullHeight">
+          <Col style={{height: "90%"}}>
             <Textfit mode="multi" className='text-justify fullHeight'>
-              &nbsp;&nbsp;&nbsp;Nós somos a CPE - Consultoria e Projetos Elétricos, uma empresa júnior de Engenharias
+              &nbsp;&nbsp;&nbsp;Nós somos a &nbsp;
+              <a href="https://cpejr.com.br/site/" style={{color: "#CEC000"}}>
+                CPE - Consultoria e Projetos Elétricos
+              </a>
+              , uma empresa júnior de Engenharias
               (Controle e Automação, Elétrica e Sistemas) da UFMG. A CPE é uma iniciativa sem fins
               lucrativos e que realiza projetos para incentivar o empreendedorismo no Brasil.
               Nosso corpo de membros é formado apenas por alunos destes cursos.
