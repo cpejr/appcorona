@@ -2,6 +2,10 @@
   min-height: 100vh;
 }
 
+.redondo {
+  border-radius: 400px;
+}
+
 .card-5 .card-body {
   padding: 52px 85px;
   padding-bottom: 73px;

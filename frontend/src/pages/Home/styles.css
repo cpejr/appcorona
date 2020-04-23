@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Raleway:wght@500;900&display=swap');
+
+.subTitle {
+  color: #fff;
+  font-family: 'Permanent Marker', cursive;
+  font-size: calc(1.3em + 2vw);
+  opacity: 1;
+  text-align: center;
+  flex-wrap: wrap;
+  margin: 0;
+  margin-top: -15px;
+}
+
+.title1{
+  font-size: calc(2em + 5vw);
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 900;
+  text-align: center;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.overlay{
+  background-color: rgba(255, 207, 79,  0.73);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.homeButton{
+  margin-top: 10% !important;
+  background-color: #2C67E4 !important;
+  border-radius: 400px !important;
+}
+
+.buttonText{
+  font-size: calc(1em + 1vw);
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  margin: auto;
+}
+
+.saibaMais{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  font-family: 'Permanent Marker', cursive;
+  position: absolute;
+  bottom: 50px;
+  font-size: calc(1.3em + 1vw);
+}
+
+.rootContainer{
+  padding: 16px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.rootInfo{
+  position: relative;
+}
+
+.rowContent{
+  display: flex;
+  height: 100%;
+}
+
+.infoImage1{
+  height: 220px;
+  width: auto;
+}
+
+.infoHeader h1{
+  color: #544B4B;
+}
+
+.info{
+  display: flex;
+}
+
+.infoLine{
+  border-bottom-width: 4px;
+  border-bottom-color: #CEC000;
+  border-bottom-style: solid;
+  width: 320px;
+}
+
+.fullHeight{
+  margin-top: 10px;
+  height: 70%;
+}
+
+.imgFullHeight{
+  margin-top: 10px;
+  margin-left: 30px;
+  height: 90%;
+  width: auto;
+  align-self: right;
+}
+
+@media screen and (min-width: 1200px) {
+  .imgCol{
+    height: auto;
+  }
+.imgCol {
+    height: 100%;
+}
+}
